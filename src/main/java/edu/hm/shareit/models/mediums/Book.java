@@ -1,5 +1,8 @@
 package edu.hm.shareit.models.mediums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Book extends Medium {
     private String isbn;
     private String author;
@@ -8,7 +11,10 @@ public class Book extends Medium {
         super(title);
     }
 
-    public Book(String title, String isbn, String author) {
+    @JsonCreator
+    public Book(@JsonProperty("title") String title,
+                @JsonProperty("isbn") String isbn,
+                @JsonProperty("author") String author) {
         super(title);
         this.isbn = isbn;
         this.author = author;

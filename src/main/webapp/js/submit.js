@@ -16,7 +16,7 @@ var submitNewBook = function() {
 	});
 	var errorText = $("#errormessage");
     $.ajax({
-        url: '/shareit/media/books/',
+        url: '/shareit/media/books',
         type:'POST',
         contentType: 'application/json; charset=UTF-8',
         data: json

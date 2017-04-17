@@ -1,5 +1,8 @@
 package edu.hm.shareit.models.mediums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Disc extends Medium {
     private String barcode;
     private String director;
@@ -9,7 +12,11 @@ public class Disc extends Medium {
         super(title);
     }
 
-    public Disc(String title, String barcode, String director, int fsk) {
+    @JsonCreator
+    public Disc(@JsonProperty("title") String title,
+                @JsonProperty("barcode") String barcode,
+                @JsonProperty("director") String director,
+                @JsonProperty("fsk") int fsk) {
         super(title);
         this.barcode = barcode;
         this.director = director;
