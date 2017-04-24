@@ -9,31 +9,16 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>Jersey Web Application</servlet-name>
+        <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm</param-value>
+            <param-value>edu.hm.shareit.api</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
-    <servlet>
-        <servlet-name>Media Resource</servlet-name>
-        <servlet-class>edu.hm.shareit.api.MediaResourceServlet</servlet-class>
-        <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm.shareit</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jersey.config.server.provider.classnames</param-name>
-            <param-value>org.glassfish.jersey.jackson.JacksonFeature</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
     <servlet-mapping>
-        <servlet-name>Media Resource</servlet-name>
+        <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/shareit/media/*</url-pattern>
     </servlet-mapping>
 </web-app>
