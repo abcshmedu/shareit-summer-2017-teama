@@ -12,6 +12,7 @@ public enum MediaServiceResult {
     ACCEPTED(202,"Request accepted"),
     INVALID_JSON_FORMAT(400,"Bad request. Please check json format and parameters"),
     INVALID_ISBN(400,"Invalid ISBN"),
+    INVALID_BARCODE(400,"Invalid Barcode"),
     DUPLICATE_ISBN(400,"ISBN already exists"),
     ISBN_NOT_FOUND(404,"ISBN does not exist"),
     ISBN_DOES_NOT_MATCH(400,"ISBN in URI and ISBN in JSON-Request do not match!"),
@@ -38,4 +39,6 @@ public enum MediaServiceResult {
     public String getStatus(){
         return status;
     }
+
+
 }

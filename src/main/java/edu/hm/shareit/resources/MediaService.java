@@ -14,4 +14,6 @@ public interface MediaService {
     Collection<? extends Medium> getDiscs();
     MediaServiceResult updateBook(Book book);
     MediaServiceResult updateDisc(Disc disc);
+    Book getBook(String isbn);
+    Disc getDisc(String barcode);
 }

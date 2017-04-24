@@ -3,6 +3,7 @@ package edu.hm.shareit.resources;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
+import org.json.simple.JSONObject;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -54,16 +55,33 @@ public class MediaServiceImpl implements MediaService {
     }
 
     private boolean isValidISBN(String isbn) {
-        boolean result = true;
-        // ToDo Check if isbn of book is valid
-        return result;
+        if (isbn.length() != 13) {
+            return false;
+        }
+
+        final char[] isbnChars = isbn.toCharArray();
+        for (char i : isbnChars) {
+            if (i < 48 || i > 57) {
+                return false;
+            }
+        }
+        return true;
+        //ToDo See if better way of checking ISBN, potentially using regex?
     }
 
 
     private boolean isValidBarcode(String barcode) {
-        boolean result = true;
-        //ToDo check for valid barcode
-        return result;
+        if (barcode.length() != 12) {
+            return false;
+        }
+        final char[] barcodeChars = barcode.toCharArray();
+        for (char i : barcodeChars) {
+            if (i < 48 || i > 57) {
+                return false;
+            }
+        }
+        return true;
+        //ToDo See if there is a better way of doing this
     }
 
     @Override
@@ -72,17 +90,66 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public Collection<? extends Medium> getDiscs() {
+    public Collection<? extends Disc> getDiscs() {
         return discs.values();
     }
 
     @Override
     public MediaServiceResult updateBook(Book book) {
-        return null;
+        boolean result = false;
+        for (Medium m : getBooks()) {
+            Book bookIt = (Book) m;
+            if (bookIt.getIsbn().equals(book.getIsbn())) {
+                result = true;
+                break;
+            }
+        }
+        if (!result) {
+            return MediaServiceResult.INVALID_ISBN;
+        }
+        books.put(book.getIsbn(), book);
+        return MediaServiceResult.ACCEPTED;
     }
 
     @Override
     public MediaServiceResult updateDisc(Disc disc) {
+        boolean result = false;
+        for (Medium m : getDiscs()) {
+            Disc discIt = (Disc) m;
+            if (discIt.getBarcode().equals(disc.getBarcode())) {
+                result = true;
+                break;
+            }
+        }
+        if (!result) {
+            return MediaServiceResult.INVALID_BARCODE;
+        }
+        discs.put(disc.getBarcode(), disc);
+        return MediaServiceResult.ACCEPTED;
+    }
+
+    @Override
+    public Book getBook(String isbn) {
+        for (Medium b : getBooks()) {
+            Book book = (Book) b;
+            if (book.getIsbn().equals(isbn)) {
+                return book;
+            }
+        }
         return null;
+        //ToDo think about what to do with null value if isbn is non-existent
+    }
+
+    @Override
+    public Disc getDisc(String barcode) {
+        for (Medium b : getDiscs()) {
+            Disc disc = (Disc) b;
+            if (disc.getBarcode().equals(barcode)) {
+                return disc;
+            }
+        }
+        return null;
+        //ToDo think about what to do with null value if isbn is non-existent
+
     }
 }
