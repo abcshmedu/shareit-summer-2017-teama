@@ -3,7 +3,7 @@ package edu.hm.shareit.resources;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 import java.util.Collection;
 import java.util.HashMap;

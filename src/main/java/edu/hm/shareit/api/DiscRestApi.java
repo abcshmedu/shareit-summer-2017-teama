@@ -3,6 +3,7 @@ package edu.hm.shareit.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.hm.shareit.models.mediums.Book;
+import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.MediaService;
 import edu.hm.shareit.resources.MediaServiceImpl;
@@ -15,52 +16,47 @@ import java.io.IOException;
 import java.util.Collection;
 
 @Path("shareit/media")
-public class BookRestApi {
+public class DiscRestApi {
+
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final String BOOKS_ROOT_URI = "books";
+    private static final String DISCS_ROOT_URI = "discs";
     private static final MediaService MEDIA_SERVICE = new MediaServiceImpl();
 
     @GET
-    @Path(BOOKS_ROOT_URI + "/{isbn}")
+    @Path(DISCS_ROOT_URI + "/{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn) throws JsonProcessingException {
-        Book book = MEDIA_SERVICE.getBook(isbn);
+    public Response getDisc(@PathParam("barcode") String barcode) throws JsonProcessingException {
+        Book book = MEDIA_SERVICE.getBook(barcode);
         String result = mapper.writeValueAsString(book);
         return Response.ok(result, MediaType.APPLICATION_JSON_TYPE).build();
     }
 
     @GET
-    @Path(BOOKS_ROOT_URI)
+    @Path(DISCS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBooks() throws JsonProcessingException{
-        Collection<? extends Medium> books = MEDIA_SERVICE.getBooks();
-
-        //System.out.println("Books size after fetch: " + books.size());
-
-        String responseStr = mapper.writeValueAsString(books);
+    public Response getDiscs() throws IOException {
+        Collection<? extends Medium> discs = MEDIA_SERVICE.getDiscs();
+        String responseStr = mapper.writeValueAsString(discs);
         return Response.ok(responseStr, MediaType.APPLICATION_JSON).build();
     }
 
     @POST
-    @Path(BOOKS_ROOT_URI)
+    @Path(DISCS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postBook(String jsonBody) throws IOException {
-        Book book = mapper.readValue(jsonBody.getBytes(), Book.class);
-        MediaServiceResult result = MEDIA_SERVICE.addBook(book);
+    public Response postDisc(String jsonBody) throws IOException {
+        Disc disc = mapper.readValue(jsonBody.getBytes(), Disc.class);
+        MediaServiceResult result = MEDIA_SERVICE.addDisc(disc);
         String jsonResult = mapper.writeValueAsString(result);
-
-        //System.out.println("New book json:" + jsonBody + " and status code: " + result.getCode());
-
         return Response.ok(jsonResult, MediaType.APPLICATION_JSON).status(result.getCode()).build();
     }
 
-    @Path("/books/{isbn}")
     @PUT
+    @Path(DISCS_ROOT_URI + "/{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateBook(@PathParam("isbn") String isbn, String jsonBody) throws IOException {
-        Book updateValues = mapper.readValue(jsonBody.getBytes(), Book.class);
-        Book fullInstance = new Book(updateValues.getTitle(), isbn, updateValues.getAuthor());
-        MediaServiceResult result = MEDIA_SERVICE.updateBook(fullInstance);
+    public Response updateDisc(@PathParam("barcode") String barcode, String jsonBody) throws IOException {
+        Disc updateValues = mapper.readValue(jsonBody.getBytes(), Disc.class);
+        Disc fullInstance = new Disc(updateValues.getTitle(), barcode, updateValues.getDirector(), updateValues.getFsk());
+        MediaServiceResult result = MEDIA_SERVICE.updateDisc(fullInstance);
         return Response.ok(result, MediaType.APPLICATION_JSON_TYPE).status(result.getCode()).build();
     }
 }

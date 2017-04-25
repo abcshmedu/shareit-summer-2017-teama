@@ -8,7 +8,7 @@ import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.MediaService;
 import edu.hm.shareit.resources.MediaServiceImpl;
 import edu.hm.shareit.resources.MediaServiceResult;
-import org.json.simple.JSONObject;
+//import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +27,8 @@ import java.util.Collection;
 
 @Path("/newPath")
 public class MediaResource {
+    /* Methods Split between Books and Discs in BookRestApi and DiscRestApi Classes
+
     private final ObjectMapper mapper = new ObjectMapper();
     private static final String BOOKS_ROOT_URI = "/books";
     private static final String DISCS_ROOT_URI = "/discs";
@@ -110,10 +112,8 @@ public class MediaResource {
         return Response.ok(result, MediaType.APPLICATION_JSON_TYPE).status(result.getCode()).build();
     }
 
-    /*
     Methods changed to Jersey Api, so that no servlet needed.
-     */
-    /*
+
     //@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String jsonRequest = getBodyContent(request);
@@ -174,5 +174,6 @@ public class MediaResource {
     //@Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    }*/
+    }
+    */
 }
