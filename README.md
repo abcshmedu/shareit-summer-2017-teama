@@ -6,3 +6,4 @@
  Team-Members:
  - Stephan Weiß
  - Sascha Siemens
+ - Max Dale
