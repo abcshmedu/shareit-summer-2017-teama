@@ -19,6 +19,6 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/shareit/media/*</url-pattern>
     </servlet-mapping>
 </web-app>

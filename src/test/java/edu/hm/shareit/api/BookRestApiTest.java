@@ -3,6 +3,7 @@ package edu.hm.shareit.api;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,6 +50,7 @@ public class BookRestApiTest {
         testGetBooksOnEmpty();
         testGetBooksAfterOnePost();
     }
+
     public void testGetBooksOnEmpty() throws JsonProcessingException{
         Response response = bookRestApi.getBooks();
 
@@ -92,6 +94,13 @@ public class BookRestApiTest {
 
     public void testGetBooksAfterMultiplePosts() {
         //TODO Implement variable runner for programmatic testing
+        String[] jsonBodies = new String[100];
+        for(int i = 0; i < jsonBodies.length; i++){
+            String author = "author" + i;
+            String title = "title" + i;
+            String isbn = String.format("%13d", i);
+            //JSONObject json = Json.createObjectBuilder();
+        }
     }
 
     public void testGetBooksOnSpecificIsbn() {

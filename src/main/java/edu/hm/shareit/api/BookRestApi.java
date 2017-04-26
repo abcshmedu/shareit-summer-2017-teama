@@ -14,14 +14,13 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.Collection;
 
-@Path("shareit/media")
+@Path("/books")
 public class BookRestApi {
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final String BOOKS_ROOT_URI = "books";
     private static final MediaService MEDIA_SERVICE = new MediaServiceImpl();
 
     @GET
-    @Path(BOOKS_ROOT_URI + "/{isbn}")
+    @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBook(@PathParam("isbn") String isbn) throws JsonProcessingException {
         Book book = MEDIA_SERVICE.getBook(isbn);
@@ -30,7 +29,6 @@ public class BookRestApi {
     }
 
     @GET
-    @Path(BOOKS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBooks() throws JsonProcessingException{
         Collection<? extends Medium> books = MEDIA_SERVICE.getBooks();
@@ -42,7 +40,6 @@ public class BookRestApi {
     }
 
     @POST
-    @Path(BOOKS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postBook(String jsonBody) throws IOException {
         Book book = mapper.readValue(jsonBody.getBytes(), Book.class);
@@ -54,8 +51,8 @@ public class BookRestApi {
         return Response.ok(jsonResult, MediaType.APPLICATION_JSON).status(result.getCode()).build();
     }
 
-    @Path("/books/{isbn}")
     @PUT
+    @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(@PathParam("isbn") String isbn, String jsonBody) throws IOException {
         Book updateValues = mapper.readValue(jsonBody.getBytes(), Book.class);

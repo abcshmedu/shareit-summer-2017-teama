@@ -15,15 +15,13 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.Collection;
 
-@Path("shareit/media")
+@Path("discs")
 public class DiscRestApi {
-
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final String DISCS_ROOT_URI = "discs";
     private static final MediaService MEDIA_SERVICE = new MediaServiceImpl();
 
     @GET
-    @Path(DISCS_ROOT_URI + "/{barcode}")
+    @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDisc(@PathParam("barcode") String barcode) throws JsonProcessingException {
         Book book = MEDIA_SERVICE.getBook(barcode);
@@ -32,7 +30,6 @@ public class DiscRestApi {
     }
 
     @GET
-    @Path(DISCS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDiscs() throws IOException {
         Collection<? extends Medium> discs = MEDIA_SERVICE.getDiscs();
@@ -41,7 +38,6 @@ public class DiscRestApi {
     }
 
     @POST
-    @Path(DISCS_ROOT_URI)
     @Produces(MediaType.APPLICATION_JSON)
     public Response postDisc(String jsonBody) throws IOException {
         Disc disc = mapper.readValue(jsonBody.getBytes(), Disc.class);
@@ -51,7 +47,7 @@ public class DiscRestApi {
     }
 
     @PUT
-    @Path(DISCS_ROOT_URI + "/{barcode}")
+    @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateDisc(@PathParam("barcode") String barcode, String jsonBody) throws IOException {
         Disc updateValues = mapper.readValue(jsonBody.getBytes(), Disc.class);
