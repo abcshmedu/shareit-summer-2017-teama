@@ -14,9 +14,6 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by maxl on 25.04.17.
- */
 public class BookRestApiTest {
 
     BookRestApi bookRestApi = new BookRestApi();
@@ -99,7 +96,10 @@ public class BookRestApiTest {
             String author = "author" + i;
             String title = "title" + i;
             String isbn = String.format("%13d", i);
-            //JSONObject json = Json.createObjectBuilder();
+            JSONObject json = new JSONObject()
+                    .append("author", author)
+                    .append("title", title)
+                    .append("isbn", isbn);
         }
     }
 

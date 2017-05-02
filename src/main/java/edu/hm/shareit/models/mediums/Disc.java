@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Disc extends Medium {
-    private String barcode;
-    private String director;
-    private int fsk;
+    private String barcode = null;
+    private String director = null;
+    private int fsk = -1; //Uninitialized value
 
     public Disc(String title) {
         super(title);
@@ -60,9 +60,9 @@ public class Disc extends Medium {
     @Override
     public String toString() {
         return "Disc{" +
-                "barcode='" + barcode + '\'' +
-                ", director='" + director + '\'' +
+                "barcode='" + barcode + "\'" +
+                ", director='" + director + "\'" +
                 ", fsk=" + fsk +
-                '}';
+                "}";
     }
 }

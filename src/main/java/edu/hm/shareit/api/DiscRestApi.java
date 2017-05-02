@@ -10,6 +10,7 @@ import edu.hm.shareit.resources.MediaServiceImpl;
 import edu.hm.shareit.resources.MediaServiceResult;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
@@ -18,7 +19,9 @@ import java.util.Collection;
 @Path("discs")
 public class DiscRestApi {
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final MediaService MEDIA_SERVICE = new MediaServiceImpl();
+
+    @Context
+    private static MediaService MEDIA_SERVICE;
 
     @GET
     @Path("{barcode}")

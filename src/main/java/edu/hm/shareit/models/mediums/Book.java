@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Book extends Medium {
-    private String isbn;
-    private String author;
+    private String isbn = null;
+    private String author = null;
 
     public Book(String title) {
         super(title);
@@ -51,8 +51,8 @@ public class Book extends Medium {
     @Override
     public String toString() {
         return "Book{" +
-                "isbn='" + isbn + '\'' +
-                ", author='" + author + '\'' +
-                '}';
+                "isbn='" + isbn + "\'" +
+                ", author='" + author + "\'" +
+                "}";
     }
 }
