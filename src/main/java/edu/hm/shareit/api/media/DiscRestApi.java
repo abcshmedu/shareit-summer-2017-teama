@@ -1,4 +1,4 @@
-package edu.hm.shareit.api;
+package edu.hm.shareit.api.media;
 
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;

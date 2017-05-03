@@ -1,5 +1,6 @@
-package edu.hm.shareit.api;
+package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.media.BookRestApi;
 import edu.hm.shareit.models.mediums.Book;
 
 import edu.hm.shareit.models.mediums.Vars;
@@ -17,7 +18,7 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestBookRestApi extends BookRestApi{
+public class TestBookRestApi extends BookRestApi {
 
     private static Thread worker;
 

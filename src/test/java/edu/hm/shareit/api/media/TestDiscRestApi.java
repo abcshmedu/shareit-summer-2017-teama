@@ -1,5 +1,6 @@
-package edu.hm.shareit.api;
+package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.media.DiscRestApi;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Vars;
 import edu.hm.shareit.resources.media.MediaServiceResult;
@@ -16,7 +17,7 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestDiscRestApi extends DiscRestApi{
+public class TestDiscRestApi extends DiscRestApi {
 
     private static Thread worker;
 
