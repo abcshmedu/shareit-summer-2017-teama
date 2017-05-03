@@ -97,43 +97,60 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateBook(Book book, String isbn) {
-        if (book.getAuthor() == null || book.getTitle() == null) return MediaServiceResult.PARAMETER_MISSING;
-
-        if (!book.getIsbn().equals(isbn)) return MediaServiceResult.ISBN_DOES_NOT_MATCH;
-
-        boolean result = false;
-        for (Medium m : getBooks()) {
-            Book bookIt = (Book) m;
-            if (bookIt.getIsbn().equals(book.getIsbn())) {
-                result = true;
-                break;
-            }
+        if (book.getIsbn() != null && !book.getIsbn().equals(isbn)) {
+            return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
-        if (!result) {
-            return MediaServiceResult.INVALID_ISBN;
+
+        Book oldBook = books.get(isbn);
+
+        if (oldBook == null) {
+            return MediaServiceResult.ISBN_NOT_FOUND;
         }
-        books.put(book.getIsbn(), book);
+
+        String bookAuthor = book.getAuthor();
+        String bookTitle = book.getTitle();
+
+        if(bookAuthor != null){
+            oldBook.setAuthor(bookAuthor);
+        }
+
+        if(bookTitle != null){
+            oldBook.setTitle(bookTitle);
+        }
         return MediaServiceResult.ACCEPTED;
     }
 
     @Override
     public MediaServiceResult updateDisc(Disc disc, String barcode) {
-        if (disc.getTitle() == null || disc.getDirector() == null) return MediaServiceResult.PARAMETER_MISSING;
 
-        if (!disc.getBarcode().equals(barcode)) return MediaServiceResult.DISC_DOES_NOT_MATCH;
+        if (disc.getBarcode() != null && !disc.getBarcode().equals(barcode)) {
+            return MediaServiceResult.ISBN_DOES_NOT_MATCH;
+        }
 
-        boolean result = false;
-        for (Medium m : getDiscs()) {
-            Disc discIt = (Disc) m;
-            if (discIt.getBarcode().equals(disc.getBarcode())) {
-                result = true;
-                break;
-            }
+        Disc oldDisc = discs.get(barcode);
+
+        if (oldDisc == null) {
+            return MediaServiceResult.ISBN_NOT_FOUND;
         }
-        if (!result) {
-            return MediaServiceResult.INVALID_BARCODE;
+
+        String discDirector = disc.getDirector();
+        String discTitle = disc.getTitle();
+        int discFsk = disc.getFsk();
+
+        if(discFsk < 0){
+            return MediaServiceResult.INVALID_DISC;
+        } else {
+            oldDisc.setFsk(discFsk);
         }
-        discs.put(disc.getBarcode(), disc);
+
+        if(discDirector != null){
+            oldDisc.setDirector(discDirector);
+        }
+
+        if(discTitle != null){
+            oldDisc.setTitle(discTitle);
+        }
+
         return MediaServiceResult.ACCEPTED;
     }
 
