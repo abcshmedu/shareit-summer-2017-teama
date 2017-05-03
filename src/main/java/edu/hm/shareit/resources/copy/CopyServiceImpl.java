@@ -38,12 +38,12 @@ public class CopyServiceImpl implements CopyService {
 
     @Override
     public CopyServiceResult borrowBook(String isbn) {
-        return null;
+        return CopyServiceResult.ACCEPTED;
     }
 
     @Override
     public CopyServiceResult returnBook(String isbn) {
-        return null;
+        return CopyServiceResult.ACCEPTED;
     }
 
     @Override
