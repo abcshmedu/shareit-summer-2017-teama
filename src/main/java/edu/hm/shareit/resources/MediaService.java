@@ -18,6 +18,4 @@ public interface MediaService {
     MediaServiceResult updateDisc(Disc disc, String isbn);
     Book getBook(String isbn);
     Disc getDisc(String barcode);
-    MediaServiceResult addBookCopy(Copy copy);
-
 }

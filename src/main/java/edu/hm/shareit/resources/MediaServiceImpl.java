@@ -164,11 +164,4 @@ public class MediaServiceImpl implements MediaService {
     public Disc getDisc(String barcode) {
         return discs.get(barcode);
     }
-
-    @Override
-    public MediaServiceResult addBookCopy(Copy copy) {
-        if(copy.getOwner() == null || !copy.getMedium() instanceof Book )
-    }
-
-
 }
