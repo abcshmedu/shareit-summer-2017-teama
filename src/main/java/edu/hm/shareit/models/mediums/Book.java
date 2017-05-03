@@ -1,19 +1,19 @@
 package edu.hm.shareit.models.mediums;
 
 public class Book extends Medium {
-    private String isbn = null;
-    private String author = null;
+    private String isbn;
+    private String author;
 
-    private Book() {
-        super(null);
+    public Book() {
+        this(null, null, null);
     }
 
     public Book( String title,
                 String isbn,
                 String author) {
-        super(title);
-        this.isbn = isbn;
-        this.author = author;
+        setTitle(title);
+        setIsbn(isbn);
+        setAuthor(author);
     }
 
     public String getIsbn() {
@@ -22,6 +22,14 @@ public class Book extends Medium {
 
     public String getAuthor() {
         return author;
+    }
+
+    public void setIsbn(String isbn){
+        this.isbn = isbn;
+    }
+
+    public void setAuthor(String author){
+        this.author = author;
     }
 
     @Override

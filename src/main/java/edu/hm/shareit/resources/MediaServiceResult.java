@@ -26,8 +26,8 @@ public enum MediaServiceResult {
 
     @JsonCreator
     MediaServiceResult(int code, String status) {
-        this.code = code;
-        this.status = status;
+        setCode(code);
+        setStatus(status);
     }
 
     @JsonProperty
@@ -40,5 +40,11 @@ public enum MediaServiceResult {
         return status;
     }
 
+    public void setCode(int code){
+        this.code = code;
+    }
 
+    public void setStatus(String status){
+        this.status = status;
+    }
 }

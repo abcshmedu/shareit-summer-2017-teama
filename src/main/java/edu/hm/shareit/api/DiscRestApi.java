@@ -1,8 +1,5 @@
 package edu.hm.shareit.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.MediaService;
@@ -17,15 +14,16 @@ import java.util.Collection;
 
 @Path("discs")
 public class DiscRestApi {
-    private MediaService MEDIA_SERVICE = new MediaServiceImpl();
+    private static MediaService MEDIA_SERVICE = new MediaServiceImpl();
 
     protected void setMediaService(MediaService mediaService){
         MEDIA_SERVICE = mediaService;
     }
+
     @GET
     @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(String barcode)  {
+    public Response getDisc(@PathParam("barcode") String barcode)  {
         Disc disc = MEDIA_SERVICE.getDisc(barcode);
         return Response.ok(disc).build();
     }
@@ -38,11 +36,10 @@ public class DiscRestApi {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postDisc(Disc disc) {
         MediaServiceResult result = MEDIA_SERVICE.addDisc(disc);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 
     @PUT
@@ -51,6 +48,6 @@ public class DiscRestApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateDisc(Disc disc, @PathParam("barcode") String barcode)  {
         MediaServiceResult result = MEDIA_SERVICE.updateDisc(disc, barcode);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 }

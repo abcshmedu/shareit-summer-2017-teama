@@ -1,14 +1,22 @@
 package edu.hm.shareit.models.mediums;
 
 public class Medium {
-    private final String title;
+    private String title;
+
+    public Medium(){
+        this(null);
+    }
 
     public Medium(String title) {
-        this.title = title;
+        setTitle(title);
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
     @Override

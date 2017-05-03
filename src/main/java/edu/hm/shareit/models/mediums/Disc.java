@@ -4,22 +4,22 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Disc extends Medium {
-    private String barcode = null;
-    private String director = null;
-    private int fsk = -1; //Uninitialized value
+    private String barcode;
+    private String director;
+    private int fsk;
 
-    private Disc() {
-        super(null);
+    public Disc() {
+        this(null, null, null, -1);
     }
 
     public Disc(String title,
                 String barcode,
                 String director,
                 int fsk) {
-        super(title);
-        this.barcode = barcode;
-        this.director = director;
-        this.fsk = fsk;
+        setTitle(title);
+        setBarcode(barcode);
+        setDirector(director);
+        setFsk(fsk);
     }
 
     public String getBarcode() {
@@ -32,6 +32,18 @@ public class Disc extends Medium {
 
     public int getFsk() {
         return fsk;
+    }
+
+    public void setBarcode(String barcode){
+        this.barcode = barcode;
+    }
+
+    public void setDirector(String director){
+        this.director = director;
+    }
+
+    public void setFsk(int fsk){
+        this.fsk = fsk;
     }
 
     @Override

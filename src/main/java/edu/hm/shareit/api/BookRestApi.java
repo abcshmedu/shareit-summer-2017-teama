@@ -13,12 +13,29 @@ import java.util.Collection;
 
 @Path("books")
 public class BookRestApi {
-    private MediaService MEDIA_SERVICE = new MediaServiceImpl();
+    // Field for the backend service
+    private static MediaService MEDIA_SERVICE;
 
+    /**
+     * Constructor, sets MediaService to default production MediaServiceImpl
+     */
+    public BookRestApi(){
+        setMediaService(new MediaServiceImpl());
+    }
+
+    /**
+     * Helper Method, used for setting MediaService (to allow for testing)
+     * @param mediaService the MediaService to use
+     */
     protected void setMediaService(MediaService mediaService){
         MEDIA_SERVICE = mediaService;
     }
 
+    /**
+     * GET (getBook) Returns a specific book, provided it exists
+     * @param isbn the ISBN for the book to get
+     * @return The Json format for the book
+     */
     @GET
     @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,12 +52,10 @@ public class BookRestApi {
     }
 
     @POST
-    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postBook(Book book) {
-        System.out.println(book);
         MediaServiceResult result = MEDIA_SERVICE.addBook(book);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 
     @PUT
@@ -49,6 +64,6 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(Book book, @PathParam("isbn") String isbn) {
         MediaServiceResult result = MEDIA_SERVICE.updateBook(book, isbn);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 }
