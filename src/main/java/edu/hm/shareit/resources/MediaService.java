@@ -1,6 +1,7 @@
 package edu.hm.shareit.resources;
 
 import edu.hm.shareit.models.mediums.Book;
+import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 
@@ -17,4 +18,6 @@ public interface MediaService {
     MediaServiceResult updateDisc(Disc disc, String isbn);
     Book getBook(String isbn);
     Disc getDisc(String barcode);
+    MediaServiceResult addBookCopy(Copy copy);
+
 }

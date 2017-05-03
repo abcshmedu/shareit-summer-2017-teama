@@ -1,6 +1,7 @@
 package edu.hm.shareit.resources;
 
 import edu.hm.shareit.models.mediums.Book;
+import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 //import org.json.simple.JSONObject;
@@ -160,4 +161,11 @@ public class MediaServiceImpl implements MediaService {
         //ToDo think about what to do with null value if isbn is non-existent
 
     }
+
+    @Override
+    public MediaServiceResult addBookCopy(Copy copy) {
+        if(copy.getOwner() == null || !copy.getMedium() instanceof Book )
+    }
+
+
 }
