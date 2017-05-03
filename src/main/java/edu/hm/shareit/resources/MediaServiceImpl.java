@@ -1,7 +1,6 @@
 package edu.hm.shareit.resources;
 
 import edu.hm.shareit.models.mediums.Book;
-import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 
@@ -9,14 +8,16 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-//import org.json.simple.JSONObject;
-
 public class MediaServiceImpl implements MediaService {
     private final Map<String, Book> books = new HashMap<>();
     private final Map<String, Disc> discs = new HashMap<>();
 
     @Override
     public MediaServiceResult addBook(Book book) {
+        if (book == null || book.getIsbn() == null || book.getTitle() == null || book.getAuthor() == null) {
+            return MediaServiceResult.PARAMETER_MISSING;
+        }
+
         if (book.getAuthor().isEmpty() ||
                 book.getIsbn().isEmpty() || book.getTitle().isEmpty()) {
             return MediaServiceResult.PARAMETER_MISSING;
@@ -37,6 +38,10 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult addDisc(Disc disc) {
+        if (disc == null || disc.getBarcode() == null || disc.getDirector() == null || disc.getTitle() == null) {
+            return MediaServiceResult.PARAMETER_MISSING;
+        }
+
         if (disc.getBarcode().isEmpty() |
                 disc.getDirector().isEmpty() |
                 //disc.getFsk() < 0 |
@@ -45,7 +50,7 @@ public class MediaServiceImpl implements MediaService {
         }
 
         if (!isValidBarcode(disc.getBarcode())) {
-            return MediaServiceResult.INVALID_DISC;
+            return MediaServiceResult.INVALID_BARCODE;
         }
 
         if (discs.containsKey(disc.getBarcode())) {
@@ -73,7 +78,7 @@ public class MediaServiceImpl implements MediaService {
 
 
     private boolean isValidBarcode(String barcode) {
-        if (barcode.length() != 12) {
+        if (barcode.length() != 13) {
             return false;
         }
         final char[] barcodeChars = barcode.toCharArray();
@@ -111,11 +116,11 @@ public class MediaServiceImpl implements MediaService {
         String bookAuthor = book.getAuthor();
         String bookTitle = book.getTitle();
 
-        if(bookAuthor != null){
+        if (bookAuthor != null) {
             oldBook.setAuthor(bookAuthor);
         }
 
-        if(bookTitle != null){
+        if (bookTitle != null) {
             oldBook.setTitle(bookTitle);
         }
         return MediaServiceResult.ACCEPTED;
@@ -125,30 +130,30 @@ public class MediaServiceImpl implements MediaService {
     public MediaServiceResult updateDisc(Disc disc, String barcode) {
 
         if (disc.getBarcode() != null && !disc.getBarcode().equals(barcode)) {
-            return MediaServiceResult.ISBN_DOES_NOT_MATCH;
+            return MediaServiceResult.DISC_DOES_NOT_MATCH;
         }
 
         Disc oldDisc = discs.get(barcode);
 
         if (oldDisc == null) {
-            return MediaServiceResult.ISBN_NOT_FOUND;
+            return MediaServiceResult.DISC_NOT_FOUND;
         }
 
         String discDirector = disc.getDirector();
         String discTitle = disc.getTitle();
         int discFsk = disc.getFsk();
 
-        if(discFsk < 0){
+        if (discFsk < 0) {
             return MediaServiceResult.INVALID_DISC;
         } else {
             oldDisc.setFsk(discFsk);
         }
 
-        if(discDirector != null){
+        if (discDirector != null) {
             oldDisc.setDirector(discDirector);
         }
 
-        if(discTitle != null){
+        if (discTitle != null) {
             oldDisc.setTitle(discTitle);
         }
 

@@ -40,7 +40,8 @@ var submitNewBook = function() {
  * Creates a list of all books using a Mustache-template.
  */
 var listBooks = function() {
-	$.ajax({
+	//noinspection BadExpressionStatementJS
+    $.ajax({
         url: '/shareit/media/books',
         type:'GET'
 	})

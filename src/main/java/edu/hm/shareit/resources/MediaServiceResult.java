@@ -6,11 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum MediaServiceResult {
-    OK(200,"OK"),
-    INVALID_URL_REQUEST(400, "Invalid URL-Request for this HTTP-Method"),
     PARAMETER_MISSING(404,"At least one parameter is missing."),
     ACCEPTED(202,"Request accepted"),
-    INVALID_JSON_FORMAT(400,"Bad request. Please check json format and parameters"),
     INVALID_ISBN(400,"Invalid ISBN"),
     INVALID_BARCODE(400,"Invalid Barcode"),
     DUPLICATE_ISBN(400,"ISBN already exists"),
@@ -28,16 +25,6 @@ public enum MediaServiceResult {
     MediaServiceResult(int code, String status) {
         setCode(code);
         setStatus(status);
-    }
-
-    @JsonProperty
-    public int getCode(){
-        return code;
-    }
-
-    @JsonProperty
-    public String getStatus(){
-        return status;
     }
 
     public void setCode(int code){
