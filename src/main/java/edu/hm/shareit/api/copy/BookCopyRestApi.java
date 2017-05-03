@@ -31,8 +31,24 @@ public class BookCopyRestApi {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listBookCopies(){
+    public Response listBookCopies() {
         Collection<Copy> result = COPY_SERVICE.listBookCopies();
+        return Response.ok(result).build();
+    }
+
+    @GET
+    @Path("{isbn}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response borrowBook(@PathParam("isbn") String isbn) {
+        CopyServiceResult result = COPY_SERVICE.borrowBook(isbn);
+        return Response.ok(result).build();
+    }
+
+    @PUT
+    @Path("{isbn}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response returnBook(@PathParam("isbn") String isbn) {
+        CopyServiceResult result = COPY_SERVICE.returnBook(isbn);
         return Response.ok(result).build();
     }
 
