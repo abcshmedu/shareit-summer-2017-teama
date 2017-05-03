@@ -13,7 +13,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class TestBook extends Vars{
+public class TestBook extends Vars {
 
     @Parameters
     public static Collection<Object[]> data() {

@@ -4,11 +4,12 @@ import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
-//import org.json.simple.JSONObject;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+//import org.json.simple.JSONObject;
 
 public class MediaServiceImpl implements MediaService {
     private final Map<String, Book> books = new HashMap<>();
@@ -97,69 +98,71 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult updateBook(Book book, String isbn) {
-        if(book.getAuthor() == null || book.getTitle() == null) return MediaServiceResult.PARAMETER_MISSING;
-
-        if(!book.getIsbn().equals(isbn)) return MediaServiceResult.ISBN_DOES_NOT_MATCH;
-
-        boolean result = false;
-        for (Medium m : getBooks()) {
-            Book bookIt = (Book) m;
-            if (bookIt.getIsbn().equals(book.getIsbn())) {
-                result = true;
-                break;
-            }
+        if (book.getIsbn() != null && !book.getIsbn().equals(isbn)) {
+            return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
-        if (!result) {
-            return MediaServiceResult.INVALID_ISBN;
+
+        Book oldBook = books.get(isbn);
+
+        if (oldBook == null) {
+            return MediaServiceResult.ISBN_NOT_FOUND;
         }
-        books.put(book.getIsbn(), book);
+
+        String bookAuthor = book.getAuthor();
+        String bookTitle = book.getTitle();
+
+        if(bookAuthor != null){
+            oldBook.setAuthor(bookAuthor);
+        }
+
+        if(bookTitle != null){
+            oldBook.setTitle(bookTitle);
+        }
         return MediaServiceResult.ACCEPTED;
     }
 
     @Override
     public MediaServiceResult updateDisc(Disc disc, String barcode) {
-        if(disc.getTitle() == null || disc.getDirector() == null) return MediaServiceResult.PARAMETER_MISSING;
 
-        if(!disc.getBarcode().equals(barcode)) return MediaServiceResult.DISC_DOES_NOT_MATCH;
+        if (disc.getBarcode() != null && !disc.getBarcode().equals(barcode)) {
+            return MediaServiceResult.ISBN_DOES_NOT_MATCH;
+        }
 
-        boolean result = false;
-        for (Medium m : getDiscs()) {
-            Disc discIt = (Disc) m;
-            if (discIt.getBarcode().equals(disc.getBarcode())) {
-                result = true;
-                break;
-            }
+        Disc oldDisc = discs.get(barcode);
+
+        if (oldDisc == null) {
+            return MediaServiceResult.ISBN_NOT_FOUND;
         }
-        if (!result) {
-            return MediaServiceResult.INVALID_BARCODE;
+
+        String discDirector = disc.getDirector();
+        String discTitle = disc.getTitle();
+        int discFsk = disc.getFsk();
+
+        if(discFsk < 0){
+            return MediaServiceResult.INVALID_DISC;
+        } else {
+            oldDisc.setFsk(discFsk);
         }
-        discs.put(disc.getBarcode(), disc);
+
+        if(discDirector != null){
+            oldDisc.setDirector(discDirector);
+        }
+
+        if(discTitle != null){
+            oldDisc.setTitle(discTitle);
+        }
+
         return MediaServiceResult.ACCEPTED;
     }
 
     @Override
     public Book getBook(String isbn) {
-        for (Medium b : getBooks()) {
-            Book book = (Book) b;
-            if (book.getIsbn().equals(isbn)) {
-                return book;
-            }
-        }
-        return null;
-        //ToDo think about what to do with null value if isbn is non-existent
+        return books.get(isbn);
     }
 
     @Override
     public Disc getDisc(String barcode) {
-        for (Medium b : getDiscs()) {
-            Disc disc = (Disc) b;
-            if (disc.getBarcode().equals(barcode)) {
-                return disc;
-            }
-        }
-        return null;
-        //ToDo think about what to do with null value if isbn is non-existent
-
+        return discs.get(barcode);
     }
 
     @Override
