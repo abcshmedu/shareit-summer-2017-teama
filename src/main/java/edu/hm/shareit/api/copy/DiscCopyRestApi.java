@@ -37,7 +37,21 @@ public class DiscCopyRestApi {
         return Response.ok(result).build();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{barcode}")
+    public Response borrowDisc(@PathParam("barcode") String isbn) {
+        CopyServiceResult result = COPY_SERVICE.borrowDisc(isbn);
+        return Response.ok(result).build();
+    }
 
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("{barcode}")
+    public Response returnBook(@PathParam("barcode") String barcode) {
+        CopyServiceResult result = COPY_SERVICE.returnDisc(barcode);
+        return Response.ok(result).build();
+    }
 
     private void setMediaService(CopyServiceImpl copyService) {
         COPY_SERVICE = copyService;

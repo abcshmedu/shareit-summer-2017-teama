@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class TestBook extends Vars {
-
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
