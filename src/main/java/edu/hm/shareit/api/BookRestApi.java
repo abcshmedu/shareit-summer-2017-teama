@@ -63,11 +63,10 @@ public class BookRestApi {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response postBook(Book book) {
         MediaServiceResult result = MEDIA_SERVICE.addBook(book);
-        return Response.ok(result.getStatus())
-                .status(result.getCode())
-                .build();
+        return Response.ok(result).build();
     }
 
     /**
@@ -82,8 +81,6 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(Book book, @PathParam("isbn") String isbn) {
         MediaServiceResult result = MEDIA_SERVICE.updateBook(book, isbn);
-        return Response.ok(result.getStatus())
-                .status(result.getCode())
-                .build();
+        return Response.ok(result).build();
     }
 }

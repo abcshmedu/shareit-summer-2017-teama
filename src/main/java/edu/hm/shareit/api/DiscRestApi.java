@@ -64,11 +64,10 @@ public class DiscRestApi {
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response postDisc(Disc disc) {
         MediaServiceResult result = MEDIA_SERVICE.addDisc(disc);
-        return Response.ok(result.getStatus())
-                .status(result.getCode())
-                .build();
+        return Response.ok(result).build();
     }
 
     /**
@@ -83,8 +82,6 @@ public class DiscRestApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateDisc(Disc disc, @PathParam("barcode") String barcode)  {
         MediaServiceResult result = MEDIA_SERVICE.updateDisc(disc, barcode);
-        return Response.ok(result.getStatus())
-                .status(result.getCode())
-                .build();
+        return Response.ok(result).build();
     }
 }
