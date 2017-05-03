@@ -13,7 +13,9 @@ import java.util.Collection;
 
 @Path("books")
 public class BookRestApi {
-    // Field for the backend service
+    /**
+     * Field for the backend service
+     */
     private static MediaService MEDIA_SERVICE;
 
     /**
@@ -41,6 +43,7 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBook(@PathParam("isbn") String isbn) {
         Book book = MEDIA_SERVICE.getBook(isbn);
+        System.out.println(book);
         return Response.ok(book).build();
     }
 
