@@ -8,15 +8,14 @@ public class Disc extends Medium {
     private String director = null;
     private int fsk = -1; //Uninitialized value
 
-    public Disc(String title) {
-        super(title);
+    private Disc() {
+        super(null);
     }
 
-    @JsonCreator
-    public Disc(@JsonProperty("title") String title,
-                @JsonProperty("barcode") String barcode,
-                @JsonProperty("director") String director,
-                @JsonProperty("fsk") int fsk) {
+    public Disc(String title,
+                String barcode,
+                String director,
+                int fsk) {
         super(title);
         this.barcode = barcode;
         this.director = director;

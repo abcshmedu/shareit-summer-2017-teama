@@ -95,7 +95,11 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public MediaServiceResult updateBook(Book book) {
+    public MediaServiceResult updateBook(Book book, String isbn) {
+        if(book.getAuthor() == null || book.getTitle() == null) return MediaServiceResult.PARAMETER_MISSING;
+
+        if(!book.getIsbn().equals(isbn)) return MediaServiceResult.ISBN_DOES_NOT_MATCH;
+
         boolean result = false;
         for (Medium m : getBooks()) {
             Book bookIt = (Book) m;
@@ -112,7 +116,11 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public MediaServiceResult updateDisc(Disc disc) {
+    public MediaServiceResult updateDisc(Disc disc, String barcode) {
+        if(disc.getTitle() == null || disc.getDirector() == null) return MediaServiceResult.PARAMETER_MISSING;
+
+        if(!disc.getBarcode().equals(barcode)) return MediaServiceResult.DISC_DOES_NOT_MATCH;
+
         boolean result = false;
         for (Medium m : getDiscs()) {
             Disc discIt = (Disc) m;
