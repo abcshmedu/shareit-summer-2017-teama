@@ -52,7 +52,7 @@ public class DiscRestApi {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDiscs() throws IOException {
+    public Response getDiscs() {
         Collection<? extends Medium> discs = MEDIA_SERVICE.getDiscs();
         return Response.ok(discs).build();
     }

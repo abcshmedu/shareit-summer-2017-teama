@@ -1,20 +1,17 @@
 package edu.hm.shareit.models.mediums;
 
-class Vars {
-
-    static final int ONE_ARG_CONSTRUCTOR = 0;
-    static final int MULTI_ARG_CONSTRUCTOR = 1;
+public class Vars {
 
     static final String title = "title";
     static final String otherTitle = "other_title";
     static final String nullTitle = null;
 
-    static final String isbn = "1234567890123";
-    static final String otherIsbn = "3210987654321";
+    public static final String isbn = "1234567890123";
+    public static final String otherIsbn = "3210987654321";
     static final String nullIsbn = null;
 
-    static final String barcode = "123456789012";
-    static final String otherBarcode = "210987654321";
+    public static final String barcode = "123456789012";
+    public static final String otherBarcode = "210987654321";
     static final String nullBarcode = null;
 
     static final String director = "director";
@@ -35,6 +32,9 @@ class Vars {
     private static final String nonMatchingDirector = "non_matching_director";
     private static final String nonMatchingAuthor = "non_matching_author";
     private static final int nonMatchingFsk = 18;
+
+    public static final Disc testDisc = new Disc(title, barcode, director, fsk);
+    public static final Book testBook = new Book(title, isbn, author);
 
     static final Medium notEqualMedium = new Medium(nonMatchingTitle);
     static final Disc notEqualDisc = new Disc(nonMatchingTitle, nonMatchingBarcode, nonMatchingDirector, nonMatchingFsk);
