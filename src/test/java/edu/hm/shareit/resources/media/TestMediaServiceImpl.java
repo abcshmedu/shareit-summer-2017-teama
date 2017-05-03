@@ -1,8 +1,11 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.resources.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
+import edu.hm.shareit.resources.media.MediaService;
+import edu.hm.shareit.resources.media.MediaServiceImpl;
+import edu.hm.shareit.resources.media.MediaServiceResult;
 import org.junit.Test;
 
 import java.util.*;

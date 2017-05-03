@@ -1,11 +1,9 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.resources.media;
 
 import edu.hm.shareit.models.mediums.Book;
-import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 
-import javax.inject.Inject;
 import java.util.Collection;
 
 public interface MediaService {

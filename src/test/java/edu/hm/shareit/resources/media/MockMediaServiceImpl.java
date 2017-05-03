@@ -1,10 +1,12 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.resources.media;
 
 import edu.hm.shareit.models.mediums.Vars;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
+import edu.hm.shareit.resources.media.MediaService;
+import edu.hm.shareit.resources.media.MediaServiceResult;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -14,7 +16,7 @@ import java.util.Collections;
  *
  * If a method is called it will simply return preset values.
  */
-public class MockMediaServiceImpl implements MediaService{
+public class MockMediaServiceImpl implements MediaService {
     private static final Book testBook = Vars.testBook;
     private static final Disc testDisc = Vars.testDisc;
 

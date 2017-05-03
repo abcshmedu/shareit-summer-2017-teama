@@ -1,6 +1,8 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.resources.copy;
 
 import edu.hm.shareit.models.mediums.Copy;
+import edu.hm.shareit.resources.media.MediaService;
+import edu.hm.shareit.resources.media.MediaServiceImpl;
 
 /**
  * Created by Nelson on 03.05.2017.

@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.resources.copy;
 
 import edu.hm.shareit.models.mediums.Copy;
 

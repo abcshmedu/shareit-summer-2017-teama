@@ -1,17 +1,13 @@
 package edu.hm.shareit.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
-import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Copy;
-import edu.hm.shareit.resources.*;
-import org.json.JSONObject;
+import edu.hm.shareit.resources.copy.CopyService;
+import edu.hm.shareit.resources.copy.CopyServiceImpl;
+import edu.hm.shareit.resources.copy.CopyServiceResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
 
 /**
  * Created by Nelson on 03.05.2017.
@@ -19,7 +15,7 @@ import java.io.IOException;
 @Path("copies")
 public class CopyRestApi  {
 
-    private static CopyService COPY_SERVICE;
+    private CopyService COPY_SERVICE;
 
     public CopyRestApi() {
         setMediaService(new CopyServiceImpl());
