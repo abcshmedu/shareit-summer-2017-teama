@@ -1,5 +1,7 @@
 package edu.hm.shareit.api;
 
+import edu.hm.shareit.models.mediums.Book;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -65,8 +67,8 @@ public class BookRestApiTest {
     }
 
     public void testGetBooksAfterOnePost() throws IOException{
-        String jsonBody = "{\"title\":\"KaBlam\",\"isbn\":\"1234567890123\",\"author\":\"My Man\"}";
-        Response response = bookRestApi.postBook(jsonBody);
+        Book testBook = new Book("KaBlam", "1234567890123", "My Man");
+        Response response = bookRestApi.postBook(testBook);
 
         int status = response.getStatus();
         assertEquals(202, status);
@@ -86,7 +88,7 @@ public class BookRestApiTest {
         assertTrue(hasEntity);
 
         String entity = response.getEntity().toString();
-        assertEquals("[" + jsonBody + "]", entity);
+        assertEquals(testBook.toString(), entity);
     }
 
     public void testGetBooksAfterMultiplePosts() {

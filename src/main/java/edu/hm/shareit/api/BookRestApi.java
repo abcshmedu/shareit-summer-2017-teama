@@ -11,9 +11,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
-@Path("/books")
+@Path("books")
 public class BookRestApi {
-    private final MediaService MEDIA_SERVICE = new MediaServiceImpl();
+    private MediaService MEDIA_SERVICE = new MediaServiceImpl();
+
+    protected void setMediaService(MediaService mediaService){
+        MEDIA_SERVICE = mediaService;
+    }
 
     @GET
     @Path("{isbn}")
@@ -34,6 +38,7 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postBook(Book book) {
+        System.out.println(book);
         MediaServiceResult result = MEDIA_SERVICE.addBook(book);
         return Response.ok(result).status(result.getCode()).build();
     }

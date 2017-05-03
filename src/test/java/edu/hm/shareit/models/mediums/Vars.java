@@ -37,8 +37,6 @@ class Vars {
     private static final int nonMatchingFsk = 18;
 
     static final Medium notEqualMedium = new Medium(nonMatchingTitle);
-    static final Disc notEqualDiscOne = new Disc(nonMatchingTitle);
-    static final Disc notEqualDiscTwo = new Disc(nonMatchingTitle, nonMatchingBarcode, nonMatchingDirector, nonMatchingFsk);
-    static final Book notEqualBookOne = new Book(nonMatchingTitle);
-    static final Book notEqualBookTwo = new Book(nonMatchingTitle, nonMatchingIsbn, nonMatchingAuthor);
+    static final Disc notEqualDisc = new Disc(nonMatchingTitle, nonMatchingBarcode, nonMatchingDirector, nonMatchingFsk);
+    static final Book notEqualBook = new Book(nonMatchingTitle, nonMatchingIsbn, nonMatchingAuthor);
 }

@@ -17,8 +17,11 @@ import java.util.Collection;
 
 @Path("discs")
 public class DiscRestApi {
-    private final MediaService MEDIA_SERVICE = new MediaServiceImpl();
+    private MediaService MEDIA_SERVICE = new MediaServiceImpl();
 
+    protected void setMediaService(MediaService mediaService){
+        MEDIA_SERVICE = mediaService;
+    }
     @GET
     @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)

@@ -18,35 +18,24 @@ public class TestBook extends Vars{
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {ONE_ARG_CONSTRUCTOR, title, nullIsbn, nullAuthor },
-                {ONE_ARG_CONSTRUCTOR, otherTitle, nullIsbn, nullAuthor },
-                {ONE_ARG_CONSTRUCTOR, nullTitle, nullIsbn, nullAuthor},
-                {MULTI_ARG_CONSTRUCTOR, title, isbn, author},
-                {MULTI_ARG_CONSTRUCTOR, otherTitle, otherIsbn, otherAuthor},
-                {MULTI_ARG_CONSTRUCTOR, nullTitle, nullIsbn, nullAuthor},
+                {title, isbn, author},
+                {otherTitle, otherIsbn, otherAuthor},
+                {nullTitle, nullIsbn, nullAuthor},
         });
     }
 
     @Parameter // first data value (0) is default
-    public /* NOT private */ int constructorToUse;
-
-    @Parameter(1)
     public /* NOT private */ String testTitle;
 
-    @Parameter(2)
+    @Parameter(1)
     public /* NOT private */ String testIsbn;
 
-    @Parameter(3)
+    @Parameter(2)
     public /* NOT private */ String testAuthor;
 
     @Test
     public void test(){
-        Book testBook;
-        if(constructorToUse == ONE_ARG_CONSTRUCTOR){
-            testBook = new Book(testTitle);
-        }else{
-            testBook = new Book(testTitle, testIsbn, testAuthor);
-        }
+        Book testBook = new Book(testTitle, testIsbn, testAuthor);
 
         int titleHashCode = 0;
         if(testTitle != null) {
@@ -71,10 +60,8 @@ public class TestBook extends Vars{
         String getAuthorResult = testBook.getAuthor();
 
         boolean equalsOtherMedium = testBook.equals(notEqualMedium);
-        boolean equalsOtherDiscOne = testBook.equals(notEqualDiscOne);
-        boolean equalsOtherDiscTwo = testBook.equals(notEqualDiscTwo);
-        boolean equalsOtherBookOne = testBook.equals(notEqualBookOne);
-        boolean equalsOtherBookTwo = testBook.equals(notEqualBookTwo);
+        boolean equalsOtherDisc = testBook.equals(notEqualDisc);
+        boolean equalsOtherBook = testBook.equals(notEqualBook);
         boolean equalsSelf = testBook.equals(testBook);
 
         int hashCodeResult = testBook.hashCode();
@@ -86,10 +73,8 @@ public class TestBook extends Vars{
         assertEquals(testAuthor, getAuthorResult);
 
         assertFalse(equalsOtherMedium);
-        assertFalse(equalsOtherDiscOne);
-        assertFalse(equalsOtherDiscTwo);
-        assertFalse(equalsOtherBookOne);
-        assertFalse(equalsOtherBookTwo);
+        assertFalse(equalsOtherDisc);
+        assertFalse(equalsOtherBook);
         assertTrue(equalsSelf);
 
         assertEquals(finalHashCode, hashCodeResult);

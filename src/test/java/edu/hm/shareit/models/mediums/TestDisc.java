@@ -18,38 +18,27 @@ public class TestDisc extends Vars{
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
-                {ONE_ARG_CONSTRUCTOR, title, nullBarcode, nullDirector, defaultFsk },
-                {ONE_ARG_CONSTRUCTOR, otherTitle, nullBarcode, nullDirector, defaultFsk },
-                {ONE_ARG_CONSTRUCTOR, nullTitle, nullBarcode, nullDirector, defaultFsk },
-                {MULTI_ARG_CONSTRUCTOR, title, barcode, director, fsk },
-                {MULTI_ARG_CONSTRUCTOR, otherTitle, otherBarcode, otherDirector, otherFsk },
-                {MULTI_ARG_CONSTRUCTOR, nullTitle, nullBarcode, nullDirector, defaultFsk},
+                {title, barcode, director, fsk },
+                {otherTitle, otherBarcode, otherDirector, otherFsk },
+                {nullTitle, nullBarcode, nullDirector, defaultFsk},
         });
     }
 
     @Parameter // first data value (0) is default
-    public /* NOT private */ int constructorToUse;
-
-    @Parameter(1)
     public /* NOT private */ String testTitle;
 
-    @Parameter(2)
+    @Parameter(1)
     public /* NOT private */ String testBarcode;
 
-    @Parameter(3)
+    @Parameter(2)
     public /* NOT private */ String testDirector;
 
-    @Parameter(4)
+    @Parameter(3)
     public /* NOT private */ int testFsk;
 
     @Test
     public void test(){
-        Disc testDisc;
-        if(constructorToUse == ONE_ARG_CONSTRUCTOR){
-            testDisc = new Disc(testTitle);
-        }else{
-            testDisc = new Disc(testTitle, testBarcode, testDirector, testFsk);
-        }
+        Disc testDisc = new Disc(testTitle, testBarcode, testDirector, testFsk);
 
         int titleHashCode = 0;
         if(testTitle != null) {
@@ -76,10 +65,8 @@ public class TestDisc extends Vars{
         int getFskResult = testDisc.getFsk();
 
         boolean equalsOtherMedium = testDisc.equals(notEqualMedium);
-        boolean equalsOtherDiscOne = testDisc.equals(notEqualDiscOne);
-        boolean equalsOtherDiscTwo = testDisc.equals(notEqualDiscTwo);
-        boolean equalsOtherBookOne = testDisc.equals(notEqualBookOne);
-        boolean equalsOtherBookTwo = testDisc.equals(notEqualBookTwo);
+        boolean equalsOtherDisc = testDisc.equals(notEqualDisc);
+        boolean equalsOtherBook = testDisc.equals(notEqualBook);
         boolean equalsSelf = testDisc.equals(testDisc);
 
         int hashCodeResult = testDisc.hashCode();
@@ -92,10 +79,8 @@ public class TestDisc extends Vars{
         assertEquals(testFsk, getFskResult);
 
         assertFalse(equalsOtherMedium);
-        assertFalse(equalsOtherDiscOne);
-        assertFalse(equalsOtherDiscTwo);
-        assertFalse(equalsOtherBookOne);
-        assertFalse(equalsOtherBookTwo);
+        assertFalse(equalsOtherDisc);
+        assertFalse(equalsOtherBook);
         assertTrue(equalsSelf);
 
         assertEquals(finalHashCode, hashCodeResult);
