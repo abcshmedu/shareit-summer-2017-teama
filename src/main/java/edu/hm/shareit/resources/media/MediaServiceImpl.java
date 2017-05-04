@@ -47,7 +47,6 @@ public class MediaServiceImpl implements MediaService {
 
         if (disc.getBarcode().isEmpty() |
                 disc.getDirector().isEmpty() |
-                //disc.getFsk() < 0 |
                 disc.getTitle().isEmpty()) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
