@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.media.MediaService;
@@ -21,16 +22,7 @@ import java.util.Collection;
  */
 @Path("books")
 public class BookRestApi {
-    // Field for the backend service
-    private static MediaService MEDIA_SERVICE = new MediaServiceImpl();
-
-    /**
-     * Helper Method, used for setting MediaService (to allow for testing)
-     * @param mediaService The MediaService to use
-     */
-    protected void setMediaService(MediaService mediaService){
-        MEDIA_SERVICE = mediaService;
-    }
+    private MediaService MEDIA_SERVICE = ServiceGetter.getMediaService();
 
     /**
      * GET (getBook) Returns a specific book, provided it exists
@@ -66,7 +58,7 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response postBook(Book book) {
         MediaServiceResult result = MEDIA_SERVICE.addBook(book);
-        return Response.ok(result).build();
+        return Response.ok(result).status(result.getCode()).build();
     }
 
     /**
@@ -81,6 +73,6 @@ public class BookRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(Book book, @PathParam("isbn") String isbn) {
         MediaServiceResult result = MEDIA_SERVICE.updateBook(book, isbn);
-        return Response.ok(result).build();
+        return Response.ok(result).status(result.getCode()).build();
     }
 }

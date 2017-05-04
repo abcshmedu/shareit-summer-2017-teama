@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.media.MediaService;
@@ -21,16 +22,7 @@ import java.util.Collection;
  */
 @Path("discs")
 public class DiscRestApi {
-    //Field for the backend service
-    private static MediaService MEDIA_SERVICE = new MediaServiceImpl();
-
-    /**
-     * Helper Method, used for setting MediaService (to allow for testing)
-     * @param mediaService The MediaService to use
-     */
-    protected void setMediaService(MediaService mediaService){
-        MEDIA_SERVICE = mediaService;
-    }
+    private MediaService MEDIA_SERVICE = ServiceGetter.getMediaService();
 
     /**
      * GET (getDisc) Returns a specific disc, provided it exists
@@ -66,7 +58,7 @@ public class DiscRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response postDisc(Disc disc) {
         MediaServiceResult result = MEDIA_SERVICE.addDisc(disc);
-        return Response.ok(result).build();
+        return Response.ok(result).status(result.getCode()).build();
     }
 
     /**
@@ -81,6 +73,6 @@ public class DiscRestApi {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateDisc(Disc disc, @PathParam("barcode") String barcode)  {
         MediaServiceResult result = MEDIA_SERVICE.updateDisc(disc, barcode);
-        return Response.ok(result).build();
+        return Response.ok(result).status(result.getCode()).build();
     }
 }

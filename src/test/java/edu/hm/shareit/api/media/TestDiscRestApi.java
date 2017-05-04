@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.api.media.DiscRestApi;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Vars;
@@ -46,8 +47,8 @@ public class TestDiscRestApi extends DiscRestApi {
             }
         });
         worker.start();
+        ServiceGetter.setMediaService(new MockMediaServiceImpl());
         discRestApi = new DiscRestApi();
-        discRestApi.setMediaService(new MockMediaServiceImpl());
     }
 
     @Test

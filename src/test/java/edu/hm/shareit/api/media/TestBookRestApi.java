@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.api.media.BookRestApi;
 import edu.hm.shareit.models.mediums.Book;
 
@@ -47,8 +48,8 @@ public class TestBookRestApi extends BookRestApi {
             }
         });
         worker.start();
+        ServiceGetter.setMediaService(new MockMediaServiceImpl());
         bookRestApi = new BookRestApi();
-        bookRestApi.setMediaService(new MockMediaServiceImpl());
     }
 
     @Test

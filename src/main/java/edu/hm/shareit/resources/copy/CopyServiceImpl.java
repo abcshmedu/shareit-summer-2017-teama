@@ -1,5 +1,6 @@
 package edu.hm.shareit.resources.copy;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
@@ -10,18 +11,16 @@ import edu.hm.shareit.resources.media.MediaServiceImpl;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by Nelson on 03.05.2017.
- */
 public class CopyServiceImpl implements CopyService {
-    MediaService mediaService = new MediaServiceImpl();
+    private MediaService MEDIA_SERVICE = ServiceGetter.getMediaService();
 
     @Override
     public CopyServiceResult addBookCopy(Copy copy, String isbn) {
         if (copy.getOwner().isEmpty()) {
             return CopyServiceResult.NO_OWNER_FOUND;
         }
-        if (mediaService.getBook(isbn) == null) {
+        System.out.println(MEDIA_SERVICE.getBooks());
+        if (MEDIA_SERVICE.getBook(isbn) == null) {
             return CopyServiceResult.ISBN_NOT_FOUND;
         }
         return CopyServiceResult.OK;

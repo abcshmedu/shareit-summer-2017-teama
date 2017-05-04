@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.copy;
 
+import edu.hm.shareit.api.ServiceGetter;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.resources.copy.CopyService;
 import edu.hm.shareit.resources.copy.CopyServiceImpl;
@@ -12,22 +13,7 @@ import java.util.Collection;
 
 @Path("books")
 public class BookCopyRestApi {
-
-    private CopyService COPY_SERVICE;
-
-    public BookCopyRestApi() {
-        setMediaService(new CopyServiceImpl());
-    }
-
-    @POST
-    @Path("{isbn}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addBookCopy(Copy copyWithOwner, @PathParam("isbn") String isbn) {
-        System.out.println("got isbn: " + isbn + "\n" + "and got owner: " + copyWithOwner.getOwner());
-        CopyServiceResult result = COPY_SERVICE.addBookCopy(copyWithOwner, isbn);
-        return Response.ok(result).build();
-    }
+    private CopyService COPY_SERVICE = ServiceGetter.getCopyService();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -44,15 +30,21 @@ public class BookCopyRestApi {
         return Response.ok(result).build();
     }
 
+    @POST
+    @Path("{isbn}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addBookCopy(Copy copyWithOwner, @PathParam("isbn") String isbn) {
+        System.out.println("got isbn: " + isbn + "\n" + "and got owner: " + copyWithOwner.getOwner());
+        CopyServiceResult result = COPY_SERVICE.addBookCopy(copyWithOwner, isbn);
+        return Response.ok(result).status(result.getCode()).build();
+    }
+
     @PUT
     @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response returnBook(@PathParam("isbn") String isbn) {
         CopyServiceResult result = COPY_SERVICE.returnBook(isbn);
-        return Response.ok(result).build();
-    }
-
-    private void setMediaService(CopyServiceImpl copyService) {
-        COPY_SERVICE = copyService;
+        return Response.ok(result).status(result.getCode()).build();
     }
 }

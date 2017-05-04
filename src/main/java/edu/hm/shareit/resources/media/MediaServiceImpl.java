@@ -14,6 +14,7 @@ public class MediaServiceImpl implements MediaService {
 
     @Override
     public MediaServiceResult addBook(Book book) {
+        System.out.println(book);
         if (book == null || book.getIsbn() == null || book.getTitle() == null || book.getAuthor() == null) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
@@ -23,6 +24,8 @@ public class MediaServiceImpl implements MediaService {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
+        System.out.println(book.getIsbn());
+        System.out.println(books.keySet());
         if (!isValidISBN(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
