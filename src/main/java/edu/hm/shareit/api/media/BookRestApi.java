@@ -1,10 +1,9 @@
 package edu.hm.shareit.api.media;
 
-import edu.hm.shareit.api.ServiceGetter;
+import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.media.MediaService;
-import edu.hm.shareit.resources.media.MediaServiceImpl;
 import edu.hm.shareit.resources.media.MediaServiceResult;
 
 import javax.ws.rs.*;

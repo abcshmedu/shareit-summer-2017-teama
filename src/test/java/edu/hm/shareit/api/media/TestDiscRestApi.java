@@ -1,7 +1,6 @@
 package edu.hm.shareit.api.media;
 
-import edu.hm.shareit.api.ServiceGetter;
-import edu.hm.shareit.api.media.DiscRestApi;
+import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Vars;
 import edu.hm.shareit.resources.media.MediaServiceResult;

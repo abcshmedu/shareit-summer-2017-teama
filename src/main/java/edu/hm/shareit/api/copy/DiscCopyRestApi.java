@@ -1,12 +1,10 @@
 package edu.hm.shareit.api.copy;
 
-import edu.hm.shareit.api.ServiceGetter;
+import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.resources.copy.CopyService;
-import edu.hm.shareit.resources.copy.CopyServiceImpl;
 import edu.hm.shareit.resources.copy.CopyServiceResult;
 
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

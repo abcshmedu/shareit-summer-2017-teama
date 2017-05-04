@@ -1,5 +1,6 @@
 package edu.hm.shareit.models.mediums;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -32,10 +33,15 @@ public class TestBook extends Vars {
     @Parameter(2)
     public /* NOT private */ String testAuthor;
 
-    @Test
-    public void test(){
-        Book testBook = new Book(testTitle, testIsbn, testAuthor);
+    private Book testBook;
 
+    @Before
+    public void setup(){
+        testBook = new Book(testTitle, testIsbn, testAuthor);
+    }
+
+    @Test
+    public void testHashCode(){
         int titleHashCode = 0;
         if(testTitle != null) {
             titleHashCode = testTitle.hashCode();
@@ -52,32 +58,51 @@ public class TestBook extends Vars {
         finalHashCode = 31 * finalHashCode + isbnHashCode;
         finalHashCode = 31 * finalHashCode + authorHashCode;
 
+        int hashCodeResult = testBook.hashCode();
+
+        assertEquals(finalHashCode, hashCodeResult);
+    }
+
+    @Test
+    public void testToString(){
         String toStringExpected = "Book{isbn='" + testIsbn + "\', author='" + testAuthor + "\'}";
 
+        String toStringResult = testBook.toString();
+
+        assertEquals(toStringExpected, toStringResult);
+    }
+
+    @Test
+    public void testGetTitle(){
         String getTitleResult = testBook.getTitle();
+
+        assertEquals(testTitle, getTitleResult);
+    }
+
+    @Test
+    public void testGetIsbn(){
         String getIsbnResult = testBook.getIsbn();
+
+        assertEquals(testIsbn, getIsbnResult);
+    }
+
+    @Test
+    public void testGetAuthor(){
         String getAuthorResult = testBook.getAuthor();
 
+        assertEquals(testAuthor, getAuthorResult);
+    }
+
+    @Test
+    public void testEquals(){
         boolean equalsOtherMedium = testBook.equals(notEqualMedium);
         boolean equalsOtherDisc = testBook.equals(notEqualDisc);
         boolean equalsOtherBook = testBook.equals(notEqualBook);
         boolean equalsSelf = testBook.equals(testBook);
 
-        int hashCodeResult = testBook.hashCode();
-
-        String toStringResult = testBook.toString();
-
-        assertEquals(testTitle, getTitleResult);
-        assertEquals(testIsbn, getIsbnResult);
-        assertEquals(testAuthor, getAuthorResult);
-
         assertFalse(equalsOtherMedium);
         assertFalse(equalsOtherDisc);
         assertFalse(equalsOtherBook);
         assertTrue(equalsSelf);
-
-        assertEquals(finalHashCode, hashCodeResult);
-
-        assertEquals(toStringExpected, toStringResult);
     }
 }

@@ -1,7 +1,6 @@
 package edu.hm.shareit.api.media;
 
-import edu.hm.shareit.api.ServiceGetter;
-import edu.hm.shareit.api.media.BookRestApi;
+import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 
 import edu.hm.shareit.models.mediums.Vars;
