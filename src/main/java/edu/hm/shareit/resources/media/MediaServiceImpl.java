@@ -8,7 +8,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Implements the interface MediaService and provides functionality and logic for managing the media in the database.
+ */
 public class MediaServiceImpl implements MediaService {
+    private final int isbnBarcodeLength = 13;
+    private final int isbnBarcodeValidStart = 48;
+    private final int isbnBarcodeValidEnd = 57;
     private final Map<String, Book> books = new HashMap<>();
     private final Map<String, Disc> discs = new HashMap<>();
 
@@ -19,8 +25,8 @@ public class MediaServiceImpl implements MediaService {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
-        if (book.getAuthor().isEmpty() ||
-                book.getIsbn().isEmpty() || book.getTitle().isEmpty()) {
+        if (book.getAuthor().isEmpty()
+                || book.getIsbn().isEmpty() || book.getTitle().isEmpty()) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
@@ -45,9 +51,9 @@ public class MediaServiceImpl implements MediaService {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
-        if (disc.getBarcode().isEmpty() |
-                disc.getDirector().isEmpty() |
-                disc.getTitle().isEmpty()) {
+        if (disc.getBarcode().isEmpty()
+                | disc.getDirector().isEmpty()
+                | disc.getTitle().isEmpty()) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
@@ -63,43 +69,50 @@ public class MediaServiceImpl implements MediaService {
         return MediaServiceResult.ACCEPTED;
     }
 
+    /**
+     * Helper method to check for validity of isbn.
+     * @param isbn the isbn to be checked.
+     * @return Isbn valid or not.
+     */
     private boolean isValidISBN(String isbn) {
-        if (isbn.length() != 13) {
+        if (isbn.length() != isbnBarcodeLength) {
             return false;
         }
 
         final char[] isbnChars = isbn.toCharArray();
         for (char i : isbnChars) {
-            if (i < 48 || i > 57) {
+            if (i < isbnBarcodeValidStart || i > isbnBarcodeValidEnd) {
                 return false;
             }
         }
         return true;
-        //ToDo See if better way of checking ISBN, potentially using regex?
     }
 
-
+    /**
+     * Helper method to check for validity of barcode.
+     * @param barcode The barcode to be checked.
+     * @return Barcode is valid or not.
+     */
     private boolean isValidBarcode(String barcode) {
-        if (barcode.length() != 13) {
+        if (barcode.length() != isbnBarcodeLength) {
             return false;
         }
         final char[] barcodeChars = barcode.toCharArray();
         for (char i : barcodeChars) {
-            if (i < 48 || i > 57) {
+            if (i < isbnBarcodeValidStart || i > isbnBarcodeValidEnd) {
                 return false;
             }
         }
         return true;
-        //ToDo See if there is a better way of doing this
     }
 
     @Override
-    public Collection<? extends Medium> getBooks() {
+    public Collection< ? extends Medium> getBooks() {
         return books.values();
     }
 
     @Override
-    public Collection<? extends Disc> getDiscs() {
+    public Collection< ? extends Disc> getDiscs() {
         return discs.values();
     }
 

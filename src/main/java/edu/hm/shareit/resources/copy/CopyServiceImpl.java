@@ -9,16 +9,20 @@ import edu.hm.shareit.resources.media.MediaService;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Implements the interface CopyService and provides functionality and logic for managing the copies in the database.
+ */
 public class CopyServiceImpl implements CopyService {
-    private MediaService MEDIA_SERVICE = ServiceGetter.getMediaService();
+    private final int fskConstant = 18;
+    private MediaService mediaService = ServiceGetter.getMediaService();
 
     @Override
     public CopyServiceResult addBookCopy(Copy copy, String isbn) {
         if (copy.getOwner().isEmpty()) {
             return CopyServiceResult.NO_OWNER_FOUND;
         }
-        System.out.println(MEDIA_SERVICE.getBooks());
-        if (MEDIA_SERVICE.getBook(isbn) == null) {
+        System.out.println(mediaService.getBooks());
+        if (mediaService.getBook(isbn) == null) {
             return CopyServiceResult.ISBN_NOT_FOUND;
         }
         return CopyServiceResult.OK;
@@ -51,8 +55,8 @@ public class CopyServiceImpl implements CopyService {
     @Override
     public Collection<Copy> listDiscCopies() {
         ArrayList<Copy> list = new ArrayList<>();
-        list.add(new Copy(new Disc("title", "barcode", "director", 18), "owner"));
-        list.add(new Copy(new Disc("title1", "barcode1", "director1", 18), "owner1"));
+        list.add(new Copy(new Disc("title", "barcode", "director", fskConstant), "owner"));
+        list.add(new Copy(new Disc("title1", "barcode1", "director1", fskConstant), "owner1"));
         return list;
     }
 

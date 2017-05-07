@@ -52,6 +52,4 @@ public class TestBookCopyRestApi {
 
         assertEquals(202, response.getStatus());
     }
-
-
 }

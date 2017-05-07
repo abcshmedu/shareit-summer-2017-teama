@@ -1,14 +1,28 @@
 package edu.hm.shareit.models.mediums;
 
+/**
+ * Represents a book with a unique isbn.
+ * The isbn is unique, title and author can exist more than once.
+ */
 public class Book extends Medium {
     private String isbn;
     private String author;
 
+    /**
+     * The default constructor.
+     */
     public Book() {
         this(null, null, null);
     }
 
-    public Book( String title,
+    /**
+     * The custom constructor.
+     *
+     * @param title  Title of the book.
+     * @param isbn   Isbn number of the book.
+     * @param author Author of the book.
+     */
+    public Book(String title,
                 String isbn,
                 String author) {
         setTitle(title);
@@ -16,31 +30,59 @@ public class Book extends Medium {
         setAuthor(author);
     }
 
+    /**
+     * Getter for isbn number.
+     *
+     * @return The isbn of the book.
+     */
     public String getIsbn() {
         return isbn;
     }
 
+    /**
+     * Getter for the author.
+     *
+     * @return The author of the book.
+     */
     public String getAuthor() {
         return author;
     }
 
-    public void setIsbn(String isbn){
+    /**
+     * Setter for isbn number.
+     *
+     * @param isbn The isbn of the book.
+     */
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public void setAuthor(String author){
+    /**
+     * Setter for the author.
+     *
+     * @param author The author of the book.
+     */
+    public void setAuthor(String author) {
         this.author = author;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         Book book = (Book) o;
 
-        if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) return false;
+        if (isbn != null ? !isbn.equals(book.isbn) : book.isbn != null) {
+            return false;
+        }
         return author != null ? author.equals(book.author) : book.author == null;
     }
 
@@ -54,9 +96,9 @@ public class Book extends Medium {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "isbn='" + isbn + "\'" +
-                ", author='" + author + "\'" +
-                "}";
+        return "Book{"
+                + "isbn='" + isbn + "\'"
+                + ", author='" + author + "\'"
+                + "}";
     }
 }

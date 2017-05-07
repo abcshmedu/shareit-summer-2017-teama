@@ -1,17 +1,29 @@
 package edu.hm.shareit.models.mediums;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
+/**
+ * Represents a disc with a unique barcode.
+ * The barcode is unique, director, title and fsk can exist more than once.
+ */
 public class Disc extends Medium {
     private String barcode;
     private String director;
     private int fsk;
 
+    /**
+     * The default constructor.
+     */
     public Disc() {
         this(null, null, null, -1);
     }
 
+    /**
+     * The custom constructor.
+     *
+     * @param title    Title of the disc.
+     * @param barcode  Barcode of the disc.
+     * @param director Director of the disc's content.
+     * @param fsk      fsk of the disc's content.
+     */
     public Disc(String title,
                 String barcode,
                 String director,
@@ -22,40 +34,80 @@ public class Disc extends Medium {
         setFsk(fsk);
     }
 
+    /**
+     * Getter for the barcode.
+     *
+     * @return The barcode.
+     */
     public String getBarcode() {
         return barcode;
     }
 
+    /**
+     * Getter for the director.
+     *
+     * @return The director.
+     */
     public String getDirector() {
         return director;
     }
 
+    /**
+     * Getter for fsk.
+     *
+     * @return The fsk.
+     */
     public int getFsk() {
         return fsk;
     }
 
-    public void setBarcode(String barcode){
+    /**
+     * Setter for the barcode.
+     *
+     * @param barcode The barcode.
+     */
+    public void setBarcode(String barcode) {
         this.barcode = barcode;
     }
 
-    public void setDirector(String director){
+    /**
+     * Setter for the director.
+     *
+     * @param director The director.
+     */
+    public void setDirector(String director) {
         this.director = director;
     }
 
-    public void setFsk(int fsk){
+    /**
+     * Setter for fsk.
+     *
+     * @param fsk The fsk.
+     */
+    public void setFsk(int fsk) {
         this.fsk = fsk;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
         Disc disc = (Disc) o;
 
-        if (fsk != disc.fsk) return false;
-        if (barcode != null ? !barcode.equals(disc.barcode) : disc.barcode != null) return false;
+        if (fsk != disc.fsk) {
+            return false;
+        }
+        if (barcode != null ? !barcode.equals(disc.barcode) : disc.barcode != null) {
+            return false;
+        }
         return director != null ? director.equals(disc.director) : disc.director == null;
     }
 
@@ -70,10 +122,10 @@ public class Disc extends Medium {
 
     @Override
     public String toString() {
-        return "Disc{" +
-                "barcode='" + barcode + "\'" +
-                ", director='" + director + "\'" +
-                ", fsk=" + fsk +
-                "}";
+        return "Disc{"
+                + "barcode='" + barcode + "\'"
+                + ", director='" + director + "\'"
+                + ", fsk=" + fsk
+                + "}";
     }
 }

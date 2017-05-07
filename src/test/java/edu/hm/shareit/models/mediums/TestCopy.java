@@ -1,7 +1,7 @@
 package edu.hm.shareit.models.mediums;
 
 public class TestCopy {
-    //ToDo Implements copy tests
+    // Tests not required at this stage, though maybe in the future.
 }
 
 
