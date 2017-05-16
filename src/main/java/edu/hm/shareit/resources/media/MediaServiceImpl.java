@@ -1,9 +1,15 @@
 package edu.hm.shareit.resources.media;
 
+import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
+import edu.hm.shareit.resources.Authorization;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +17,7 @@ import java.util.Map;
 /**
  * Implements the interface MediaService and provides functionality and logic for managing the media in the database.
  */
-public class MediaServiceImpl implements MediaService {
+public class MediaServiceImpl implements MediaService, Authorization {
     private final int isbnBarcodeLength = 13;
     private final int isbnBarcodeValidStart = 48;
     private final int isbnBarcodeValidEnd = 57;
@@ -183,5 +189,31 @@ public class MediaServiceImpl implements MediaService {
     @Override
     public Disc getDisc(String barcode) {
         return discs.get(barcode);
+    }
+
+    @Override
+    public Response authorize(Token token){
+
+        //URL url = new
+        //HttpURLConnection connection = HttpURLConnection.
+
+        //HttpClient client = new HttpClient();
+
+        // Create a method instance.
+        //GetMethod method = new GetMethod("http://localhost:9000/giveMeString");
+
+        // Execute the method.
+        //int statusCode = client.executeMethod(method);
+
+        // Read the response body.
+        //byte[] responseBody = method.getResponseBody();
+
+        //Print the response
+        //System.out.println(new String(responseBody));
+        return Response
+                .status(Response.Status.OK)
+                .entity("This is a valid token")
+                .type( MediaType.APPLICATION_JSON)
+                .build();
     }
 }

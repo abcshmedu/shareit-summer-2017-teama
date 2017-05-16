@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
@@ -31,7 +32,9 @@ public class BookRestApi {
     @GET
     @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn) {
+    public Response getBook(@PathParam("isbn") String isbn, @HeaderParam("authorization") String tokenStr) {
+        Token token = new Token(tokenStr);
+        mediaService.authorize(token);
         Book book = mediaService.getBook(isbn);
         return Response.ok(book).build();
     }

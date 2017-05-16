@@ -1,9 +1,11 @@
 package edu.hm.shareit.resources.media;
 
+import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
 
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
@@ -73,4 +75,6 @@ public interface MediaService {
      * @return an instance of the disc.
      */
     Disc getDisc(String barcode);
+
+    Response authorize(Token token);
 }
