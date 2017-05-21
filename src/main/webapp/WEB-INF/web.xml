@@ -13,7 +13,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm.shareit.api.media;edu.hm.shareit.api.exception_handlers</param-value>
+            <param-value>edu.hm.shareit.api.unsecured.media;edu.hm.shareit.api.exception_handlers</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -22,13 +22,26 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>Jersey REST Secured-Media-Service</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>edu.hm.shareit.api.secured.media;edu.hm.shareit.api.exception_handlers</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
     <servlet>
         <servlet-name>Jersey REST Copy-Service</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm.shareit.api.copy;edu.hm.shareit.api.exception_handlers</param-value>
+            <param-value>edu.hm.shareit.api.unsecured.copy;edu.hm.shareit.api.exception_handlers</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -42,7 +55,7 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm.shareit.api.authentication;edu.hm.shareit.api.exception_handlers</param-value>
+            <param-value>edu.hm.shareit.api.secured.authentication;edu.hm.shareit.api.exception_handlers</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -56,6 +69,10 @@
     <servlet-mapping>
         <servlet-name>Jersey REST Media-Service</servlet-name>
         <url-pattern>/shareit/media/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Secured-Media-Service</servlet-name>
+        <url-pattern>/shareit/media/secured/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Jersey REST Copy-Service</servlet-name>

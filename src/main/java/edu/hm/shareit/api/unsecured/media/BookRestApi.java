@@ -1,11 +1,10 @@
-package edu.hm.shareit.api.media;
+package edu.hm.shareit.api.unsecured.media;
 
-import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.media.MediaService;
-import edu.hm.shareit.resources.media.MediaServiceResult;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -22,7 +21,7 @@ import java.util.Collection;
  */
 @Path("books")
 public class BookRestApi {
-    private MediaService mediaService = ServiceGetter.getMediaService();
+    protected MediaService mediaService = ServiceGetter.getMediaService();
 
     /**
      * GET (getBook) Returns a specific book, provided it exists.
@@ -32,10 +31,12 @@ public class BookRestApi {
     @GET
     @Path("{isbn}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBook(@PathParam("isbn") String isbn, @HeaderParam("authorization") String tokenStr) {
-        Token token = new Token(tokenStr);
-        mediaService.authorize(token);
-        Book book = mediaService.getBook(isbn);
+    public Response getBook(@PathParam("isbn") String isbn) {
+        Collection collection = mediaService.getBook(isbn).getMedia();
+        Book book = null;
+        if(collection != null){
+            book = (Book) collection.toArray()[0];
+        }
         return Response.ok(book).build();
     }
 
@@ -46,14 +47,14 @@ public class BookRestApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBooks() {
-        Collection< ? extends Medium> books = mediaService.getBooks();
+        Collection< ? extends Medium> books = mediaService.getBooks().getMedia();
         return Response.ok(books).build();
     }
 
     /**
      * POST (postBook) Posts a book to the Media_Service.
      * @param book The book to post
-     * @return The Response from the MediaService
+     * @return The Response from the SecuredMediaService
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -67,7 +68,7 @@ public class BookRestApi {
      * PUT (updateBook) Updates a book with the given ISBN to the new values.
      * @param book The book with the new values
      * @param isbn The ISBN for the book to replace
-     * @return The Response from the MediaService
+     * @return The Response from the SecuredMediaService
      */
     @PUT
     @Path("{isbn}")

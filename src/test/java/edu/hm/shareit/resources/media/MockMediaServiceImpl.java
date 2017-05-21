@@ -6,8 +6,8 @@ import edu.hm.shareit.models.mediums.Vars;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.media.MediaService;
-import edu.hm.shareit.resources.media.MediaServiceResult;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Mock Implementation of the MediaService for Testing
+ * Mock Implementation of the SecuredMediaService for Testing
  *
  * If a method is called it will simply return preset values.
  */
@@ -31,12 +31,17 @@ public class MockMediaServiceImpl implements MediaService {
         return success();
     }
 
-    public Collection<? extends Medium> getBooks(){
-        return Collections.singletonList(testBook);
+    public MediaServiceResult getBooks(){
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        res.setMedia(Collections.singletonList(testBook));
+        return res;
     }
-    public Collection<? extends Medium> getDiscs(){
-        return Collections.singletonList(testDisc);
+    public MediaServiceResult getDiscs(){
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        res.setMedia(Collections.singletonList(testDisc));
+        return res;
     }
+
     public MediaServiceResult updateBook(Book book, String isbn){
         if(isbn == null){
             return MediaServiceResult.ISBN_NOT_FOUND;
@@ -46,6 +51,7 @@ public class MockMediaServiceImpl implements MediaService {
             return MediaServiceResult.ACCEPTED;
         }
     }
+
     public MediaServiceResult updateDisc(Disc disc, String barcode){
         if(barcode == null){
             return MediaServiceResult.ISBN_NOT_FOUND;
@@ -55,26 +61,30 @@ public class MockMediaServiceImpl implements MediaService {
             return MediaServiceResult.ACCEPTED;
         }
     }
-    public Book getBook(String isbn){
+
+    public MediaServiceResult getBook(String isbn){
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
         if(isbn == null){
-            return null;
+            res.setMedia(null);
         }else if(!isbn.equals(testBook.getIsbn())){
-            return new Book();
+            res.setMedia(Collections.singletonList(new Book()));
         }else {
-            return testBook;
+            res.setMedia(Collections.singletonList(testBook));
         }
+        return res;
     }
-    public Disc getDisc(String barcode){
+    public MediaServiceResult getDisc(String barcode){
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
         if(barcode == null){
-            return null;
+            res.setMedia(null);
         }else if(!barcode.equals(testDisc.getBarcode())){
-            return new Disc();
+            res.setMedia(Collections.singletonList(new Disc()));
         }else {
-            return testDisc;
+            res.setMedia(Collections.singletonList(testDisc));
         }
+        return res;
     }
 
-    @Override
     public Response authorize(Token token) {
         return Response
                 .status(Response.Status.ACCEPTED)

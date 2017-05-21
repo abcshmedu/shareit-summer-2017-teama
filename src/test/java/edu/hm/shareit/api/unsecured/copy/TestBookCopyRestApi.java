@@ -1,4 +1,4 @@
-package edu.hm.shareit.api.copy;
+package edu.hm.shareit.api.unsecured.copy;
 
 import edu.hm.shareit.models.mediums.Copy;
 import org.junit.Test;
@@ -10,23 +10,23 @@ import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestDiscCopyRestApi {
-    private static final String DISCS_URL_TO_TEST = "http://localhost:8082/shareit/copies/discs";
+public class TestBookCopyRestApi {
+    private static final String BOOKS_URL_TO_TEST = "http://localhost:8082/shareit/copies/books";
 
     @Test
-    public void testAddDiscCopy() {
+    public void testAddBookCopy() {
         Response response = ClientBuilder.newClient() // erzeuge neuen Client
-                .target(DISCS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
+                .target(BOOKS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
                 .request(MediaType.APPLICATION_JSON) // erzeuge Request mit HTML als Datenformat
                 .post(Entity.json(new Copy(null, "test"))); // führe GET Request mit Unmarshalling des Payloads aus
 
-        assertEquals(200, response.getStatus());
+        assertEquals(404, response.getStatus());
     }
 
     @Test
-    public void testBorrowDiscCopy() {
+    public void testBorrowBookCopy() {
         Response response = ClientBuilder.newClient() // erzeuge neuen Client
-                .target(DISCS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
+                .target(BOOKS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
                 .request(MediaType.APPLICATION_JSON) // erzeuge Request mit HTML als Datenformat
                 .get(); // führe GET Request mit Unmarshalling des Payloads aus
 
@@ -34,9 +34,9 @@ public class TestDiscCopyRestApi {
     }
 
     @Test
-    public void testListDiscOfCopies() {
+    public void testListBookOfCopies() {
         Response response = ClientBuilder.newClient() // erzeuge neuen Client
-                .target(DISCS_URL_TO_TEST) // setze Ressource-URL
+                .target(BOOKS_URL_TO_TEST) // setze Ressource-URL
                 .request(MediaType.APPLICATION_JSON) // erzeuge Request mit HTML als Datenformat
                 .get(); // führe GET Request mit Unmarshalling des Payloads aus
 
@@ -44,14 +44,12 @@ public class TestDiscCopyRestApi {
     }
 
     @Test
-    public void testReturnCopyOfDisc() {
+    public void testReturnCopyOfBook() {
         Response response = ClientBuilder.newClient() // erzeuge neuen Client
-                .target(DISCS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
+                .target(BOOKS_URL_TO_TEST + "/1234567890123") // setze Ressource-URL
                 .request(MediaType.APPLICATION_JSON) // erzeuge Request mit HTML als Datenformat
                 .put(Entity.json(new Copy(null, "test"))); // führe GET Request mit Unmarshalling des Payloads aus
 
-        assertEquals(200, response.getStatus());
+        assertEquals(202, response.getStatus());
     }
-
-
 }

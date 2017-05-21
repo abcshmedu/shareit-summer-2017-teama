@@ -15,7 +15,7 @@ public class JsonParseExceptionMapper implements ExceptionMapper<JsonParseExcept
         return Response
                 .status(Response.Status.BAD_REQUEST)
                 .entity("This is an invalid json. The request can not be parsed")
-                .type( MediaType.APPLICATION_JSON)
+                .type( MediaType.TEXT_PLAIN)
                 .build();
     }
 

@@ -1,9 +1,10 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.shareit.api.unsecured.media.DiscRestApi;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Vars;
-import edu.hm.shareit.resources.media.MediaServiceResult;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.resources.media.MockMediaServiceImpl;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;

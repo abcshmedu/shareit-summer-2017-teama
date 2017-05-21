@@ -1,11 +1,12 @@
-package edu.hm.shareit.resources.authentication;
+package edu.hm.shareit.resources.secured.authentication;
 
 import edu.hm.shareit.models.authentication.Token;
+import edu.hm.shareit.resources.ServiceResult;
 
 /**
  * Contains all the status codes and messages needed for the CopyService.
  */
-public enum AuthenticationServiceResult {
+public enum AuthenticationServiceResult implements ServiceResult{
     AUTHENTICATED(200, "Authenticated"),
     LOGIN_ACCEPTED(201, "Login Accepted"),
     TOKEN_NOT_VALID(400, "Token not valid"),

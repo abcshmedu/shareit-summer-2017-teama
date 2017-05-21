@@ -1,13 +1,12 @@
-package edu.hm.shareit.resources.copy;
+package edu.hm.shareit.resources.secured.copy;
 
+import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Copy;
+import edu.hm.shareit.resources.ServiceResult;
 
 import java.util.Collection;
 
-/**
- * Created by Nelson on 03.05.2017.
- */
-public interface CopyService {
+public interface SecuredCopyService {
     /**
      * The result of the request for adding a copy.
      *
@@ -15,14 +14,14 @@ public interface CopyService {
      * @param isbn Isbn of book copy to be added.
      * @return Status code and message.
      */
-    CopyServiceResult addBookCopy(Copy copy, String isbn);
+    ServiceResult addBookCopy(Copy copy, String isbn, Token token);
 
     /**
      * Requests a list of book copies.
      *
      * @return Collection of book copies.
      */
-    Collection<Copy> listBookCopies();
+    ServiceResult listBookCopies(Token token);
 
     /**
      * Requests to borrow a book copy.
@@ -30,7 +29,7 @@ public interface CopyService {
      * @param isbn Isbn of the book copy requested.
      * @return Status code and message.
      */
-    CopyServiceResult borrowBook(String isbn);
+    ServiceResult borrowBook(String isbn, Token token);
 
     /**
      * Requests to return a book.
@@ -38,7 +37,7 @@ public interface CopyService {
      * @param isbn Isbn of the book to be returned.
      * @return Status code and message.
      */
-    CopyServiceResult returnBook(String isbn);
+    ServiceResult returnBook(String isbn, Token token);
 
     /**
      * Request to add disc copy.
@@ -47,25 +46,25 @@ public interface CopyService {
      * @param barcode Barcode of copy to be added.
      * @return Status code and message.
      */
-    CopyServiceResult addDiscCopy(Copy copy, String barcode);
+    ServiceResult addDiscCopy(Copy copy, String barcode, Token token);
 
     /**
      * Request for a list of disc copies.
      * @return All copies of discs in the database.
      */
-    Collection<Copy> listDiscCopies();
+    ServiceResult listDiscCopies(Token token);
 
     /**
      * Request for borrowing a disc.
      * @param barcode Barcode of the disc requested.
      * @return Status code and message.
      */
-    CopyServiceResult borrowDisc(String barcode);
+    ServiceResult borrowDisc(String barcode, Token token);
 
     /**
      * Request to return a copy of a disc.
      * @param barcode The barcode of the copy.
      * @return Status code and message.
      */
-    CopyServiceResult returnDisc(String barcode);
+    ServiceResult returnDisc(String barcode, Token token);
 }

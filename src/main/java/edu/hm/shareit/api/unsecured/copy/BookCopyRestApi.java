@@ -1,9 +1,9 @@
-package edu.hm.shareit.api.copy;
+package edu.hm.shareit.api.unsecured.copy;
 
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Copy;
-import edu.hm.shareit.resources.copy.CopyService;
-import edu.hm.shareit.resources.copy.CopyServiceResult;
+import edu.hm.shareit.resources.unsecured.copy.CopyService;
+import edu.hm.shareit.resources.unsecured.copy.CopyServiceResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +39,7 @@ public class BookCopyRestApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listBookCopies() {
-        Collection<Copy> result = copyService.listBookCopies();
+        Collection<Copy> result = copyService.listBookCopies().getCopies();
         return Response.ok(result).build();
     }
 

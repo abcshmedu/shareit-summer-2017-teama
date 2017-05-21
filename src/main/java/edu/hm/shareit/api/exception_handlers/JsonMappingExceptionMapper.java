@@ -15,7 +15,7 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
         return Response
                 .status(Response.Status.BAD_REQUEST)
                 .entity("This is an invalid request. At least one field format is not readable by the system.")
-                .type(MediaType.TEXT_PLAIN)
+                .type(MediaType.APPLICATION_JSON)
                 .build();
     }
 

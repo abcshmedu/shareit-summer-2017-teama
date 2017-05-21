@@ -1,23 +1,15 @@
-package edu.hm.shareit.resources.media;
+package edu.hm.shareit.resources.unsecured.media;
 
-import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.Authorization;
 
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
- * Implements the interface MediaService and provides functionality and logic for managing the media in the database.
+ * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
  */
-public class MediaServiceImpl implements MediaService, Authorization {
+public class MediaServiceImpl implements MediaService {
     private final int isbnBarcodeLength = 13;
     private final int isbnBarcodeValidStart = 48;
     private final int isbnBarcodeValidEnd = 57;
@@ -26,7 +18,6 @@ public class MediaServiceImpl implements MediaService, Authorization {
 
     @Override
     public MediaServiceResult addBook(Book book) {
-        System.out.println(book);
         if (book == null || book.getIsbn() == null || book.getTitle() == null || book.getAuthor() == null) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
@@ -36,8 +27,6 @@ public class MediaServiceImpl implements MediaService, Authorization {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
-        System.out.println(book.getIsbn());
-        System.out.println(books.keySet());
         if (!isValidISBN(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
@@ -113,13 +102,19 @@ public class MediaServiceImpl implements MediaService, Authorization {
     }
 
     @Override
-    public Collection< ? extends Medium> getBooks() {
-        return books.values();
+    public MediaServiceResult getBooks() {
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        Collection theBooks = books.values();
+        res.setMedia(theBooks);
+        return res;
     }
 
     @Override
-    public Collection< ? extends Disc> getDiscs() {
-        return discs.values();
+    public MediaServiceResult getDiscs() {
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        Collection theDiscs = discs.values();
+        res.setMedia(theDiscs);
+        return res;
     }
 
     @Override
@@ -182,38 +177,18 @@ public class MediaServiceImpl implements MediaService, Authorization {
     }
 
     @Override
-    public Book getBook(String isbn) {
-        return books.get(isbn);
+    public MediaServiceResult getBook(String isbn) {
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        Book book = books.get(isbn);
+        res.setMedia(Collections.singletonList(book));
+        return res;
     }
 
     @Override
-    public Disc getDisc(String barcode) {
-        return discs.get(barcode);
-    }
-
-    @Override
-    public Response authorize(Token token){
-
-        //URL url = new
-        //HttpURLConnection connection = HttpURLConnection.
-
-        //HttpClient client = new HttpClient();
-
-        // Create a method instance.
-        //GetMethod method = new GetMethod("http://localhost:9000/giveMeString");
-
-        // Execute the method.
-        //int statusCode = client.executeMethod(method);
-
-        // Read the response body.
-        //byte[] responseBody = method.getResponseBody();
-
-        //Print the response
-        //System.out.println(new String(responseBody));
-        return Response
-                .status(Response.Status.OK)
-                .entity("This is a valid token")
-                .type( MediaType.APPLICATION_JSON)
-                .build();
+    public MediaServiceResult getDisc(String barcode) {
+        MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        Disc disc = discs.get(barcode);
+        res.setMedia(Collections.singletonList(disc));
+        return res;
     }
 }

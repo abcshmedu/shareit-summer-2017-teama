@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources.authentication;
+package edu.hm.shareit.resources.secured.authentication;
 
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.authentication.User;

@@ -1,15 +1,12 @@
-package edu.hm.shareit.resources.media;
+package edu.hm.shareit.resources.unsecured.media;
 
-import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
 
-import javax.ws.rs.core.Response;
 import java.util.Collection;
 
 /**
- * Implements the interface MediaService and provides functionality and logic for managing the media in the database.
+ * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
  */
 public interface MediaService {
     /**
@@ -33,14 +30,14 @@ public interface MediaService {
      *
      * @return Collection of all books.
      */
-    Collection< ? extends Medium> getBooks();
+    MediaServiceResult getBooks();
 
     /**
      * Request for getting all discs in the database.
      *
      * @return Collection of all discs.
      */
-    Collection< ? extends Medium> getDiscs();
+    MediaServiceResult getDiscs();
 
     /**
      * Request for updating an existing book in the database.
@@ -55,10 +52,10 @@ public interface MediaService {
      * Request for updating an existing disc in the database.
      *
      * @param disc The disc to be updated.
-     * @param isbn The isbn to be updated.
+     * @param barcode The isbn to be updated.
      * @return Status code and message.
      */
-    MediaServiceResult updateDisc(Disc disc, String isbn);
+    MediaServiceResult updateDisc(Disc disc, String barcode);
 
     /**
      * Request for getting a specific book from the database.
@@ -66,7 +63,7 @@ public interface MediaService {
      * @param isbn The isbn of the book.
      * @return an instance of the book.
      */
-    Book getBook(String isbn);
+    MediaServiceResult getBook(String isbn);
 
     /**
      * Request for getting a specific disc from the database.
@@ -74,7 +71,5 @@ public interface MediaService {
      * @param barcode The barcode of the disc.
      * @return an instance of the disc.
      */
-    Disc getDisc(String barcode);
-
-    Response authorize(Token token);
+    MediaServiceResult getDisc(String barcode);
 }

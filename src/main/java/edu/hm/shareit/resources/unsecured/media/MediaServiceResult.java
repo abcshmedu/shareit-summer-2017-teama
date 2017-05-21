@@ -1,19 +1,20 @@
-package edu.hm.shareit.resources.copy;
+package edu.hm.shareit.resources.unsecured.media;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.hm.shareit.models.mediums.Medium;
+import edu.hm.shareit.resources.ServiceResult;
+
+import javax.print.attribute.standard.Media;
+import java.util.Collection;
 
 /**
- * Contains all the status codes and messages needed for the CopyService.
+ * Contains all the status codes and messages needed for the SecuredMediaService.
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum CopyServiceResult {
-    OK(200, "OK"),
-    NO_OWNER_FOUND(404, "Owner is required in order to create new copy in database"),
-    INVALID_URL_REQUEST(400, "Invalid URL-Request for this HTTP-Method"),
+public enum MediaServiceResult implements ServiceResult{
     PARAMETER_MISSING(404, "At least one parameter is missing."),
     ACCEPTED(202, "Request accepted"),
-    INVALID_JSON_FORMAT(400, "Bad request. Please check json format and parameters"),
     INVALID_ISBN(400, "Invalid ISBN"),
     INVALID_BARCODE(400, "Invalid Barcode"),
     DUPLICATE_ISBN(400, "ISBN already exists"),
@@ -26,14 +27,18 @@ public enum CopyServiceResult {
 
     private int code;
     private String status;
+    private Collection<Medium> media;
+
+    MediaServiceResult() {
+        this(0, null);
+    }
 
     /**
      * Custom constructor.
-     *
-     * @param code   the status code.
-     * @param status the status message.
+     * @param code The status code.
+     * @param status The status message.
      */
-    CopyServiceResult(int code, String status) {
+    MediaServiceResult(int code, String status) {
         setCode(code);
         setStatus(status);
     }
@@ -59,6 +64,16 @@ public enum CopyServiceResult {
     }
 
     /**
+     * Getter for the status message.
+     *
+     * @return the status message.
+     */
+    @JsonProperty
+    public Collection<Medium> getMedia() {
+        return media;
+    }
+
+    /**
      * Setter for the status code.
      *
      * @param code the status code.
@@ -76,4 +91,12 @@ public enum CopyServiceResult {
         this.status = status;
     }
 
+    /**
+     * setter for the status media.
+     *
+     * @param media the status media.
+     */
+    public void setMedia(Collection<Medium> media) {
+        this.media = media;
+    }
 }

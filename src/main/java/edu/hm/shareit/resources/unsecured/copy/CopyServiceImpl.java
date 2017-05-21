@@ -1,10 +1,10 @@
-package edu.hm.shareit.resources.copy;
+package edu.hm.shareit.resources.unsecured.copy;
 
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.media.MediaService;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,12 +29,14 @@ public class CopyServiceImpl implements CopyService {
     }
 
     @Override
-    public Collection<Copy> listBookCopies() {
+    public CopyServiceResult listBookCopies() {
         ArrayList<Copy> list = new ArrayList<>();
         list.add(new Copy(new Book("title", "1234567890123", "author"), "owner"));
         list.add(new Copy(new Book("title1", "3214567890123", "author1"), "owner1"));
 
-        return list;
+        CopyServiceResult res = CopyServiceResult.OK;
+        res.setCopies(list);
+        return res;
     }
 
     @Override
@@ -53,11 +55,14 @@ public class CopyServiceImpl implements CopyService {
     }
 
     @Override
-    public Collection<Copy> listDiscCopies() {
+    public CopyServiceResult listDiscCopies() {
         ArrayList<Copy> list = new ArrayList<>();
         list.add(new Copy(new Disc("title", "barcode", "director", fskConstant), "owner"));
         list.add(new Copy(new Disc("title1", "barcode1", "director1", fskConstant), "owner1"));
-        return list;
+
+        CopyServiceResult res = CopyServiceResult.OK;
+        res.setCopies(list);
+        return res;
     }
 
     @Override

@@ -1,10 +1,10 @@
-package edu.hm.shareit.api.media;
+package edu.hm.shareit.api.unsecured.media;
 
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.media.MediaService;
-import edu.hm.shareit.resources.media.MediaServiceResult;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -20,8 +20,8 @@ import java.util.Collection;
  * PUT  /discs/{barcode}->  updateDisc
  */
 @Path("discs")
-public class DiscRestApi {
-    private MediaService mediaService = ServiceGetter.getMediaService();
+public class DiscRestApi{
+    protected MediaService mediaService = ServiceGetter.getMediaService();
 
     /**
      * GET (getDisc) Returns a specific disc, provided it exists.
@@ -32,7 +32,11 @@ public class DiscRestApi {
     @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDisc(@PathParam("barcode") String barcode)  {
-        Disc disc = mediaService.getDisc(barcode);
+        Collection collection = mediaService.getDisc(barcode).getMedia();
+        Disc disc = null;
+        if(collection != null){
+            disc = (Disc) collection.toArray()[0];
+        }
         return Response.ok(disc).build();
     }
 
@@ -43,14 +47,14 @@ public class DiscRestApi {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDiscs() {
-        Collection< ? extends Medium> discs = mediaService.getDiscs();
+        Collection< ? extends Medium> discs = mediaService.getDiscs().getMedia();
         return Response.ok(discs).build();
     }
 
     /**
      * POST (postDisc) Posts a disc to the Media_Service.
      * @param disc The disc to post
-     * @return The Response from the MediaService
+     * @return The Response from the SecuredMediaService
      */
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -64,7 +68,7 @@ public class DiscRestApi {
      * PUT (updateDisc) Updates a disc with the given barcode to the new values.
      * @param disc The disc with the new values
      * @param barcode The barcode for the disc to replace
-     * @return The Response from the MediaService
+     * @return The Response from the SecuredMediaService
      */
     @PUT
     @Path("{barcode}")

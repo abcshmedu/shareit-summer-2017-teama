@@ -1,13 +1,17 @@
 package edu.hm.shareit.resources;
 
-import edu.hm.shareit.resources.copy.CopyService;
-import edu.hm.shareit.resources.copy.CopyServiceImpl;
-import edu.hm.shareit.resources.media.MediaService;
-import edu.hm.shareit.resources.media.MediaServiceImpl;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl;
+import edu.hm.shareit.resources.secured.media.SecuredMediaService;
+import edu.hm.shareit.resources.secured.media.SecuredMediaServiceImpl;
+import edu.hm.shareit.resources.unsecured.copy.CopyService;
+import edu.hm.shareit.resources.unsecured.copy.CopyServiceImpl;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
 /**
  * Utility Class for ensuring static usage of the Service Classes.
- * <p>
+ *
  * Also provides setters for testing or altering default behavior
  * MUST call setters before instantiating other classes utilizing Services
  */
@@ -20,16 +24,31 @@ public final class ServiceGetter {
     //Default MediaService is MediaServiceImpl
     private static MediaService mediaService = new MediaServiceImpl();
 
-    //Default CopyService is CopyServiceImpl
+    //Default MediaService is MediaServiceImpl
+    private static SecuredMediaService securedMediaService = new SecuredMediaServiceImpl();
+
+    //Default CopyService is SecuredCopyServiceImpl
     private static CopyService copyService = new CopyServiceImpl();
+
+    //Default AuthenticationService is AuthenticationServiceImpl
+    private static AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
     /**
      * Statically returns an instance of a MediaService.
      *
-     * @return An instance of a MediaService
+     * @return An instance of a SecuredMediaService
      */
     public static MediaService getMediaService() {
         return mediaService;
+    }
+
+    /**
+     * Statically returns an instance of a SecuredMediaService.
+     *
+     * @return An instance of a SecuredMediaService
+     */
+    public static SecuredMediaService getSecuredMediaService() {
+        return securedMediaService;
     }
 
     /**
@@ -42,12 +61,30 @@ public final class ServiceGetter {
     }
 
     /**
+     * Statically returns an instance of an AuthenticationService.
+     *
+     * @return An instance of a CopyService
+     */
+    public static AuthenticationService getAuthenticationService() {
+        return authenticationService;
+    }
+
+    /**
      * Statically sets the MediaService to the one provided.
      *
-     * @param mediaService The MediaService to use
+     * @param mediaService The SecuredMediaService to use
      */
     public static void setMediaService(MediaService mediaService) {
         ServiceGetter.mediaService = mediaService;
+    }
+
+    /**
+     * Statically sets the SecuredMediaService to the one provided.
+     *
+     * @param securedMediaService The SecuredMediaService to use
+     */
+    public static void setSecuredMediaService(SecuredMediaService securedMediaService) {
+        ServiceGetter.securedMediaService = securedMediaService;
     }
 
     /**
@@ -57,5 +94,14 @@ public final class ServiceGetter {
      */
     public static void setCopyService(CopyService copyService) {
         ServiceGetter.copyService = copyService;
+    }
+
+    /**
+     * Statically sets the AuthenticationService to the one provided.
+     *
+     * @param authenticationService The CopyService to use
+     */
+    public static void setAuthenticationService(AuthenticationService authenticationService) {
+        ServiceGetter.authenticationService = authenticationService;
     }
 }
