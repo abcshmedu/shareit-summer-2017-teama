@@ -1,5 +1,6 @@
 package edu.hm.shareit.resources.secured;
 
+import edu.hm.JettyStarter;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -20,9 +21,9 @@ import java.net.URISyntaxException;
 public class Authorization {
     //Constants
     private static final String HOST = "localhost";
-    private static final int PORT = 8082;
+    private static final int PORT = JettyStarter.PORT;
     private static final String HTTP_SCHEME = "http";
-    private static final String PATH = "/shareit/authentication/users";
+    private static final String PATH = JettyStarter.APP_URL + "/shareit/authentication/users";
 
     /**
      * Calls the Authentication MicroService to authenticate users
