@@ -1,14 +1,11 @@
 package edu.hm.shareit.api.secured.media;
 
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.ServiceResult;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.resources.secured.media.SecuredMediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.*;
@@ -30,7 +27,7 @@ public class AuthenticatedDiscRestApi {
     private SecuredMediaService securedMediaService = ServiceGetter.getSecuredMediaService();
 
     @HeaderParam(HttpHeaders.AUTHORIZATION)
-    private String tokenStr;
+    private String tokenStr = null;
 
     /**
      * GET (getDisc) Returns a specific disc, provided it exists.

@@ -14,6 +14,7 @@ import edu.hm.shareit.resources.unsecured.copy.CopyService;
 public class SecuredCopyServiceImpl extends Authorization implements SecuredCopyService {
     private CopyService copyService = ServiceGetter.getCopyService();
 
+    //Shortening a call
     private static final int AUTHENTICATED_CODE = AuthenticationServiceResult.AUTHENTICATED.getCode();
 
     @Override

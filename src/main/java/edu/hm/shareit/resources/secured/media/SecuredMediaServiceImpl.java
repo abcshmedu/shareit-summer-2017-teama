@@ -18,6 +18,7 @@ import java.util.Collections;
 public class SecuredMediaServiceImpl extends Authorization implements SecuredMediaService {
     private MediaService mediaService = ServiceGetter.getMediaService();
 
+    //Shortening a call
     private static final int AUTHENTICATED_CODE = AuthenticationServiceResult.AUTHENTICATED.getCode();
 
     @Override

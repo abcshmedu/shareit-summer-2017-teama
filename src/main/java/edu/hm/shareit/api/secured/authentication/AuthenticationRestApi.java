@@ -6,9 +6,7 @@ import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 
-import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,8 +19,9 @@ import javax.ws.rs.core.Response;
 public class AuthenticationRestApi {
     private AuthenticationService authenticationService = ServiceGetter.getAuthenticationService();
 
+    //Used for authorization
     @HeaderParam(HttpHeaders.AUTHORIZATION)
-    private String tokenStr;
+    private String tokenStr = null;
 
     /**
      * GET (authenticate) Returns AUTHENTICATED Code if the token is valid
@@ -39,6 +38,7 @@ public class AuthenticationRestApi {
 
     /**
      * POST (login) Posts a User to be authenticated for login
+     *
      * @param user The User to login
      * @return The Response, containing a Token upon success
      */

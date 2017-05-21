@@ -2,7 +2,6 @@ package edu.hm.shareit.api.secured.media;
 
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
-import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.ServiceResult;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
@@ -27,10 +26,13 @@ import java.util.Collection;
 public class AuthenticatedBookRestApi{
     private SecuredMediaService securedMediaService = ServiceGetter.getSecuredMediaService();
 
+    //Used for authorization
     @HeaderParam(HttpHeaders.AUTHORIZATION)
-    private String tokenStr;
+    private String tokenStr = null;
+
     /**
      * GET (getBook) Returns a specific book, provided it exists.
+     *
      * @param isbn The ISBN for the book to get
      * @return The Response with the Json format for the book
      */
@@ -55,6 +57,7 @@ public class AuthenticatedBookRestApi{
 
     /**
      * GET (getBooks) Returns all books.
+     *
      * @return The Response with the Json array format for the books
      */
     @GET
@@ -73,6 +76,7 @@ public class AuthenticatedBookRestApi{
 
     /**
      * POST (postBook) Posts a book to the Media_Service.
+     *
      * @param book The book to post
      * @return The Response from the SecuredMediaService
      */
@@ -87,6 +91,7 @@ public class AuthenticatedBookRestApi{
 
     /**
      * PUT (updateBook) Updates a book with the given ISBN to the new values.
+     *
      * @param book The book with the new values
      * @param isbn The ISBN for the book to replace
      * @return The Response from the SecuredMediaService

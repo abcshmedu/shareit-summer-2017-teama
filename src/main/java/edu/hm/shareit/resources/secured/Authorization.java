@@ -11,19 +11,25 @@ import org.apache.http.impl.client.HttpClients;
 
 import javax.ws.rs.core.HttpHeaders;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Performs the call to the AuthorizationService
+ */
 public class Authorization {
-
+    //Constants
     private static final String HOST = "localhost";
     private static final int PORT = 8082;
-
     private static final String HTTP_SCHEME = "http";
-
     private static final String PATH = "/shareit/authentication/users";
 
+    /**
+     * Calls the Authentication MicroService to authenticate users
+     *
+     * @param token The token to authorize
+     * @return code and status of the result
+     */
     protected static AuthenticationServiceResult authorize(Token token){
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
