@@ -63,15 +63,10 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        System.out.println(this);
-        System.out.println(":equals:");
-        System.out.println(o);
         if (this == o) {
-            System.out.println("TRUE");
             return true;
         }
         if (o == null || getClass() != o.getClass()) {
-            System.out.println("FALSE");
             return false;
         }
 
