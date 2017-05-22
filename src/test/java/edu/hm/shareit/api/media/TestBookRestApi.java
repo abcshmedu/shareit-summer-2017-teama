@@ -31,7 +31,7 @@ public class TestBookRestApi extends BookRestApi {
             @Override
             public void run() {
                 String APP_URL = "/";
-                int PORT = 8082;
+                int PORT = 8084;
                 String WEBAPP_DIR = "./src/main/webapp/";
                 Server jetty = new Server(PORT);
                 jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
