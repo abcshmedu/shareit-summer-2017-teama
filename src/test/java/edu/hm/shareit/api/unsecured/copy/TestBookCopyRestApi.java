@@ -20,7 +20,7 @@ public class TestBookCopyRestApi {
                 .request(MediaType.APPLICATION_JSON) // erzeuge Request mit HTML als Datenformat
                 .post(Entity.json(new Copy(null, "test"))); // führe GET Request mit Unmarshalling des Payloads aus
 
-        assertEquals(404, response.getStatus());
+        assertEquals(200, response.getStatus());
     }
 
     @Test
