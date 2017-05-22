@@ -53,8 +53,9 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private static Token generateToken(User user){
         String username = user.getUsername();
         String password = user.getPassword();
-        String saltedPassword = SALT + password;
-        String saltedPasswordHash = saltedPassword.hashCode() + "";
+        String time = System.currentTimeMillis() + "";
+        String saltedPasswordAndTime = SALT + password + time;
+        String saltedPasswordHash = Math.abs(saltedPasswordAndTime.hashCode()) + "";
         String totalTokenStr = username + "-" + saltedPasswordHash + "-" + username;
         return new Token(totalTokenStr);
     }

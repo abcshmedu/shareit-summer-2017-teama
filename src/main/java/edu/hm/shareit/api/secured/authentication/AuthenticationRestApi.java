@@ -47,6 +47,9 @@ public class AuthenticationRestApi {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user) {
         AuthenticationServiceResult result = authenticationService.login(user);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result)
+                .status(result.getCode())
+                .header(HttpHeaders.AUTHORIZATION, result.getToken())
+                .build();
     }
 }

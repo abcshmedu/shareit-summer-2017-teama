@@ -86,7 +86,7 @@ public class AuthenticatedBookRestApi{
     public Response postBook(Book book) {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.addBook(book, token);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 
     /**
@@ -103,6 +103,6 @@ public class AuthenticatedBookRestApi{
     public Response updateBook(Book book, @PathParam("isbn") String isbn) {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.updateBook(book, isbn, token);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 }

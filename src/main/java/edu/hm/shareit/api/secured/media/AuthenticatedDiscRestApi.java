@@ -82,7 +82,7 @@ public class AuthenticatedDiscRestApi {
     public Response postDisc(Disc disc) {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.addDisc(disc, token);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 
     /**
@@ -98,6 +98,6 @@ public class AuthenticatedDiscRestApi {
     public Response updateDisc(Disc disc, @PathParam("barcode") String barcode)  {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.updateDisc(disc, barcode, token);
-        return Response.ok(result).status(result.getCode()).build();
+        return Response.ok(result.getStatus()).status(result.getCode()).build();
     }
 }
