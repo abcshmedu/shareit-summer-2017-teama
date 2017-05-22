@@ -2,6 +2,8 @@ package edu.hm.shareit.resources;
 
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl;
+import edu.hm.shareit.resources.secured.copy.SecuredCopyService;
+import edu.hm.shareit.resources.secured.copy.SecuredCopyServiceImpl;
 import edu.hm.shareit.resources.secured.media.SecuredMediaService;
 import edu.hm.shareit.resources.secured.media.SecuredMediaServiceImpl;
 import edu.hm.shareit.resources.unsecured.copy.CopyService;
@@ -24,11 +26,14 @@ public final class ServiceGetter {
     //Default MediaService is MediaServiceImpl
     private static MediaService mediaService = new MediaServiceImpl();
 
-    //Default MediaService is MediaServiceImpl
+    //Default SecuredMediaService is SecuredMediaServiceImpl
     private static SecuredMediaService securedMediaService = new SecuredMediaServiceImpl();
 
     //Default CopyService is SecuredCopyServiceImpl
     private static CopyService copyService = new CopyServiceImpl();
+
+    //Default SecuredCopyService is SecuredCopyServiceImpl
+    private static SecuredCopyService securedCopyService = new SecuredCopyServiceImpl();
 
     //Default AuthenticationService is AuthenticationServiceImpl
     private static AuthenticationService authenticationService = new AuthenticationServiceImpl();
@@ -60,6 +65,14 @@ public final class ServiceGetter {
         return copyService;
     }
 
+    /**
+     * Statically returns an instance of a SecuredCopyService.
+     *
+     * @return An instance of a SecuredCopyService
+     */
+    public static SecuredCopyService getSecuredCopyService() {
+        return securedCopyService;
+    }
     /**
      * Statically returns an instance of an AuthenticationService.
      *
@@ -94,6 +107,15 @@ public final class ServiceGetter {
      */
     public static void setCopyService(CopyService copyService) {
         ServiceGetter.copyService = copyService;
+    }
+
+    /**
+     * Statically sets the SecuredCopyService to the one provided.
+     *
+     * @param securedCopyService The SecuredCopyService to use
+     */
+    public static void setSecuredCopyService(SecuredCopyService securedCopyService) {
+        ServiceGetter.securedCopyService = securedCopyService;
     }
 
     /**
