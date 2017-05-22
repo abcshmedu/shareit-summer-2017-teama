@@ -1,5 +1,6 @@
 package edu.hm.shareit.api.media;
 
+import edu.hm.JettyStarter;
 import edu.hm.shareit.api.unsecured.media.DiscRestApi;
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Disc;
@@ -20,33 +21,14 @@ import static org.junit.Assert.assertEquals;
 
 public class TestDiscRestApi extends DiscRestApi {
 
-    private static Thread worker;
 
     private static DiscRestApi discRestApi;
     private static Response testResponse;
 
+    JettyStarter jettyStarter;
+
     @BeforeClass
     public static void setup() {
-        worker = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String APP_URL = "/";
-                int PORT = 8083;
-                String WEBAPP_DIR = "./src/main/webapp/";
-                Server jetty = new Server(PORT);
-                jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
-
-                try {
-                    jetty.start();
-                    jetty.join();
-                }catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    jetty.destroy();
-                }
-            }
-        });
-        worker.start();
         ServiceGetter.setMediaService(new MockMediaServiceImpl());
         discRestApi = new DiscRestApi();
     }
@@ -87,13 +69,6 @@ public class TestDiscRestApi extends DiscRestApi {
         assertEquals(MediaServiceResult.ACCEPTED, testResponse.getEntity());
     }
 
-    @AfterClass
-    public static void tearDown(){
-        try{
-            worker.join(100);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
-    }
+
 }
 

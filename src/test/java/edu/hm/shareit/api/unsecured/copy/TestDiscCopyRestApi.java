@@ -1,6 +1,9 @@
 package edu.hm.shareit.api.unsecured.copy;
 
+import edu.hm.JettyStarter;
 import edu.hm.shareit.models.mediums.Copy;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.ws.rs.client.ClientBuilder;
@@ -12,6 +15,13 @@ import static org.junit.Assert.assertEquals;
 
 public class TestDiscCopyRestApi {
     private static final String DISCS_URL_TO_TEST = "http://localhost:8082/shareit/copies/discs";
+    private static JettyStarter jettyStarter;
+
+    @BeforeClass
+    public void setup() throws Exception {
+        jettyStarter = new JettyStarter();
+        jettyStarter.main();
+    }
 
     @Test
     public void testAddDiscCopy() {
@@ -53,5 +63,11 @@ public class TestDiscCopyRestApi {
         assertEquals(200, response.getStatus());
     }
 
+    @AfterClass
+    public static void tearDown() throws Exception {
+        synchronized (JettyStarter.MONITOR) {
+            jettyStarter.notifyAll();
+        }
+    }
 
 }

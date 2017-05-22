@@ -12,11 +12,12 @@ public final class JettyStarter {
     /**
      * Private default constructor.
      */
-    private JettyStarter() { }
+    public JettyStarter() { }
 
     public static final String APP_URL = "/";
     public static final int PORT = 8082;
     public static final String WEBAPP_DIR = "./src/main/webapp/";
+    public static final Object MONITOR = new Object();
 
     /**
      * Main method to start jetty.
@@ -28,7 +29,11 @@ public final class JettyStarter {
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();
         System.out.println("Jetty listening on port " + PORT);
-        jetty.join();
+        synchronized (JettyStarter.MONITOR) {
+            JettyStarter.MONITOR.wait();
+        }
     }
+
+
 
 }

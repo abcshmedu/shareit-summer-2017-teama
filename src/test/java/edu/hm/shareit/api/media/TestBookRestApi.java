@@ -20,33 +20,12 @@ import static org.junit.Assert.assertEquals;
 
 public class TestBookRestApi extends BookRestApi {
 
-    private static Thread worker;
 
     private static BookRestApi bookRestApi;
     private static Response testResponse;
 
     @BeforeClass
     public static void setup() {
-        worker = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String APP_URL = "/";
-                int PORT = 8084;
-                String WEBAPP_DIR = "./src/main/webapp/";
-                Server jetty = new Server(PORT);
-                jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
-
-                try {
-                    jetty.start();
-                    jetty.join();
-                }catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    jetty.destroy();
-                }
-            }
-        });
-        worker.start();
         ServiceGetter.setMediaService(new MockMediaServiceImpl());
         bookRestApi = new BookRestApi();
     }
@@ -85,14 +64,5 @@ public class TestBookRestApi extends BookRestApi {
 
         testResponse = bookRestApi.updateBook(Vars.testBook, Vars.isbn);
         assertEquals(MediaServiceResult.ACCEPTED, testResponse.getEntity());
-    }
-
-    @AfterClass
-    public static void tearDown(){
-        try{
-            worker.join(100);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        }
     }
 }

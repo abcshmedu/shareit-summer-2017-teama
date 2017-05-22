@@ -18,11 +18,6 @@ import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
  * MUST call setters before instantiating other classes utilizing Services
  */
 public final class ServiceGetter {
-    /**
-     * Private custom constructor.
-     */
-    private ServiceGetter() { }
-
     //Default MediaService is MediaServiceImpl
     private static MediaService mediaService = new MediaServiceImpl();
 
