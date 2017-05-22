@@ -71,13 +71,15 @@ public class User {
         }
 
         User user = (User) o;
-
-        return username.equals(user.getUsername()) && password.equals(user.getPassword());
+        if (username != null ? !username.equals(user.getUsername()) : user.getUsername() != null) {
+            return false;
+        }
+        return password != null ? password.equals(user.getPassword()) : user.getPassword() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result = 7;
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;

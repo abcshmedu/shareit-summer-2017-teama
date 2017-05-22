@@ -1,5 +1,6 @@
 package edu.hm.shareit.models.mediums;
 
+import edu.hm.shareit.models.Vars;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class TestDisc extends Vars{
+public class TestDisc extends Vars {
 
     @Parameters
     public static Collection<Object[]> data() {

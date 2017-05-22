@@ -1,5 +1,6 @@
 package edu.hm.shareit.models.mediums;
 
+import edu.hm.shareit.models.Vars;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -11,7 +12,7 @@ import java.util.Collection;
 import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
-public class TestMedium extends Vars{
+public class TestMedium extends Vars {
 
     @Parameters
     public static Collection<Object[]> data() {

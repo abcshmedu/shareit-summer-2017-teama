@@ -52,12 +52,12 @@ public class Token {
 
         Token otherToken = (Token) o;
 
-        return token.equals(otherToken.getToken());
+        return token != null ? token.equals(otherToken.getToken()) : otherToken.getToken() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
+        int result = 7;
         result = 31 * result + (token != null ? token.hashCode() : 0);
         return result;
     }

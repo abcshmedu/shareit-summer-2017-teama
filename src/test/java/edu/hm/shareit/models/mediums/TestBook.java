@@ -1,5 +1,6 @@
 package edu.hm.shareit.models.mediums;
 
+import edu.hm.shareit.models.Vars;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,17 +1,15 @@
 package edu.hm.shareit.resources.media;
 
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.models.mediums.Vars;
+import edu.hm.shareit.models.Vars;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Collection;
 import java.util.Collections;
 
 /**
