@@ -3,6 +3,7 @@ package edu.hm.shareit.api.unsecured.copy;
 import edu.hm.JettyStarter;
 import edu.hm.shareit.models.mediums.Copy;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -10,6 +11,9 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.io.IOException;
+import java.net.Socket;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
@@ -21,14 +25,18 @@ public class TestBookCopyRestApi {
 
     @BeforeClass
     public static void setup() throws Exception {
-        new Thread(() -> {
-            try {
-                jettyStarter.main();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
-        sleep(4_000);
+        try{
+            new Socket("localhost",8082);
+        } catch (IOException ex){
+            new Thread(() -> {
+                try {
+                    jettyStarter.main();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
+            sleep(4_000);
+        }
     }
 
     @Test

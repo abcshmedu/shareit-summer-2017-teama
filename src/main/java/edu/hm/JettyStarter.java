@@ -32,6 +32,7 @@ public final class JettyStarter {
         synchronized (JettyStarter.MONITOR) {
             JettyStarter.MONITOR.wait();
         }
+        System.out.println("Jetty stopped");
     }
 
 
