@@ -34,7 +34,4 @@ public final class JettyStarter {
         }
         System.out.println("Jetty stopped");
     }
-
-
-
 }

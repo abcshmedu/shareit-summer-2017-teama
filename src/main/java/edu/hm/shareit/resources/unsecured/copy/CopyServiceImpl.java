@@ -18,13 +18,13 @@ public class CopyServiceImpl implements CopyService {
 
     @Override
     public CopyServiceResult addBookCopy(Copy copy, String isbn) {
-        if (copy.getOwner().isEmpty()) {
-            return CopyServiceResult.NO_OWNER_FOUND;
-        }
-        System.out.println(mediaService.getBooks());
-        if (mediaService.getBook(isbn) == null) {
-            return CopyServiceResult.ISBN_NOT_FOUND;
-        }
+        //if (copy.getOwner().isEmpty()) {
+        //    return CopyServiceResult.NO_OWNER_FOUND;
+        //}
+        //System.out.println(mediaService.getBooks());
+        //if (mediaService.getBook(isbn) == null) {
+        //    return CopyServiceResult.ISBN_NOT_FOUND;
+        //}
         return CopyServiceResult.OK;
     }
 
