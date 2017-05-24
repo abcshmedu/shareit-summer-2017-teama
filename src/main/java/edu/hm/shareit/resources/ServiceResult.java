@@ -1,7 +1,5 @@
 package edu.hm.shareit.resources;
 
-import java.util.Collection;
-
 public interface ServiceResult {
     /**
      * Getter for the status code.

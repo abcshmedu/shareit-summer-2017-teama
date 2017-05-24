@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources.media.resources;
+package edu.hm.shareit.resources;
 
 import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
@@ -28,12 +28,9 @@ public class TestServiceGetter {
             ServiceGetter.setMediaService(null);
             ServiceGetter.setSecuredCopyService(null);
             ServiceGetter.setSecuredMediaService(null);
-
-
         } catch (Exception ex) {
             gotError = true;
         }
         assertFalse(gotError);
     }
-
 }

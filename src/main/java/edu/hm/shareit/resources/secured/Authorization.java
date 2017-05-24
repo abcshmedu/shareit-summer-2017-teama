@@ -31,7 +31,7 @@ public class Authorization {
      * @param token The token to authorize
      * @return code and status of the result
      */
-    protected static AuthenticationServiceResult authorize(Token token){
+    public static AuthenticationServiceResult authorize(Token token){
 
         CloseableHttpClient httpClient = HttpClients.createDefault();
 

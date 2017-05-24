@@ -4,7 +4,7 @@ import edu.hm.shareit.resources.ServiceGetter;
 
 import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
-import edu.hm.shareit.resources.media.MockMediaServiceImpl;
+import edu.hm.shareit.resources.unsecured.media.MockMediaServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

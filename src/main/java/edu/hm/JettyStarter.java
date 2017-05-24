@@ -1,18 +1,19 @@
 package edu.hm;
 
-import org.eclipse.jetty.server.*;
-import org.eclipse.jetty.webapp.*;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
  * Start the application without an AppServer like tomcat.
- * @author ab@cs.hm.edu
  *
+ * @author ab@cs.hm.edu
  */
 public final class JettyStarter {
     /**
      * Private default constructor.
      */
-    public JettyStarter() { }
+    public JettyStarter() {
+    }
 
     public static final String APP_URL = "/";
     public static final int PORT = 8082;
@@ -21,6 +22,7 @@ public final class JettyStarter {
 
     /**
      * Main method to start jetty.
+     *
      * @param args optional args string parameter.
      * @throws Exception May throw exception
      */

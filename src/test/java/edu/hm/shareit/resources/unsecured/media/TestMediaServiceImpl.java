@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources.media;
+package edu.hm.shareit.resources.unsecured.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;

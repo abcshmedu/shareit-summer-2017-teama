@@ -58,6 +58,6 @@ public class TestAuthenticatedBookRestApi {
                 .header(HttpHeaders.AUTHORIZATION, testToken)
                 .get();
 
-        assertEquals(202, response.getStatus());
+        assertEquals(200, response.getStatus());
     }
 }
