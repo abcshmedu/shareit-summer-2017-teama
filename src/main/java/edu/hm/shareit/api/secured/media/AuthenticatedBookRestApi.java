@@ -16,14 +16,14 @@ import java.util.Collection;
 
 /**
  * REST Resource Class for the Authenticated Book API.
- *
+ * <p>
  * GET  /books/{isbn}   ->  getBook
  * GET  /books          ->  getBooks
  * POST /books          ->  postBook
  * PUT  /books/{isbn}   ->  updateBook
  */
 @Path("books")
-public class AuthenticatedBookRestApi{
+public class AuthenticatedBookRestApi {
     private SecuredMediaService securedMediaService = ServiceGetter.getSecuredMediaService();
 
     //Used for authorization
@@ -42,13 +42,13 @@ public class AuthenticatedBookRestApi{
     public Response getBook(@PathParam("isbn") String isbn) {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.getBook(isbn, token);
-        if(result instanceof AuthenticationServiceResult){
+        if (result instanceof AuthenticationServiceResult) {
             return Response.ok(result.getStatus()).status(result.getCode()).build();
-        }else{
+        } else {
             MediaServiceResult mediaRes = (MediaServiceResult) result;
             Collection collection = mediaRes.getMedia();
             Book book = null;
-            if(collection != null){
+            if (collection != null) {
                 book = (Book) collection.toArray()[0];
             }
             return Response.ok(book).build();
@@ -65,9 +65,9 @@ public class AuthenticatedBookRestApi{
     public Response getBooks() {
         Token token = new Token(tokenStr);
         ServiceResult result = securedMediaService.getBooks(token);
-        if(result instanceof AuthenticationServiceResult){
+        if (result instanceof AuthenticationServiceResult) {
             return Response.ok(result.getStatus()).status(result.getCode()).build();
-        }else{
+        } else {
             MediaServiceResult mediaRes = (MediaServiceResult) result;
             Collection collection = mediaRes.getMedia();
             return Response.ok(collection).build();
