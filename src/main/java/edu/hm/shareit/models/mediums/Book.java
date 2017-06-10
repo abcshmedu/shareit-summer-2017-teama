@@ -1,11 +1,22 @@
 package edu.hm.shareit.models.mediums;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Represents a book with a unique isbn.
  * The isbn is unique, title and author can exist more than once.
  */
-public class Book extends Medium {
+@Entity
+@Table(name = "TBook")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Book extends Medium implements Serializable {
+
+    @Id
+    @Column(name = "TBook_ISBN", length = 13)
     private String isbn;
+
+    @Column(name = "TBook_Author")
     private String author;
 
     /**

@@ -1,12 +1,30 @@
 package edu.hm.shareit.models.mediums;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Represents a copy of a medium.
  * Contains information about the owner and the medium it is a copy of.
  */
-public class Copy {
+
+@Entity
+@Table(name = "TCopy")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Copy implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TCopy_Id")
+    private long id;
+
+    @Column(name = "TCopy_Medium")
     private Medium medium;
+
+    @Column(name = "TCopy_Owner")
     private String owner;
+
+
 
     /**
      * Default constructor.
