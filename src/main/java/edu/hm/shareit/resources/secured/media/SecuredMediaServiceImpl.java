@@ -9,9 +9,6 @@ import edu.hm.shareit.resources.secured.Authorization;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 
-import java.util.Collection;
-import java.util.Collections;
-
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
  */
