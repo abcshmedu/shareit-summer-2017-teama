@@ -32,7 +32,7 @@ public final class JettyStarter {
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();
-        logger.info("Jetty listening on port" + PORT);
+        logger.info("Jetty listening on port " + PORT);
         synchronized (JettyStarter.MONITOR) {
             JettyStarter.MONITOR.wait();
         }
