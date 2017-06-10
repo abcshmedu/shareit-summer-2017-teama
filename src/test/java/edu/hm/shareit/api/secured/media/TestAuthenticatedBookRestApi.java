@@ -1,6 +1,8 @@
 package edu.hm.shareit.api.secured.media;
 
 import edu.hm.JettyStarter;
+import edu.hm.shareit.api.unsecured.media.BookRestApi;
+import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.authentication.User;
 import edu.hm.shareit.models.mediums.Book;
@@ -13,6 +15,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import javax.naming.AuthenticationException;
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -21,6 +24,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Collections;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
@@ -30,17 +34,23 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Nelson on 22.05.2017.
  */
-public class TestAuthenticatedBookRestApi {
+public class TestAuthenticatedBookRestApi extends AuthenticatedBookRestApi {
     private static final String SECURED_MEDIA_URL_TO_TEST = "http://localhost:8082/shareit/media/secured/";
     private static final String AUTHENTICATION_URL_TO_TEST = "http://localhost:8082/shareit/authentication/";
 
     private static JettyStarter jettyStarter = new JettyStarter();
     private static String testToken;
-    private Book book1;
+    private static Book book1;
+    private static AuthenticatedBookRestApi bookRestApi;
+    private static Response testResponse;
     //private AuthenticatedBookRestApi mockAuthenticatedBookRestApi;
 
-    @Before
-    public void setup() throws InterruptedException {
+    @BeforeClass
+    public static void setup() throws InterruptedException {
+
+        ServiceGetter.setMediaService(new MockSecuredMediaServiceImpl());
+        bookRestApi = new AuthenticatedBookRestApi();
+
         try {
             new Socket("localhost", 8082);
         } catch (IOException ex) {
@@ -53,8 +63,6 @@ public class TestAuthenticatedBookRestApi {
             }).start();
             sleep(4_000);
         }
-        ServiceGetter.setMediaService(new MockSecuredMediaServiceImpl());
-
 
         Response response = ClientBuilder.newClient() // erzeuge neuen Client
                 .target(AUTHENTICATION_URL_TO_TEST + "users") // setze Ressource-URL
@@ -100,21 +108,20 @@ public class TestAuthenticatedBookRestApi {
     //    Response response = ClientBuilder.newClient()
     //            .target(SECURED_MEDIA_URL_TO_TEST + "books")
     //            .request(MediaType.APPLICATION_JSON)
-    //            .accept(MediaType.APPLICATION_JSON)
     //            .header(HttpHeaders.AUTHORIZATION, testToken)
-    //            .post(Entity.entity(book1, MediaType.APPLICATION_JSON));
+    //            .post(Entity.json(book1));
 //
     //    assertEquals(200, response.getStatus());
     //}
 
-    @Test
-    public void testUpdateBook() {
-        Response response = ClientBuilder.newClient()
-                .target(SECURED_MEDIA_URL_TO_TEST + "books/0123456789012")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, testToken)
-                .put(Entity.json(book1));
-
-        assertEquals(200, response.getStatus());
-    }
+    //@Test
+    //public void testUpdateBook() {
+    //    Response response = ClientBuilder.newClient()
+    //            .target(SECURED_MEDIA_URL_TO_TEST + "books/0123456789012")
+    //            .request(MediaType.APPLICATION_JSON)
+    //            .header(HttpHeaders.AUTHORIZATION, testToken)
+    //            .put(Entity.json(book1));
+//
+    //    assertEquals(200, response.getStatus());
+    //}
 }

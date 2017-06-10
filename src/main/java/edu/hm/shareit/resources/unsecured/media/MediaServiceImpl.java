@@ -2,19 +2,23 @@ package edu.hm.shareit.resources.unsecured.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
+import org.apache.commons.validator.routines.ISBNValidator;
 
+import java.io.Serializable;
 import java.util.*;
+
+
 
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
  */
-public class MediaServiceImpl implements MediaService {
+public class MediaServiceImpl implements MediaService, Serializable {
     private final int isbnBarcodeLength = 13;
     private final int isbnBarcodeValidStart = 48;
     private final int isbnBarcodeValidEnd = 57;
     private final Map<String, Book> books = new HashMap<>();
     private final Map<String, Disc> discs = new HashMap<>();
+    private final ISBNValidator validator = new ISBNValidator();
 
     @Override
     public MediaServiceResult addBook(Book book) {
@@ -27,15 +31,15 @@ public class MediaServiceImpl implements MediaService {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
-        if (!isValidISBN(book.getIsbn())) {
+        if (!validator.isValidISBN13(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
 
-        if (books.containsKey(book.getIsbn())) {
+        if (books.containsKey(validator.isValidISBN13(book.getIsbn()))) {
             return MediaServiceResult.DUPLICATE_ISBN;
         }
 
-        books.put(book.getIsbn(), book);
+        books.put(validator.validateISBN13(book.getIsbn()), book);
         return MediaServiceResult.ACCEPTED;
     }
 

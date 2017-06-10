@@ -58,7 +58,7 @@ public class TestMediaServiceImpl {
 
     @Test
     public void testAddBookWithValidBook() {
-        MediaServiceResult result = mediaService.addBook(new Book("title2", "1234567890123", "author2"));
+        MediaServiceResult result = mediaService.addBook(new Book("title2", "978-1-234-56789-7", "author2"));
         assertEquals(MediaServiceResult.ACCEPTED, result);
     }
 
@@ -121,10 +121,10 @@ public class TestMediaServiceImpl {
 
     @Test
     public void testUpdateBookWithEmptyBook() {
-        Book bookOld = new Book("title", "1234567890123", "author");
+        Book bookOld = new Book("title", "978-1-234-56789-7", "author");
         Book newBook = new Book(null, null, null);
         mediaService.addBook(bookOld);
-        MediaServiceResult result = mediaService.updateBook(newBook, "1234567890123");
+        MediaServiceResult result = mediaService.updateBook(newBook, "978-1-234-56789-7");
         assertEquals(MediaServiceResult.ACCEPTED, result);
     }
 
