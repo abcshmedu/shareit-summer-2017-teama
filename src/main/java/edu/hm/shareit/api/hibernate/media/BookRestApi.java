@@ -8,6 +8,7 @@ import edu.hm.shareit.resources.hibernate.media.HibernateMediaServiceResult;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,8 +23,10 @@ import java.util.Collection;
  * PUT  /books/{isbn}   ->  updateBook
  */
 @Path("books")
-public class BookRestApi {
-    protected HibernateMediaService mediaService = ServiceGetter.getHibernateMediaService();
+public class BookRestApi{
+
+    @Inject
+    protected HibernateMediaService mediaService;
 
     /**
      * GET (getBook) Returns a specific book, provided it exists.
