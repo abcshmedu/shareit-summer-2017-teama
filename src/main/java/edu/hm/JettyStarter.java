@@ -1,9 +1,17 @@
 package edu.hm;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Stage;
+import com.google.inject.servlet.GuiceFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.*;
+import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.webapp.*;
+import sun.security.provider.SHA;
+
+import java.util.EnumSet;
 
 /**
  * Start the application without an AppServer like tomcat.
