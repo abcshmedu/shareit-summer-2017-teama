@@ -9,19 +9,19 @@ import java.io.Serializable;
  */
 
 @Entity
-@Table(name = "TCopy")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "Copy")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Copy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TCopy_Id")
+    @Column(name = "ID")
     private long id;
 
-    @Column(name = "TCopy_Medium")
+    @Column(name = "Medium")
     private Medium medium;
 
-    @Column(name = "TCopy_Owner")
+    @Column(name = "Owner")
     private String owner;
 
 

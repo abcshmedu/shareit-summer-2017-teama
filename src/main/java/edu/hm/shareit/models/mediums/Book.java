@@ -8,15 +8,13 @@ import java.io.Serializable;
  * The isbn is unique, title and author can exist more than once.
  */
 @Entity
-@Table(name = "TBook")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Book extends Medium implements Serializable {
-
+@Table(name = "Book")
+public class Book extends Medium {
     @Id
-    @Column(name = "TBook_ISBN", length = 13)
+    @Column(name = "ISBN", length = 13)
     private String isbn;
 
-    @Column(name = "TBook_Author")
+    @Column(name = "Author")
     private String author;
 
     /**

@@ -1,10 +1,16 @@
 package edu.hm.shareit.models.mediums;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Base class for all types of media.
  * Title field is inherited by all media.
  */
-public class Medium {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Medium implements Serializable{
+
+    @Column(name = "Title")
     private String title;
 
     /**

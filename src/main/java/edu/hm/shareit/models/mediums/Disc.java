@@ -1,12 +1,23 @@
 package edu.hm.shareit.models.mediums;
 
+import javax.persistence.*;
+import java.io.Serializable;
+
 /**
  * Represents a disc with a unique barcode.
  * The barcode is unique, director, title and fsk can exist more than once.
  */
+@Entity
+@Table(name = "Disc")
 public class Disc extends Medium {
+    @Id
+    @Column(name = "Barcode", length = 13)
     private String barcode;
+
+    @Column(name = "Director")
     private String director;
+
+    @Column(name = "FSK", length = 2)
     private int fsk;
 
     /**

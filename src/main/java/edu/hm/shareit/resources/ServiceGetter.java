@@ -1,5 +1,8 @@
 package edu.hm.shareit.resources;
 
+import edu.hm.shareit.persistence.HibernateUtils;
+import edu.hm.shareit.resources.hibernate.media.HibernateMediaService;
+import edu.hm.shareit.resources.hibernate.media.HibernateMediaServiceImpl;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl;
 import edu.hm.shareit.resources.secured.copy.SecuredCopyService;
@@ -10,6 +13,12 @@ import edu.hm.shareit.resources.unsecured.copy.CopyService;
 import edu.hm.shareit.resources.unsecured.copy.CopyServiceImpl;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+
+import java.util.logging.Logger;
 
 /**
  * Utility Class for ensuring static usage of the Service Classes.
@@ -18,7 +27,10 @@ import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
  * MUST call setters before instantiating other classes utilizing Services
  */
 public final class ServiceGetter {
-    //Default MediaService is MediaServiceImpl
+
+    private static Logger logger = Logger.getLogger(ServiceGetter.class.getName());
+
+    //Default HibernateMediaService is HibernateMediaServiceImpl
     private static MediaService mediaService = new MediaServiceImpl();
 
     //Default SecuredMediaService is SecuredMediaServiceImpl
@@ -33,8 +45,10 @@ public final class ServiceGetter {
     //Default AuthenticationService is AuthenticationServiceImpl
     private static AuthenticationService authenticationService = new AuthenticationServiceImpl();
 
+    //Default HibernateMediaService is HibernateMediaServiceImpl
+    private static HibernateMediaService hibernateMediaService = new HibernateMediaServiceImpl();
     /**
-     * Statically returns an instance of a MediaService.
+     * Statically returns an instance of a HibernateMediaService.
      *
      * @return An instance of a SecuredMediaService
      */
@@ -68,17 +82,27 @@ public final class ServiceGetter {
     public static SecuredCopyService getSecuredCopyService() {
         return securedCopyService;
     }
+
     /**
      * Statically returns an instance of an AuthenticationService.
      *
-     * @return An instance of a CopyService
+     * @return An instance of a AuthenticationService
      */
     public static AuthenticationService getAuthenticationService() {
         return authenticationService;
     }
 
     /**
-     * Statically sets the MediaService to the one provided.
+     * Statically returns an instance of an HibernateMediaService.
+     *
+     * @return An instance of a HibernateMediaService
+     */
+    public static HibernateMediaService getHibernateMediaService() {
+        return hibernateMediaService;
+    }
+
+    /**
+     * Statically sets the HibernateMediaService to the one provided.
      *
      * @param mediaService The SecuredMediaService to use
      */
@@ -120,5 +144,14 @@ public final class ServiceGetter {
      */
     public static void setAuthenticationService(AuthenticationService authenticationService) {
         ServiceGetter.authenticationService = authenticationService;
+    }
+
+    /**
+     * Statically sets the HibernateMediaService to the one provided.
+     *
+     * @param hibernateMediaService The HibernateMediaService to use
+     */
+    public static void setHibernateMediaService(HibernateMediaService hibernateMediaService) {
+        ServiceGetter.hibernateMediaService = hibernateMediaService;
     }
 }
