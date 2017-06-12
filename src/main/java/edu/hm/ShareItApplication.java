@@ -9,7 +9,6 @@ import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 public class ShareItApplication extends ResourceConfig {
     @Inject
     public ShareItApplication(ServiceLocator serviceLocator) {
-
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
         GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
         guiceBridge.bridgeGuiceInjector(ShareitServletContextListener.getInjectorInstance());

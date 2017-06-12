@@ -4,6 +4,10 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import edu.hm.shareit.api.hibernate.media.BookRestApi;
+import edu.hm.shareit.api.hibernate.media.DiscRestApi;
+import edu.hm.shareit.resources.hibernate.media.HibernateMediaService;
+import edu.hm.shareit.resources.hibernate.media.HibernateMediaServiceImpl;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
@@ -11,7 +15,9 @@ public class ShareitServletContextListener extends GuiceServletContextListener {
     private static final Injector injector = Guice.createInjector(new ServletModule() {
         @Override
         protected void configureServlets() {
-            bind(MediaService.class).to(MediaServiceImpl.class);
+            bind(BookRestApi.class);
+            bind(DiscRestApi.class);
+            bind(HibernateMediaService.class).to(HibernateMediaServiceImpl.class);
         }
     });
 
