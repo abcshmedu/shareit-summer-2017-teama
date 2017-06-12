@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Base class for all types of media.
  * Title field is inherited by all media.
  */
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class Medium implements Serializable{
 
     @Column(name = "Title")
