@@ -8,8 +8,6 @@ import edu.hm.shareit.api.hibernate.media.BookRestApi;
 import edu.hm.shareit.api.hibernate.media.DiscRestApi;
 import edu.hm.shareit.resources.hibernate.media.HibernateMediaService;
 import edu.hm.shareit.resources.hibernate.media.HibernateMediaServiceImpl;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
 public class ShareitServletContextListener extends GuiceServletContextListener {
     private static final Injector injector = Guice.createInjector(new ServletModule() {

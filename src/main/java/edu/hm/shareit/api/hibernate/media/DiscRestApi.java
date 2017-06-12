@@ -8,6 +8,7 @@ import edu.hm.shareit.resources.hibernate.media.HibernateMediaServiceResult;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -23,7 +24,8 @@ import java.util.Collection;
  */
 @Path("discs")
 public class DiscRestApi{
-    protected HibernateMediaService mediaService = ServiceGetter.getHibernateMediaService();
+    @Inject
+    protected HibernateMediaService mediaService;
 
     /**
      * GET (getDisc) Returns a specific disc, provided it exists.
