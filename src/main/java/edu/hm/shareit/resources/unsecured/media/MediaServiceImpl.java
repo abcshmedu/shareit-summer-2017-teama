@@ -2,11 +2,15 @@ package edu.hm.shareit.resources.unsecured.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
+import edu.hm.shareit.persistence.HibernateUtils;
 import org.apache.commons.validator.routines.ISBNValidator;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
+import javax.inject.Inject;
 import java.io.Serializable;
-import java.util.*;
-
+import java.util.Collections;
 
 
 /**
@@ -16,9 +20,11 @@ public class MediaServiceImpl implements MediaService, Serializable {
     private final int isbnBarcodeLength = 13;
     private final int isbnBarcodeValidStart = 48;
     private final int isbnBarcodeValidEnd = 57;
-    private final Map<String, Book> books = new HashMap<>();
-    private final Map<String, Disc> discs = new HashMap<>();
     private final ISBNValidator validator = new ISBNValidator();
+
+    @Inject
+    private SessionFactory sessionFactory;
+
 
     @Override
     public MediaServiceResult addBook(Book book) {
@@ -33,13 +39,20 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
         if (!validator.isValidISBN13(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
+        } else {
+            book.setIsbn(validator.validateISBN13(book.getIsbn())); // Change ISBN to consistent format without dashes
         }
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
 
-        if (books.containsKey(validator.isValidISBN13(book.getIsbn()))) {
+        if (session.createQuery("from   Book where isbn=:book_isbn")
+                .setParameter("book_isbn", book.getIsbn())
+                .uniqueResult() != null) {
             return MediaServiceResult.DUPLICATE_ISBN;
         }
 
-        books.put(validator.validateISBN13(book.getIsbn()), book);
+        session.persist(book);
+        transaction.commit();
         return MediaServiceResult.ACCEPTED;
     }
 
@@ -60,16 +73,18 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.INVALID_BARCODE;
         }
 
+        /*
         if (discs.containsKey(disc.getBarcode())) {
             return MediaServiceResult.DUPLICATE_DISC;
-        }
+        }*/
 
-        discs.put(disc.getBarcode(), disc);
+
         return MediaServiceResult.ACCEPTED;
     }
 
     /**
      * Helper method to check for validity of isbn.
+     *
      * @param isbn the isbn to be checked.
      * @return Isbn valid or not.
      */
@@ -89,6 +104,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     /**
      * Helper method to check for validity of barcode.
+     *
      * @param barcode The barcode to be checked.
      * @return Barcode is valid or not.
      */
@@ -108,16 +124,17 @@ public class MediaServiceImpl implements MediaService, Serializable {
     @Override
     public MediaServiceResult getBooks() {
         MediaServiceResult res = MediaServiceResult.ACCEPTED;
-        Collection theBooks = books.values();
-        res.setMedia(theBooks);
+
+        //Collection theBooks = books.values();
+        //res.setMedia(theBooks);
         return res;
     }
 
     @Override
     public MediaServiceResult getDiscs() {
         MediaServiceResult res = MediaServiceResult.ACCEPTED;
-        Collection theDiscs = discs.values();
-        res.setMedia(theDiscs);
+        //Collection theDiscs = discs.values();
+        //res.setMedia(theDiscs);
         return res;
     }
 
@@ -127,6 +144,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
 
+        /*
         Book oldBook = books.get(isbn);
 
         if (oldBook == null) {
@@ -143,6 +161,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
         if (bookTitle != null) {
             oldBook.setTitle(bookTitle);
         }
+        */
         return MediaServiceResult.ACCEPTED;
     }
 
@@ -153,6 +172,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.DISC_DOES_NOT_MATCH;
         }
 
+        /*
         Disc oldDisc = discs.get(barcode);
 
         if (oldDisc == null) {
@@ -176,23 +196,28 @@ public class MediaServiceImpl implements MediaService, Serializable {
         if (discTitle != null) {
             oldDisc.setTitle(discTitle);
         }
-
+        */
         return MediaServiceResult.ACCEPTED;
     }
 
     @Override
     public MediaServiceResult getBook(String isbn) {
         MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        /*
         Book book = books.get(isbn);
+
         res.setMedia(Collections.singletonList(book));
+        */
         return res;
     }
 
     @Override
     public MediaServiceResult getDisc(String barcode) {
         MediaServiceResult res = MediaServiceResult.ACCEPTED;
+        /*
         Disc disc = discs.get(barcode);
         res.setMedia(Collections.singletonList(disc));
+        */
         return res;
     }
 }
