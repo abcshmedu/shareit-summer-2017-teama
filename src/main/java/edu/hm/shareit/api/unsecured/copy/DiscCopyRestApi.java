@@ -1,10 +1,10 @@
 package edu.hm.shareit.api.unsecured.copy;
 
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.resources.unsecured.copy.CopyService;
 import edu.hm.shareit.resources.unsecured.copy.CopyServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -15,7 +15,9 @@ import java.util.Collection;
  */
 @Path("discs")
 public class DiscCopyRestApi {
-    private CopyService copyService = ServiceGetter.getCopyService();
+
+    @Inject
+    private CopyService copyService;
 
     /**
      * Shows a list of all disc copies that exist in the database.
