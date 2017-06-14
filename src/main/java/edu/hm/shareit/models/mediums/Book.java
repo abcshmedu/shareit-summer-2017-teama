@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Book")
 public class Book extends Medium {
-    
+
     @Id
     @Column(name = "ISBN", length = 13)
     private String isbn;
