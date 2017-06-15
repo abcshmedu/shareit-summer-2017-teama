@@ -2,10 +2,10 @@ package edu.hm.shareit.api.secured.authentication;
 
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.authentication.User;
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -17,7 +17,9 @@ import javax.ws.rs.core.Response;
  */
 @Path("users")
 public class AuthenticationRestApi {
-    private AuthenticationService authenticationService = ServiceGetter.getAuthenticationService();
+
+    @Inject
+    private AuthenticationService authenticationService;
 
     //Used for authorization
     @HeaderParam(HttpHeaders.AUTHORIZATION)

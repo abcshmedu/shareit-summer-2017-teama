@@ -1,11 +1,11 @@
 package edu.hm.shareit.api.unsecured.media;
 
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -21,8 +21,9 @@ import java.util.Collection;
  */
 @Path("books")
 public class BookRestApi {
-    protected MediaService mediaService = ServiceGetter.getMediaService();
 
+    @Inject
+    private MediaService mediaService;
     /**
      * GET (getBook) Returns a specific book, provided it exists.
      * @param isbn The ISBN for the book to get

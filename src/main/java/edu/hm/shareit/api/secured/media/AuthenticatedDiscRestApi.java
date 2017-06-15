@@ -2,12 +2,12 @@ package edu.hm.shareit.api.secured.media;
 
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.ServiceResult;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.resources.secured.media.SecuredMediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -24,7 +24,9 @@ import java.util.Collection;
  */
 @Path("discs")
 public class AuthenticatedDiscRestApi {
-    private SecuredMediaService securedMediaService = ServiceGetter.getSecuredMediaService();
+
+    @Inject
+    private SecuredMediaService securedMediaService;
 
     @HeaderParam(HttpHeaders.AUTHORIZATION)
     private String tokenStr = null;

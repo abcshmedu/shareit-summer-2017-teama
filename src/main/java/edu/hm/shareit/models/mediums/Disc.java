@@ -10,6 +10,7 @@ import java.io.Serializable;
 @Entity
 @Table(name = "Disc")
 public class Disc extends Medium {
+
     @Id
     @Column(name = "Barcode", length = 13)
     private String barcode;

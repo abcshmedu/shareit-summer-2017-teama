@@ -1,17 +1,13 @@
 package edu.hm.shareit.api.secured.copy;
 
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Copy;
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.ServiceResult;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.resources.secured.copy.SecuredCopyService;
-import edu.hm.shareit.resources.unsecured.copy.CopyService;
 import edu.hm.shareit.resources.unsecured.copy.CopyServiceResult;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
-import javax.jws.HandlerChain;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
@@ -24,7 +20,9 @@ import java.util.Collection;
  */
 @Path("books")
 public class AuthenticatedBookCopyRestApi {
-    private SecuredCopyService copyService = ServiceGetter.getSecuredCopyService();
+
+    @Inject
+    private SecuredCopyService copyService;
 
     //Used for authorization
     @HeaderParam(HttpHeaders.AUTHORIZATION)
