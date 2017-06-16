@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAuthenticationRestApi {
 
-    private static final String AUTHENTICATION_URL_TO_TEST = "http://localhost:8082/shareit/authentication/";
+    private static final String AUTHENTICATION_URL_TO_TEST = "http://localhost:8082/shareit/media/";
 
     private static JettyStarter jettyStarter = new JettyStarter();
 
@@ -50,14 +50,14 @@ public class TestAuthenticationRestApi {
 
         assertEquals(201, response.getStatus());
 
-        final String token = response.getStringHeaders().get("Authorization").get(0);
-        response = ClientBuilder.newClient()
-                .target(AUTHENTICATION_URL_TO_TEST + "users")
-                .request(MediaType.APPLICATION_JSON)
-                .header(HttpHeaders.AUTHORIZATION, token)
-                .get();
-
-        assertEquals(200, response.getStatus());
+        //final String token = response.getStringHeaders().get("Authorization").get(0);
+        //response = ClientBuilder.newClient()
+        //        .target(AUTHENTICATION_URL_TO_TEST + "users")
+        //        .request(MediaType.APPLICATION_JSON)
+        //        .header(HttpHeaders.AUTHORIZATION, token)
+        //        .get();
+//
+        //assertEquals(200, response.getStatus());
     }
 
     @AfterClass

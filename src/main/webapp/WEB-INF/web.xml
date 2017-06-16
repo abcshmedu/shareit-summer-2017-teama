@@ -17,7 +17,7 @@
         </init-param>
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>edu.hm.shareit.api.unsecured.media;edu.hm.shareit.api.exception_handlers</param-value>
+            <param-value>edu.hm.shareit.api.unsecured.media;edu.hm.shareit.api.secured.authentication;edu.hm.shareit.api.exception_handlers</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>

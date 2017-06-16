@@ -8,6 +8,8 @@ import edu.hm.shareit.api.unsecured.media.BookRestApi;
 import edu.hm.shareit.api.unsecured.media.DiscRestApi;
 import edu.hm.shareit.persistence.Persistence;
 import edu.hm.shareit.persistence.PersistenceImpl;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
@@ -19,6 +21,7 @@ public class ShareitServletContextListener extends GuiceServletContextListener {
             //bind(DiscRestApi.class);
             bind(Persistence.class).to(PersistenceImpl.class);
             bind(MediaService.class).to(MediaServiceImpl.class);
+            bind(AuthenticationService.class).to(AuthenticationServiceImpl.class);
         }
     });
 
