@@ -4,6 +4,8 @@ import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.authentication.User;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -18,9 +20,9 @@ import javax.ws.rs.core.Response;
 @Path("users")
 public class AuthenticationRestApi {
 
+    static final Logger logger = LogManager.getLogger();
     @Inject
     private AuthenticationService authenticationService;
-
     //Used for authorization
     @HeaderParam(HttpHeaders.AUTHORIZATION)
     private String tokenStr = null;

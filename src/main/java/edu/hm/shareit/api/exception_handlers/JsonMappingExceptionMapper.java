@@ -18,5 +18,4 @@ public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingEx
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }
-
 }

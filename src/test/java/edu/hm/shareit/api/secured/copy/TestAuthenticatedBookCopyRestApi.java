@@ -3,7 +3,6 @@ package edu.hm.shareit.api.secured.copy;
 import edu.hm.JettyStarter;
 import edu.hm.shareit.models.authentication.User;
 import edu.hm.shareit.models.mediums.Book;
-import edu.hm.shareit.models.mediums.Copy;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,12 +16,7 @@ import java.net.Socket;
 
 import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-/**
- * Created by Nelson on 22.05.2017.
- */
 public class TestAuthenticatedBookCopyRestApi {
     private static final String SECURED_COPIES_URL_TO_TEST = "http://localhost:8082/shareit/copies/secured/";
     private static final String AUTHENTICATION_URL_TO_TEST = "http://localhost:8082/shareit/authentication/";

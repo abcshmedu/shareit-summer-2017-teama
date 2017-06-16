@@ -2,6 +2,8 @@ package edu.hm.shareit.persistence;
 
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,6 +15,7 @@ import java.util.Collections;
 
 public class PersistenceImpl  implements Persistence{
 
+    static final Logger logger = LogManager.getLogger();
     private SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     @Override
@@ -52,6 +55,8 @@ public class PersistenceImpl  implements Persistence{
             String hql = "from " + clazz.getSimpleName();
             Query query = session.createQuery(hql);
             Collection theMedia = query.getResultList();
+            logger.info("Collection is null: " + theMedia == null ? true : false);
+            logger.info("Size of Collection: " + theMedia.size());
             result = MediaServiceResult.SUCCESS;
             result.setMedia(theMedia);
             transaction.commit();

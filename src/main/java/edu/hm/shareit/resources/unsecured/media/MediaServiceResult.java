@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.ServiceResult;
 
-import javax.print.attribute.standard.Media;
 import java.util.Collection;
 
 /**
@@ -56,6 +55,15 @@ public enum MediaServiceResult implements ServiceResult{
     }
 
     /**
+     * Setter for the status code.
+     *
+     * @param code the status code.
+     */
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    /**
      * Getter for the status message.
      *
      * @return the status message.
@@ -66,6 +74,15 @@ public enum MediaServiceResult implements ServiceResult{
     }
 
     /**
+     * setter for the status message.
+     *
+     * @param status the status message.
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
      * Getter for the status message.
      *
      * @return the status message.
@@ -73,24 +90,6 @@ public enum MediaServiceResult implements ServiceResult{
     @JsonProperty
     public Collection<Medium> getMedia() {
         return media;
-    }
-
-    /**
-     * Setter for the status code.
-     *
-     * @param code the status code.
-     */
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    /**
-     * setter for the status message.
-     *
-     * @param status the status message.
-     */
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     /**

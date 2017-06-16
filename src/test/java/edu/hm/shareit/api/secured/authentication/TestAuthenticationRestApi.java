@@ -1,70 +1,39 @@
 package edu.hm.shareit.api.secured.authentication;
 
-import edu.hm.JettyStarter;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import edu.hm.shareit.TestInjectionBindings;
 import edu.hm.shareit.models.authentication.User;
-import edu.hm.shareit.models.mediums.Copy;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
+import org.junit.Before;
 import org.junit.Test;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.List;
 
-import static java.lang.Thread.sleep;
 import static org.junit.Assert.assertEquals;
 
 public class TestAuthenticationRestApi {
 
-    private static final String AUTHENTICATION_URL_TO_TEST = "http://localhost:8082/shareit/media/";
+    private Injector injector = Guice.createInjector(new TestInjectionBindings());
 
-    private static JettyStarter jettyStarter = new JettyStarter();
+    private AuthenticationRestApi authenticationRestApi = new AuthenticationRestApi();
 
-    @BeforeClass
-    public static void setup() throws Exception {
-        try{
-            new Socket("localhost",8082);
-        } catch (IOException ex){
-            new Thread(() -> {
-                try {
-                    jettyStarter.main();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }).start();
-            sleep(4_000);
-        }
+    @Before
+    public void setup() {
+        injector.injectMembers(authenticationRestApi);
+    }
+
+
+    @Test
+    public void testValidLogin() {
+        Response response = authenticationRestApi.login(new User("admin", "admin"));
+        assertEquals(AuthenticationServiceResult.LOGIN_ACCEPTED.getCode(), response.getStatus());
     }
 
     @Test
-    public void testUserLoginAndAuthorization() {
-        Response response = ClientBuilder.newClient() // erzeuge neuen Client
-                .target(AUTHENTICATION_URL_TO_TEST + "users") // setze Ressource-URL
-                .request(MediaType.APPLICATION_JSON) // erzeuge Request mit JSON als Datenformat
-                .post(Entity.json(new User("admin", "admin"))); // führe GET Request mit Unmarshalling des Payloads aus
-
-        assertEquals(201, response.getStatus());
-
-        //final String token = response.getStringHeaders().get("Authorization").get(0);
-        //response = ClientBuilder.newClient()
-        //        .target(AUTHENTICATION_URL_TO_TEST + "users")
-        //        .request(MediaType.APPLICATION_JSON)
-        //        .header(HttpHeaders.AUTHORIZATION, token)
-        //        .get();
-//
-        //assertEquals(200, response.getStatus());
+    public void testToken() {
+        Response response = authenticationRestApi.authenticate();
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID.getCode(), response.getStatus());
     }
 
-    @AfterClass
-    public static void tearDown() throws Exception {
-        System.out.println("after class");
-        synchronized (JettyStarter.MONITOR) {
-            JettyStarter.MONITOR.notifyAll();
-        }
-    }
 }
