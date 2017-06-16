@@ -1,10 +1,10 @@
 package edu.hm.shareit.api.unsecured.copy;
 
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.resources.unsecured.copy.CopyService;
 import edu.hm.shareit.resources.unsecured.copy.CopyServiceResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -16,7 +16,9 @@ import java.util.Collection;
  */
 @Path("books")
 public class BookCopyRestApi {
-    private CopyService copyService = ServiceGetter.getCopyService();
+
+    @Inject
+    private CopyService copyService;
 
     /**
      * Method called for borrowing books from the database.

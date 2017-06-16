@@ -2,11 +2,8 @@ package edu.hm.shareit.resources.unsecured.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.persistence.HibernateUtils;
+import edu.hm.shareit.persistence.Persistence;
 import org.apache.commons.validator.routines.ISBNValidator;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -23,8 +20,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
     private final ISBNValidator validator = new ISBNValidator();
 
     @Inject
-    private SessionFactory sessionFactory;
-
+    private Persistence persistence;
 
     @Override
     public MediaServiceResult addBook(Book book) {
@@ -39,21 +35,13 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
         if (!validator.isValidISBN13(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
-        } else {
-            book.setIsbn(validator.validateISBN13(book.getIsbn())); // Change ISBN to consistent format without dashes
         }
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
 
-        if (session.createQuery("from   Book where isbn=:book_isbn")
-                .setParameter("book_isbn", book.getIsbn())
-                .uniqueResult() != null) {
+        if (ifExists(Book.class, book.getIsbn())) {
             return MediaServiceResult.DUPLICATE_ISBN;
         }
 
-        session.persist(book);
-        transaction.commit();
-        return MediaServiceResult.ACCEPTED;
+        return persistence.addRecord(book);
     }
 
 
@@ -73,18 +61,27 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.INVALID_BARCODE;
         }
 
-        /*
-        if (discs.containsKey(disc.getBarcode())) {
+
+        if (ifExists(Disc.class, disc.getBarcode())) {
             return MediaServiceResult.DUPLICATE_DISC;
-        }*/
+        }
 
+        return persistence.addRecord(disc);
+    }
 
-        return MediaServiceResult.ACCEPTED;
+    /**
+     * Helper method to check for existance of Id
+     *
+     * @param clazz the class of the Object to check
+     * @param object the id to check
+     */
+    private boolean ifExists(Class clazz, Serializable object){
+        MediaServiceResult result = persistence.findRecord(clazz, object);
+        return result.getCode() == MediaServiceResult.SUCCESS.getCode();
     }
 
     /**
      * Helper method to check for validity of isbn.
-     *
      * @param isbn the isbn to be checked.
      * @return Isbn valid or not.
      */
@@ -104,7 +101,6 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     /**
      * Helper method to check for validity of barcode.
-     *
      * @param barcode The barcode to be checked.
      * @return Barcode is valid or not.
      */
@@ -123,19 +119,12 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult getBooks() {
-        MediaServiceResult res = MediaServiceResult.ACCEPTED;
-
-        //Collection theBooks = books.values();
-        //res.setMedia(theBooks);
-        return res;
+        return persistence.getTable(Book.class);
     }
 
     @Override
     public MediaServiceResult getDiscs() {
-        MediaServiceResult res = MediaServiceResult.ACCEPTED;
-        //Collection theDiscs = discs.values();
-        //res.setMedia(theDiscs);
-        return res;
+        return persistence.getTable(Disc.class);
     }
 
     @Override
@@ -144,8 +133,8 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
 
-        /*
-        Book oldBook = books.get(isbn);
+        MediaServiceResult result = persistence.findRecord(Book.class, isbn);
+        Book oldBook = (Book) result.getMedia().toArray()[0];
 
         if (oldBook == null) {
             return MediaServiceResult.ISBN_NOT_FOUND;
@@ -161,8 +150,8 @@ public class MediaServiceImpl implements MediaService, Serializable {
         if (bookTitle != null) {
             oldBook.setTitle(bookTitle);
         }
-        */
-        return MediaServiceResult.ACCEPTED;
+
+        return persistence.updateRecord(oldBook);
     }
 
     @Override
@@ -172,8 +161,8 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.DISC_DOES_NOT_MATCH;
         }
 
-        /*
-        Disc oldDisc = discs.get(barcode);
+        MediaServiceResult result = persistence.findRecord(Disc.class, barcode);
+        Disc oldDisc = (Disc) result.getMedia().toArray()[0];
 
         if (oldDisc == null) {
             return MediaServiceResult.DISC_NOT_FOUND;
@@ -196,28 +185,23 @@ public class MediaServiceImpl implements MediaService, Serializable {
         if (discTitle != null) {
             oldDisc.setTitle(discTitle);
         }
-        */
-        return MediaServiceResult.ACCEPTED;
+
+        return persistence.updateRecord(oldDisc);
     }
 
     @Override
     public MediaServiceResult getBook(String isbn) {
-        MediaServiceResult res = MediaServiceResult.ACCEPTED;
-        /*
-        Book book = books.get(isbn);
-
-        res.setMedia(Collections.singletonList(book));
-        */
-        return res;
+        MediaServiceResult result = persistence.findRecord(Book.class, isbn);
+        Book book = (Book) result.getMedia().toArray()[0];
+        result.setMedia(Collections.singletonList(book));
+        return result;
     }
 
     @Override
     public MediaServiceResult getDisc(String barcode) {
-        MediaServiceResult res = MediaServiceResult.ACCEPTED;
-        /*
-        Disc disc = discs.get(barcode);
-        res.setMedia(Collections.singletonList(disc));
-        */
-        return res;
+        MediaServiceResult result = persistence.findRecord(Disc.class, barcode);
+        Disc disc = (Disc) result.getMedia().toArray()[0];
+        result.setMedia(Collections.singletonList(disc));
+        return result;
     }
 }

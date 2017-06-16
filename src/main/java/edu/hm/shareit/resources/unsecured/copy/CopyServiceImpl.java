@@ -6,6 +6,7 @@ import edu.hm.shareit.models.mediums.Copy;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -14,7 +15,9 @@ import java.util.Collection;
  */
 public class CopyServiceImpl implements CopyService {
     private final int fskConstant = 18;
-    private MediaService mediaService = ServiceGetter.getMediaService();
+
+    @Inject
+    private MediaService mediaService;
 
     @Override
     public CopyServiceResult addBookCopy(Copy copy, String isbn) {

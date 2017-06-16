@@ -13,6 +13,7 @@ import java.util.Collection;
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum MediaServiceResult implements ServiceResult{
+    SUCCESS(200, "Completed request"),
     PARAMETER_MISSING(404, "At least one parameter is missing."),
     ACCEPTED(202, "Request accepted"),
     INVALID_ISBN(400, "Invalid ISBN"),
@@ -23,7 +24,8 @@ public enum MediaServiceResult implements ServiceResult{
     INVALID_DISC(400, "Invalid Disc-Barcode"),
     DUPLICATE_DISC(400, "Disc-Barcode already exists"),
     DISC_NOT_FOUND(404, "Disc-Barcode does not exist"),
-    DISC_DOES_NOT_MATCH(400, "Disc-Barcode in URI and Disc-Barcode in JSON-Request do not match!");
+    DISC_DOES_NOT_MATCH(400, "Disc-Barcode in URI and Disc-Barcode in JSON-Request do not match!"),
+    FAILURE(403, "Could not complete request");
 
     private int code;
     private String status;
