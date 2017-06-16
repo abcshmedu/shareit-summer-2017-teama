@@ -24,6 +24,8 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult addBook(Book book) {
+        book.setIsbn(validator.validateISBN13(book.getIsbn()));
+
         if (book == null || book.getIsbn() == null || book.getTitle() == null || book.getAuthor() == null) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
@@ -40,6 +42,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
         if (ifExists(Book.class, book.getIsbn())) {
             return MediaServiceResult.DUPLICATE_ISBN;
         }
+        book.setIsbn(validator.validateISBN13(book.getIsbn()));
 
         return persistence.addRecord(book);
     }
@@ -81,25 +84,6 @@ public class MediaServiceImpl implements MediaService, Serializable {
     }
 
     /**
-     * Helper method to check for validity of isbn.
-     * @param isbn the isbn to be checked.
-     * @return Isbn valid or not.
-     */
-    private boolean isValidISBN(String isbn) {
-        if (isbn.length() != isbnBarcodeLength) {
-            return false;
-        }
-
-        final char[] isbnChars = isbn.toCharArray();
-        for (char i : isbnChars) {
-            if (i < isbnBarcodeValidStart || i > isbnBarcodeValidEnd) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * Helper method to check for validity of barcode.
      * @param barcode The barcode to be checked.
      * @return Barcode is valid or not.
@@ -129,6 +113,9 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult updateBook(Book book, String isbn) {
+        book.setIsbn(validator.validateISBN13(book.getIsbn()));
+        isbn = validator.validateISBN13(isbn);
+
         if (book.getIsbn() != null && !book.getIsbn().equals(isbn)) {
             return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
@@ -156,7 +143,6 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult updateDisc(Disc disc, String barcode) {
-
         if (disc.getBarcode() != null && !disc.getBarcode().equals(barcode)) {
             return MediaServiceResult.DISC_DOES_NOT_MATCH;
         }
@@ -191,6 +177,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult getBook(String isbn) {
+        isbn = validator.validateISBN13(isbn);
         MediaServiceResult result = persistence.findRecord(Book.class, isbn);
         Book book = (Book) result.getMedia().toArray()[0];
         result.setMedia(Collections.singletonList(book));
