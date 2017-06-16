@@ -18,10 +18,12 @@ public class PersistenceImpl  implements Persistence{
     @Override
     public MediaServiceResult addRecord(Medium medium) {
         MediaServiceResult result = MediaServiceResult.FAILURE;
+
         Session session = openOrGetCurrentSession();
         if(notNull(session)){
             Transaction transaction = session.beginTransaction();
             session.save(medium);
+            System.out.println(medium.toString());
             transaction.commit();
             result = MediaServiceResult.SUCCESS;
         }
@@ -36,6 +38,7 @@ public class PersistenceImpl  implements Persistence{
             Transaction transaction = session.beginTransaction();
             session.merge(medium);
             transaction.commit();
+            result = MediaServiceResult.SUCCESS;
         }
         return result;
     }
