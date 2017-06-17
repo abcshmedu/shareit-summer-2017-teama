@@ -3,15 +3,23 @@ package edu.hm.shareit.api.secured.media;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.hm.shareit.DependencyInjectionMockBindings;
+import edu.hm.shareit.models.mediums.Book;
+import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.core.Response;
+
+import static org.junit.Assert.assertEquals;
+
 public class TestAuthenticatedBookRestApi {
+
+    Book book1 = new Book();
+    private String isbn = "9783127323207";
+
     private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
 
     private AuthenticatedBookRestApi authenticatedBookRestApi = new AuthenticatedBookRestApi();
-
-    private String isbn = "9783127323207";
 
     @Before
     public void setup() {
@@ -19,7 +27,26 @@ public class TestAuthenticatedBookRestApi {
     }
 
     @Test
-    public void startWritingTestsBrosef() {
-        // ToDo
+    public void testGetBook() {
+        Response response = authenticatedBookRestApi.getBook(isbn);
+        assertEquals(response.getStatus(), MediaServiceResult.SUCCESS.getCode());
+    }
+
+    @Test
+    public void testGetBooks() {
+        Response response = authenticatedBookRestApi.getBooks();
+        assertEquals(response.getStatus(), MediaServiceResult.SUCCESS.getCode());
+    }
+
+    @Test
+    public void testPostBook() {
+        Response response = authenticatedBookRestApi.postBook(book1);
+        assertEquals(response.getStatus(), MediaServiceResult.SUCCESS.getCode());
+    }
+
+    @Test
+    public void testUpdateBook() {
+        authenticatedBookRestApi.updateBook(book1, isbn);
+
     }
 }

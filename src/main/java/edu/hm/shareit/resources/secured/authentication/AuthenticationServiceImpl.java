@@ -60,8 +60,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         return new Token(totalTokenStr);
     }
 
+    // ToDo Tokens are hard-coded!!
     private void addUser(User user){
-        Token token = generateToken(user);
+        //Token token = generateToken(user);
+        Token token = new Token(user.getUsername() + "-82955211-" + user.getUsername());
         userToToken.put(user, token);
     }
 }
