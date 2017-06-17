@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAuthenticationRestApi {
 
-    private Injector injector = Guice.createInjector(new DependencyInjectionMockBindings());
+    private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
 
     private AuthenticationRestApi authenticationRestApi = new AuthenticationRestApi();
 

@@ -7,6 +7,7 @@ import org.apache.commons.validator.routines.ISBNValidator;
 
 import javax.inject.Inject;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Collections;
 
 
@@ -39,12 +40,18 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.INVALID_ISBN;
         }
 
-        if (ifExists(Book.class, book.getIsbn())) {
+        if (persistence.findRecord(Book.class, book.getIsbn())) {
             return MediaServiceResult.DUPLICATE_ISBN;
         }
         book.setIsbn(validator.validateISBN13(book.getIsbn()));
 
-        return persistence.addRecord(book);
+        boolean addSuccessful = persistence.addRecord(book);
+
+        if (addSuccessful) {
+            return MediaServiceResult.ACCEPTED;
+        } else {
+            return MediaServiceResult.FAILURE;
+        }
     }
 
 
@@ -64,27 +71,24 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.INVALID_BARCODE;
         }
 
-
-        if (ifExists(Disc.class, disc.getBarcode())) {
+        if (persistence.findRecord(Disc.class, disc.getBarcode())) {
             return MediaServiceResult.DUPLICATE_DISC;
         }
 
-        return persistence.addRecord(disc);
+
+        boolean addSuccessful = persistence.addRecord(disc);
+
+        if (addSuccessful) {
+            return MediaServiceResult.SUCCESS;
+        } else {
+            return MediaServiceResult.FAILURE;
+        }
     }
 
-    /**
-     * Helper method to check for existance of Id
-     *
-     * @param clazz the class of the Object to check
-     * @param object the id to check
-     */
-    private boolean ifExists(Class clazz, Serializable object){
-        MediaServiceResult result = persistence.findRecord(clazz, object);
-        return result.getCode() == MediaServiceResult.SUCCESS.getCode();
-    }
 
     /**
      * Helper method to check for validity of barcode.
+     *
      * @param barcode The barcode to be checked.
      * @return Barcode is valid or not.
      */
@@ -103,12 +107,18 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult getBooks() {
-        return persistence.getTable(Book.class);
+        Collection data = persistence.getTable(Book.class);
+        MediaServiceResult result = MediaServiceResult.SUCCESS;
+        result.setMedia(data);
+        return result;
     }
 
     @Override
     public MediaServiceResult getDiscs() {
-        return persistence.getTable(Disc.class);
+        java.util.Collection data = persistence.getTable(Disc.class);
+        MediaServiceResult result = MediaServiceResult.ACCEPTED;
+        result.setMedia(data);
+        return result;
     }
 
     @Override
@@ -120,8 +130,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.ISBN_DOES_NOT_MATCH;
         }
 
-        MediaServiceResult result = persistence.findRecord(Book.class, isbn);
-        Book oldBook = (Book) result.getMedia().toArray()[0];
+        Book oldBook = (Book) persistence.getRecord(Book.class, isbn);
 
         if (oldBook == null) {
             return MediaServiceResult.ISBN_NOT_FOUND;
@@ -138,7 +147,13 @@ public class MediaServiceImpl implements MediaService, Serializable {
             oldBook.setTitle(bookTitle);
         }
 
-        return persistence.updateRecord(oldBook);
+        boolean updatedSuccessful = persistence.updateRecord(oldBook);
+
+        if (updatedSuccessful) {
+            return MediaServiceResult.SUCCESS;
+        } else {
+            return MediaServiceResult.FAILURE;
+        }
     }
 
     @Override
@@ -147,8 +162,7 @@ public class MediaServiceImpl implements MediaService, Serializable {
             return MediaServiceResult.DISC_DOES_NOT_MATCH;
         }
 
-        MediaServiceResult result = persistence.findRecord(Disc.class, barcode);
-        Disc oldDisc = (Disc) result.getMedia().toArray()[0];
+        Disc oldDisc = (Disc) persistence.getRecord(Disc.class, barcode);
 
         if (oldDisc == null) {
             return MediaServiceResult.DISC_NOT_FOUND;
@@ -172,22 +186,28 @@ public class MediaServiceImpl implements MediaService, Serializable {
             oldDisc.setTitle(discTitle);
         }
 
-        return persistence.updateRecord(oldDisc);
+        boolean updateSuccessful = persistence.updateRecord(oldDisc);
+
+        if (updateSuccessful) {
+            return MediaServiceResult.ACCEPTED;
+        } else {
+            return MediaServiceResult.FAILURE;
+        }
     }
 
     @Override
     public MediaServiceResult getBook(String isbn) {
         isbn = validator.validateISBN13(isbn);
-        MediaServiceResult result = persistence.findRecord(Book.class, isbn);
-        Book book = (Book) result.getMedia().toArray()[0];
+        Book book = (Book) persistence.getRecord(Book.class, isbn);
+        MediaServiceResult result = MediaServiceResult.ACCEPTED;
         result.setMedia(Collections.singletonList(book));
         return result;
     }
 
     @Override
     public MediaServiceResult getDisc(String barcode) {
-        MediaServiceResult result = persistence.findRecord(Disc.class, barcode);
-        Disc disc = (Disc) result.getMedia().toArray()[0];
+        Disc disc = (Disc) persistence.getRecord(Disc.class, barcode);
+        MediaServiceResult result = MediaServiceResult.ACCEPTED;
         result.setMedia(Collections.singletonList(disc));
         return result;
     }

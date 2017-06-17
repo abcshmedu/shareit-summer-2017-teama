@@ -1,20 +1,22 @@
 package edu.hm.shareit.persistence;
 
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Created by maxl on 14.06.17.
  */
 public interface Persistence {
 
-    MediaServiceResult addRecord(Medium medium);
+    boolean addRecord(Medium medium);
 
-    MediaServiceResult updateRecord(Medium medium);
+    boolean updateRecord(Medium medium);
 
-    MediaServiceResult getTable(Class clazz);
+    Collection getTable(Class clazz);
 
-    MediaServiceResult findRecord(Class clazz, Serializable id);
+    boolean findRecord(Class clazz, Serializable id);
+
+    Medium getRecord(Class clazz, Serializable id);
 }

@@ -1,10 +1,13 @@
 package edu.hm.shareit.api.unsecured.media;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import edu.hm.shareit.DependencyInjectionMockBindings;
 import edu.hm.shareit.models.Vars;
-import edu.hm.shareit.resources.ServiceGetter;
+import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
-import edu.hm.toDelete.media.MockMediaServiceImpl;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -14,14 +17,16 @@ import static org.junit.Assert.assertEquals;
 
 public class TestBookRestApi extends BookRestApi {
 
-
-    private static BookRestApi bookRestApi;
     private static Response testResponse;
+    @Inject
+    MediaService mediaService;
+    private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
 
-    @BeforeClass
-    public static void setup() {
-        ServiceGetter.setMediaService(new MockMediaServiceImpl());
-        bookRestApi = new BookRestApi();
+    private BookRestApi bookRestApi = new BookRestApi();
+
+    @Before
+    public void setup() {
+        injector.injectMembers(bookRestApi);
     }
 
     @Test

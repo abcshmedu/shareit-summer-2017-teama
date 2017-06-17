@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestAuthenticatedBookRestApi {
-    private Injector injector = Guice.createInjector(new DependencyInjectionMockBindings());
+    private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
 
     private AuthenticatedBookRestApi authenticatedBookRestApi = new AuthenticatedBookRestApi();
 
@@ -19,8 +19,7 @@ public class TestAuthenticatedBookRestApi {
     }
 
     @Test
-    public void test() {
-        authenticatedBookRestApi.getBook(isbn);
-
+    public void startWritingTestsBrosef() {
+        // ToDo
     }
 }

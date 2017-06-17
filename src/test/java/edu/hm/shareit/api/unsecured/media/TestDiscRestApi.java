@@ -1,12 +1,13 @@
 package edu.hm.shareit.api.unsecured.media;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import edu.hm.JettyStarter;
+import edu.hm.shareit.DependencyInjectionMockBindings;
 import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
-import edu.hm.toDelete.media.MockMediaServiceImpl;
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -16,16 +17,17 @@ import static org.junit.Assert.assertEquals;
 
 public class TestDiscRestApi extends DiscRestApi {
 
-
-    private static DiscRestApi discRestApi;
     private static Response testResponse;
 
     JettyStarter jettyStarter;
 
-    @BeforeClass
-    public static void setup() {
-        ServiceGetter.setMediaService(new MockMediaServiceImpl());
-        discRestApi = new DiscRestApi();
+    private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
+
+    private DiscRestApi discRestApi = new DiscRestApi();
+
+    @Before
+    public void setup() {
+        injector.injectMembers(discRestApi);
     }
 
     @Test
