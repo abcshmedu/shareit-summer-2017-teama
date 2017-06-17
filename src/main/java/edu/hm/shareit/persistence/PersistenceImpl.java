@@ -45,15 +45,16 @@ public class PersistenceImpl implements Persistence {
 
     @Override
     public Collection getTable(Class clazz) {
+        Collection result = null;
         Session session = openOrGetCurrentSession();
         if (notNull(session)) {
             Transaction transaction = session.beginTransaction();
             String hql = "from " + clazz.getSimpleName();
             Query query = session.createQuery(hql);
+            result = query.getResultList();
             transaction.commit();
-            return query.getResultList();
         }
-        return null;
+        return result;
     }
 
     @Override
@@ -71,12 +72,14 @@ public class PersistenceImpl implements Persistence {
     }
 
     public Medium getRecord(Class clazz, Serializable id) {
+        Medium result = null;
         Session session = openOrGetCurrentSession();
         if (notNull(session)) {
             Transaction transaction = session.beginTransaction();
-            return (Medium) session.find(clazz, id);
+            result = (Medium) session.find(clazz, id);
+            transaction.commit();
         }
-        return null;
+        return result;
     }
 
     private boolean notNull(Object object) {
