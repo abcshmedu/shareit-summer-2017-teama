@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 public class AuthenticationRestApi {
 
     static final Logger logger = LogManager.getLogger();
+
     @Inject
     private AuthenticationService authenticationService;
     //Used for authorization

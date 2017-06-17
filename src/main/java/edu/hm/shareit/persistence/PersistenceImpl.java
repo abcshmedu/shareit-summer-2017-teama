@@ -55,8 +55,6 @@ public class PersistenceImpl  implements Persistence{
             String hql = "from " + clazz.getSimpleName();
             Query query = session.createQuery(hql);
             Collection theMedia = query.getResultList();
-            logger.info("Collection is null: " + theMedia == null ? true : false);
-            logger.info("Size of Collection: " + theMedia.size());
             result = MediaServiceResult.SUCCESS;
             result.setMedia(theMedia);
             transaction.commit();

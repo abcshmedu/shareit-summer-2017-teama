@@ -11,6 +11,7 @@ import edu.hm.shareit.resources.ServiceResult;
 public class MockSecuredMediaService implements SecuredMediaService {
     @Override
     public ServiceResult addBook(Book book, Token token) {
+        //return new ServiceResult().setCode(200);
         return null;
     }
 
