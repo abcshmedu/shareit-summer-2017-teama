@@ -12,16 +12,22 @@ import edu.hm.shareit.resources.unsecured.media.MediaService;
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
  */
-public class SecuredMediaServiceImpl extends Authorization implements SecuredMediaService {
+public class SecuredMediaServiceImpl implements SecuredMediaService {
 
     //Shortening a call
     private static final int AUTHENTICATED_CODE = AuthenticationServiceResult.AUTHENTICATED.getCode();
+
+
     @Inject
     private MediaService mediaService;
 
+    @Inject
+    private Authorization authorization;
+
+
     @Override
     public ServiceResult addBook(Book book, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.addBook(book);
         } else {
@@ -32,7 +38,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult addDisc(Disc disc, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.addDisc(disc);
         } else {
@@ -42,7 +48,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult getBooks(Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.getBooks();
         } else {
@@ -52,7 +58,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult getDiscs(Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.getDiscs();
         } else {
@@ -62,7 +68,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult updateBook(Book book, String isbn, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.updateBook(book, isbn);
         } else {
@@ -72,7 +78,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult updateDisc(Disc disc, String barcode, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.updateDisc(disc, barcode);
         } else {
@@ -82,7 +88,7 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult getBook(String isbn, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.getBook(isbn);
         } else {
@@ -92,15 +98,11 @@ public class SecuredMediaServiceImpl extends Authorization implements SecuredMed
 
     @Override
     public ServiceResult getDisc(String barcode, Token token) {
-        AuthenticationServiceResult authorizationRes = authenticate(token);
+        AuthenticationServiceResult authorizationRes = authorization.authorize(token);
         if (authorizationRes.getCode() == AUTHENTICATED_CODE) {
             return mediaService.getDisc(barcode);
         } else {
             return null;
         }
-    }
-
-    private AuthenticationServiceResult authenticate(Token token) {
-        return authorize(token);
     }
 }

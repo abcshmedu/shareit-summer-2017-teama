@@ -3,12 +3,7 @@ package edu.hm.shareit.resources.secured.media;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
 import edu.hm.shareit.resources.ServiceResult;
-import edu.hm.shareit.resources.secured.Authorization;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
-
-import java.util.Collection;
 
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.
