@@ -1,4 +1,4 @@
-package edu.hm.toDelete.media;
+package edu.hm.shareit.resources.secured.media;
 
 import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.models.authentication.Token;
@@ -16,7 +16,7 @@ import java.util.Collections;
  *
  * If a method is called it will simply return preset values.
  */
-public class MockMediaServiceImpl implements MediaService {
+public class MediaServiceMock implements MediaService {
     private static final Book testBook = Vars.testBook;
     private static final Disc testDisc = Vars.testDisc;
 

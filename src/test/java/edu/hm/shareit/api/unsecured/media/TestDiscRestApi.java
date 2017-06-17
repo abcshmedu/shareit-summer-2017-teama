@@ -19,8 +19,6 @@ public class TestDiscRestApi extends DiscRestApi {
 
     private static Response testResponse;
 
-    JettyStarter jettyStarter;
-
     private Injector injector = Guice.createInjector(DependencyInjectionMockBindings.getSingletonInjection());
 
     private DiscRestApi discRestApi = new DiscRestApi();

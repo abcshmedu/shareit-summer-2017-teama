@@ -16,8 +16,8 @@ public class Vars {
     public static final String otherIsbn = "3210987654321";
     public static final String nullIsbn = null;
 
-    public static final String barcode = "123456789012";
-    public static final String otherBarcode = "210987654321";
+    public static final String barcode = "1234567890123";
+    public static final String otherBarcode = "2109876543213";
     public static final String nullBarcode = null;
 
     public static final String director = "director";
