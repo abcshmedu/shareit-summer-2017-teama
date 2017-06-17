@@ -8,6 +8,7 @@ import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.resources.ServiceResult;
 import edu.hm.shareit.resources.secured.MockAuthorization;
+import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,4 +35,98 @@ public class TestSecuredMediaService extends MockAuthorization {
         ServiceResult result = securedMediaService.addBook(Vars.testBook, validToken);
         assertEquals(MediaServiceResult.ACCEPTED, result);
     }
+
+    @Test
+    public void addBookWithInvalidToken() {
+        ServiceResult result = securedMediaService.addBook(Vars.testBook, nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+    @Test
+    public void addDiscWithValidToken() {
+        ServiceResult result = securedMediaService.addDisc(Vars.testDisc, validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void addDiscWithInvalidToken() {
+        ServiceResult result = securedMediaService.addDisc(Vars.testDisc, nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+    @Test
+    public void getBooksWithValidToken() {
+        ServiceResult result = securedMediaService.getBooks(validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+
+    }
+
+    @Test
+    public void getBooksWithInvalidToken() {
+        ServiceResult result = securedMediaService.getBooks(nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+    @Test
+    public void getDiscsWithValidToken() {
+        ServiceResult result = securedMediaService.getDiscs(validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void getDiscsWithInvalidToken() {
+        ServiceResult result = securedMediaService.getDiscs(nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+
+    @Test
+    public void updateBookWithValidToken() {
+        ServiceResult result = securedMediaService.updateBook(Vars.testBook, "1234567890123", validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void updateBookWithInvalidToken() {
+        ServiceResult result = securedMediaService.updateBook(Vars.testBook, "1234567890123", nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+    @Test
+    public void updateDiscWithValidToken() {
+        ServiceResult result = securedMediaService.updateDisc(Vars.testDisc, Vars.testDisc.getBarcode(), validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void updateDiscWithInvalidToken() {
+        ServiceResult result = securedMediaService.updateDisc(Vars.testDisc, "1234567890123", nonValidToken);
+        assertEquals(AuthenticationServiceResult.TOKEN_NOT_VALID, result);
+    }
+
+    @Test
+    public void getBookWithValidToken() {
+        ServiceResult result = securedMediaService.getBook(Vars.testBook.getIsbn(), validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void getBookWithInvalidToken() {
+        ServiceResult result = securedMediaService.getBook("1234567890123", nonValidToken);
+        assertEquals(null, result);
+    }
+
+    @Test
+    public void getDiscWithValidToken() {
+        ServiceResult result = securedMediaService.getDisc("1234567890123", validToken);
+        assertEquals(MediaServiceResult.ACCEPTED, result);
+    }
+
+    @Test
+    public void getDiscWithInvalidToken() {
+        ServiceResult result = securedMediaService.getDisc("1234567890123", nonValidToken);
+        assertEquals(null, result);
+    }
+
+
 }
