@@ -1,6 +1,8 @@
 package edu.hm.shareit;
 
 import com.google.inject.AbstractModule;
+import edu.hm.shareit.resources.secured.Authorization;
+import edu.hm.shareit.resources.secured.MockAuthorization;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceMock;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
@@ -26,5 +28,6 @@ public class DependencyInjectionMockBindings extends AbstractModule {
       */
         bind(AuthenticationService.class).to(AuthenticationServiceMock.class);
         bind(MediaService.class).to(MockMediaServiceImpl.class);
+        bind(Authorization.class).to(MockAuthorization.class);
     }
 }
