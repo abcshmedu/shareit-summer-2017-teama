@@ -35,13 +35,12 @@ public class TestExceptionHandlers {
     }
 
     @Test
-    public void testUnrecognizedPropertyException() {
+    public void testJsonParseException() {
         String invalidBook = "{\n" +
                         "\"title:\" " + "\"title,\"\n" +
                 "\"author\": " + "\"author\",\n" +
                 "\"isbn\": " + "\"978-3-16-148410-0\"\n" +
                 "}";
-
 
         Response response = ClientBuilder.newClient()
                 .target("http://localhost:8082/shareit/media")
@@ -50,5 +49,26 @@ public class TestExceptionHandlers {
                 .post(Entity.json(invalidBook));
 
         assertEquals(response.getStatus(), 400);
+        assertEquals(response.readEntity(String.class), "This is an invalid json. The request can not be parsed");
     }
+
+    @Test
+    public void testUnrecognizedPropertyException() {
+        String invalidBook = "{\n" +
+                "\"tile\": " + "\"title,\"\n" +
+                "\"author\": " + "\"author\",\n" +
+                "\"isbn\": " + "\"978-3-16-148410-0\"\n" +
+                "}";
+
+        Response response = ClientBuilder.newClient()
+                .target("http://localhost:8082/shareit/media")
+                .path("books")
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .post(Entity.json(invalidBook));
+
+        assertEquals(response.getStatus(), 400);
+        assertEquals(response.readEntity(String.class), "This is an invalid request. The field tile is not recognized by the system.");
+    }
+
+
 }
