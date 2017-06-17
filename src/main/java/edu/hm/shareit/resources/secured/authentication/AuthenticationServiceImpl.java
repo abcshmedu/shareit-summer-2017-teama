@@ -6,17 +6,16 @@ import edu.hm.shareit.models.authentication.User;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthenticationServiceImpl implements AuthenticationService{
-    private final Map<User, Token> userToToken = new HashMap<>();
-
+public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String SALT = "0xw3";
+    private final Map<User, Token> userToToken = new HashMap<>();
 
 
     /**
      * Static Users: Admin, Sally, and Bob
      */
 
-    public AuthenticationServiceImpl(){
+    public AuthenticationServiceImpl() {
         addUser(new User("admin", "admin"));
 
         addUser(new User("sally", "password"));
@@ -24,10 +23,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         addUser(new User("bob", "123456"));
     }
 
-    public AuthenticationServiceResult login(User user){
+    public AuthenticationServiceResult login(User user) {
         AuthenticationServiceResult result = AuthenticationServiceResult.LOGIN_REJECTED;
-        for(User aUser : userToToken.keySet()){
-            if(aUser.equals(user)){
+        for (User aUser : userToToken.keySet()) {
+            if (aUser.equals(user)) {
                 Token userToken = userToToken.get(aUser);
                 result = AuthenticationServiceResult.LOGIN_ACCEPTED;
                 result.setToken(userToken);
@@ -40,8 +39,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     @Override
     public AuthenticationServiceResult authenticate(Token token) {
         AuthenticationServiceResult result = AuthenticationServiceResult.TOKEN_NOT_VALID;
-        for(Token aToken : userToToken.values()){
-            if(aToken.equals(token)){
+        for (Token aToken : userToToken.values()) {
+            if (aToken.equals(token)) {
                 result = AuthenticationServiceResult.AUTHENTICATED;
                 result.setToken(token);
                 return result;
@@ -50,18 +49,20 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         return result;
     }
 
-    private static Token generateToken(User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
-        String time = System.currentTimeMillis() + "";
-        String saltedPasswordAndTime = SALT + password + time;
-        String saltedPasswordHash = Math.abs(saltedPasswordAndTime.hashCode()) + "";
-        String totalTokenStr = username + "-" + saltedPasswordHash + "-" + username;
-        return new Token(totalTokenStr);
-    }
+    /*
+        private static Token generateToken(User user){
+            String username = user.getUsername();
+            String password = user.getPassword();
+            String time = System.currentTimeMillis() + "";
+            String saltedPasswordAndTime = SALT + password + time;
+            String saltedPasswordHash = Math.abs(saltedPasswordAndTime.hashCode()) + "";
+            String totalTokenStr = username + "-" + saltedPasswordHash + "-" + username;
+            return new Token(totalTokenStr);
+        }
+    */
 
     // ToDo Tokens are hard-coded!!
-    private void addUser(User user){
+    private void addUser(User user) {
         //Token token = generateToken(user);
         Token token = new Token(user.getUsername() + "-82955211-" + user.getUsername());
         userToToken.put(user, token);
