@@ -2,7 +2,7 @@ package edu.hm.shareit.api.secured.authentication;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import edu.hm.shareit.TestInjectionBindings;
+import edu.hm.shareit.DependencyInjectionMockBindings;
 import edu.hm.shareit.models.authentication.User;
 import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAuthenticationRestApi {
 
-    private Injector injector = Guice.createInjector(new TestInjectionBindings());
+    private Injector injector = Guice.createInjector(new DependencyInjectionMockBindings());
 
     private AuthenticationRestApi authenticationRestApi = new AuthenticationRestApi();
 

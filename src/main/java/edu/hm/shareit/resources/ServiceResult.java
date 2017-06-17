@@ -1,6 +1,5 @@
 package edu.hm.shareit.resources;
 
-import java.util.Collection;
 
 public interface ServiceResult {
     /**
@@ -11,18 +10,18 @@ public interface ServiceResult {
     int getCode();
 
     /**
-     * Getter for the status message.
-     *
-     * @return the status message.
-     */
-    String getStatus();
-
-    /**
      * Setter for the status code.
      *
      * @param code the status code.
      */
     void setCode(int code);
+
+    /**
+     * Getter for the status message.
+     *
+     * @return the status message.
+     */
+    String getStatus();
 
     /**
      * setter for the status message.

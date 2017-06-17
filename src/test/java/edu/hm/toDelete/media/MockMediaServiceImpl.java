@@ -1,8 +1,7 @@
-package edu.hm.shareit.resources.media;
+package edu.hm.toDelete.media;
 
-import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.Vars;
-
+import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.resources.unsecured.media.MediaService;

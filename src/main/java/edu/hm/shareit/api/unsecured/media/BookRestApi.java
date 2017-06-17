@@ -24,6 +24,7 @@ public class BookRestApi {
 
     @Inject
     private MediaService mediaService;
+
     /**
      * GET (getBook) Returns a specific book, provided it exists.
      * @param isbn The ISBN for the book to get

@@ -1,15 +1,11 @@
-package edu.hm.shareit.resources.media;
+package edu.hm.toDelete.media;
 
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.models.mediums.Medium;
-
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Test;
-
-import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 

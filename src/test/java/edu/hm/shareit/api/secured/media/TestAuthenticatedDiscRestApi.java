@@ -2,10 +2,9 @@ package edu.hm.shareit.api.secured.media;
 
 import edu.hm.JettyStarter;
 import edu.hm.shareit.models.authentication.User;
-import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.resources.ServiceGetter;
-import edu.hm.shareit.resources.media.MockSecuredMediaServiceImpl;
+import edu.hm.toDelete.media.MockSecuredMediaServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

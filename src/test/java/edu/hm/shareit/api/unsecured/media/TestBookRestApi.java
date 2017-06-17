@@ -1,15 +1,13 @@
 package edu.hm.shareit.api.unsecured.media;
 
-import edu.hm.shareit.resources.ServiceGetter;
-
 import edu.hm.shareit.models.Vars;
+import edu.hm.shareit.resources.ServiceGetter;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
-import edu.hm.shareit.resources.media.MockMediaServiceImpl;
+import edu.hm.toDelete.media.MockMediaServiceImpl;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
-
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
