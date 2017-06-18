@@ -12,6 +12,10 @@ import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
  * @author <a mailto:axel.boettcher@hm.edu>Axel B&ouml;ttcher</a>
  */
 public class ShareItApplication extends ResourceConfig {
+    /**
+     * The ShareItApplication class required for dependency injection.
+     * @param serviceLocator the service locator
+     */
     @Inject
     public ShareItApplication(ServiceLocator serviceLocator) {
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);

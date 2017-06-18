@@ -1,6 +1,8 @@
 package edu.hm.shareit.resources;
 
-
+/**
+ * The ServiceResult.
+ */
 public interface ServiceResult {
     /**
      * Getter for the status code.

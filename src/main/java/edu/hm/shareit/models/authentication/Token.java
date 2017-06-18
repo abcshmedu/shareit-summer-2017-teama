@@ -1,27 +1,31 @@
 package edu.hm.shareit.models.authentication;
 
 /**
- * Wrapper Class for the String Token used for Authentication
+ * Wrapper Class for the String Token used for Authentication.
  */
 public class Token {
-    String token;
+    private String token;
 
-    //Default Constructor
-    public Token(){
+    /**
+     * Default Constructor.
+     */
+
+    public Token() {
         this(null);
     }
 
     /**
-     * Helper Constructor
+     * Helper Constructor.
      *
      * @param token the string token
      */
-    public Token(String token){
+    public Token(String token) {
         setToken(token);
     }
 
     /**
-     * Getter for the token string
+     * Getter for the token string.
+     *
      * @return The token string
      */
     public String getToken() {
@@ -29,7 +33,8 @@ public class Token {
     }
 
     /**
-     * Setter for the token string
+     * Setter for the token string.
+     *
      * @param token The token string
      */
     public void setToken(String token) {

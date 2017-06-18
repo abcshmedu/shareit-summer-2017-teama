@@ -13,8 +13,11 @@ import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
+/**
+ * the context listener.
+ */
 public class ShareitServletContextListener extends GuiceServletContextListener {
-    private static final Injector injector = Guice.createInjector(new ServletModule() {
+    private static final Injector INJECTOR = Guice.createInjector(new ServletModule() {
         @Override
         protected void configureServlets() {
             //bind(BookRestApi.class);
@@ -33,12 +36,12 @@ public class ShareitServletContextListener extends GuiceServletContextListener {
      * @return Injector instance.
      */
     static Injector getInjectorInstance() {
-        return injector;
+        return INJECTOR;
 
     }
 
     @Override
     protected Injector getInjector() {
-        return injector;
+        return INJECTOR;
     }
 }

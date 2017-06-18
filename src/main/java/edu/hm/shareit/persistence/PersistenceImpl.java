@@ -11,9 +11,12 @@ import javax.persistence.Query;
 import java.io.Serializable;
 import java.util.Collection;
 
+/**
+ * Implementation of persistence functionality.
+ */
 public class PersistenceImpl implements Persistence {
 
-    static final Logger logger = LogManager.getLogger();
+    static final Logger LOGGER = LogManager.getLogger();
     private SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
 
     @Override
@@ -82,10 +85,19 @@ public class PersistenceImpl implements Persistence {
         return result;
     }
 
+    /**
+     * checks if object is null or not.
+     * @param object the object to be checked.
+     * @return true or false, depending on check.
+     */
     private boolean notNull(Object object) {
         return object != null;
     }
 
+    /**
+     * Retrieves the session
+     * @return the current session.
+     */
     private Session openOrGetCurrentSession() {
         Session session = null;
         if (notNull(sessionFactory)) {

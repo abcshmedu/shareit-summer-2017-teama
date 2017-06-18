@@ -7,6 +7,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * Exception Handler for UnrecognizedPropertyException.
+ */
 @Provider
 public class UnrecognizedPropertyExceptionMapper implements ExceptionMapper<UnrecognizedPropertyException> {
 
@@ -15,7 +18,7 @@ public class UnrecognizedPropertyExceptionMapper implements ExceptionMapper<Unre
         return Response
                 .status(Response.Status.BAD_REQUEST)
                 .entity("This is an invalid request. The field " + exception.getPropertyName() + " is not recognized by the system.")
-                .type( MediaType.TEXT_PLAIN)
+                .type(MediaType.TEXT_PLAIN)
                 .build();
     }
 
