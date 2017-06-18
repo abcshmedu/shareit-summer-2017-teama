@@ -20,7 +20,7 @@ import javax.ws.rs.core.Response;
 @Path("users")
 public class AuthenticationRestApi {
 
-    static final Logger logger = LogManager.getLogger();
+    static final Logger LOGGER = LogManager.getLogger();
 
     @Inject
     private AuthenticationService authenticationService;
@@ -29,20 +29,20 @@ public class AuthenticationRestApi {
     private String tokenStr = null;
 
     /**
-     * GET (authenticate) Returns AUTHENTICATED Code if the token is valid
+     * GET (authenticate) Returns AUTHENTICATED Code if the token is valid.
      *
      * @return The Response saying whether or not the Token was authenticated
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response authenticate(){
+    public Response authenticate() {
         Token token = new Token(tokenStr);
         AuthenticationServiceResult result = authenticationService.authenticate(token);
         return Response.ok(result).status(result.getCode()).build();
     }
 
     /**
-     * POST (login) Posts a User to be authenticated for login
+     * POST (login) Posts a User to be authenticated for login.
      *
      * @param user The User to login
      * @return The Response, containing a Token upon success

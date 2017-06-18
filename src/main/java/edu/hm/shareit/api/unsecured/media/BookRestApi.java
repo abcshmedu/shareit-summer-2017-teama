@@ -13,7 +13,7 @@ import java.util.Collection;
 
 /**
  * REST Resource Class for the Book API.
- *
+ * <p>
  * GET  /books/{isbn}   ->  getBook
  * GET  /books          ->  getBooks
  * POST /books          ->  postBook
@@ -27,6 +27,7 @@ public class BookRestApi {
 
     /**
      * GET (getBook) Returns a specific book, provided it exists.
+     *
      * @param isbn The ISBN for the book to get
      * @return The Response with the Json format for the book
      */
@@ -36,7 +37,7 @@ public class BookRestApi {
     public Response getBook(@PathParam("isbn") String isbn) {
         Collection collection = mediaService.getBook(isbn).getMedia();
         Book book = null;
-        if(collection != null){
+        if (collection != null) {
             book = (Book) collection.toArray()[0];
         }
         return Response.ok(book).build();
@@ -44,6 +45,7 @@ public class BookRestApi {
 
     /**
      * GET (getBooks) Returns all books.
+     *
      * @return The Response with the Json array format for the books
      */
     @GET
@@ -55,6 +57,7 @@ public class BookRestApi {
 
     /**
      * POST (postBook) Posts a book to the Media_Service.
+     *
      * @param book The book to post
      * @return The Response from the SecuredMediaService
      */
@@ -68,6 +71,7 @@ public class BookRestApi {
 
     /**
      * PUT (updateBook) Updates a book with the given ISBN to the new values.
+     *
      * @param book The book with the new values
      * @param isbn The ISBN for the book to replace
      * @return The Response from the SecuredMediaService

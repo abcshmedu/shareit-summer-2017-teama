@@ -13,30 +13,31 @@ import java.util.Collection;
 
 /**
  * REST Resource Class for the Disc API.
- *
+ * <p>
  * GET  /discs/{barcode}->  getDisc
  * GET  /discs          ->  getDiscs
  * POST /discs          ->  postDisc
  * PUT  /discs/{barcode}->  updateDisc
  */
 @Path("discs")
-public class DiscRestApi{
+public class DiscRestApi {
 
     @Inject
     private MediaService mediaService;
 
     /**
      * GET (getDisc) Returns a specific disc, provided it exists.
+     *
      * @param barcode The barcode for the book to get
      * @return The Response with the Json format for the disc
      */
     @GET
     @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getDisc(@PathParam("barcode") String barcode)  {
+    public Response getDisc(@PathParam("barcode") String barcode) {
         Collection collection = mediaService.getDisc(barcode).getMedia();
         Disc disc = null;
-        if(collection != null){
+        if (collection != null) {
             disc = (Disc) collection.toArray()[0];
         }
         return Response.ok(disc).build();
@@ -44,6 +45,7 @@ public class DiscRestApi{
 
     /**
      * GET (getDiscs) Returns all discs.
+     *
      * @return The Response with the Json array format for the discs
      */
     @GET
@@ -55,6 +57,7 @@ public class DiscRestApi{
 
     /**
      * POST (postDisc) Posts a disc to the Media_Service.
+     *
      * @param disc The disc to post
      * @return The Response from the SecuredMediaService
      */
@@ -68,7 +71,8 @@ public class DiscRestApi{
 
     /**
      * PUT (updateDisc) Updates a disc with the given barcode to the new values.
-     * @param disc The disc with the new values
+     *
+     * @param disc    The disc with the new values
      * @param barcode The barcode for the disc to replace
      * @return The Response from the SecuredMediaService
      */
@@ -76,7 +80,7 @@ public class DiscRestApi{
     @Path("{barcode}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateDisc(Disc disc, @PathParam("barcode") String barcode)  {
+    public Response updateDisc(Disc disc, @PathParam("barcode") String barcode) {
         MediaServiceResult result = mediaService.updateDisc(disc, barcode);
         return Response.ok(result).status(result.getCode()).build();
     }

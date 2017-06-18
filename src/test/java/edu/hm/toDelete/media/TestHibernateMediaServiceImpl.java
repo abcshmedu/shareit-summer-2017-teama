@@ -5,11 +5,12 @@ import edu.hm.shareit.models.mediums.Disc;
 import edu.hm.shareit.resources.unsecured.media.MediaService;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-
+@Ignore
 public class TestHibernateMediaServiceImpl {
     MediaService mediaService = new MediaServiceImpl();
 

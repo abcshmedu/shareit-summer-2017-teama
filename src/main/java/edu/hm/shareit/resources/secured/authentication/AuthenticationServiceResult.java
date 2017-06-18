@@ -6,7 +6,8 @@ import edu.hm.shareit.resources.ServiceResult;
 /**
  * Contains all the status codes and messages needed for the CopyService.
  */
-public enum AuthenticationServiceResult implements ServiceResult{
+public enum AuthenticationServiceResult implements ServiceResult {
+
     AUTHENTICATED(200, "Authenticated"),
     LOGIN_ACCEPTED(201, "Login Accepted"),
     TOKEN_NOT_VALID(400, "Token not valid"),
@@ -15,10 +16,16 @@ public enum AuthenticationServiceResult implements ServiceResult{
     private int code;
     private String status;
     private Token token;
+    private static final int ERROR_404 = 404;
 
-    AuthenticationServiceResult(){
-        this(404, null);
+
+    /**
+     * Custom constructor.
+     */
+    AuthenticationServiceResult() {
+        this(ERROR_404, null);
     }
+
     /**
      * Custom constructor.
      *
@@ -46,9 +53,9 @@ public enum AuthenticationServiceResult implements ServiceResult{
      * @return the status message.
      */
     public String getStatus() {
-        if(token != null){
+        if (token != null) {
             return status + ":" + token.getToken();
-        }else {
+        } else {
             return status;
         }
     }
@@ -71,10 +78,18 @@ public enum AuthenticationServiceResult implements ServiceResult{
         this.status = status;
     }
 
+    /**
+     * getter for token.
+     * @return the token to be retrieved.
+     */
     public Token getToken() {
         return token;
     }
 
+    /**
+     * setter for token.
+     * @param token the token to be set.
+     */
     public void setToken(Token token) {
         this.token = token;
     }

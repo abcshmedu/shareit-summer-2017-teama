@@ -6,13 +6,16 @@ import edu.hm.shareit.models.authentication.User;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Authentication Service Implementation for Authentication and Authorization of users.
+ */
 public class AuthenticationServiceImpl implements AuthenticationService {
     private static final String SALT = "0xw3";
     private final Map<User, Token> userToToken = new HashMap<>();
 
 
     /**
-     * Static Users: Admin, Sally, and Bob
+     * Static Users: Admin, Sally, and Bob.
      */
 
     public AuthenticationServiceImpl() {
@@ -23,6 +26,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         addUser(new User("bob", "123456"));
     }
 
+    @Override
     public AuthenticationServiceResult login(User user) {
         AuthenticationServiceResult result = AuthenticationServiceResult.LOGIN_REJECTED;
         for (User aUser : userToToken.keySet()) {
@@ -61,6 +65,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         }
     */
 
+    /**
+     * adding Users to Map for initialization.
+     * @param user the user to be added
+     */
     // ToDo Tokens are hard-coded!!
     private void addUser(User user) {
         //Token token = generateToken(user);

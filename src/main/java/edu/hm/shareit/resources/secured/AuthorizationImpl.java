@@ -15,7 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Performs the call to the AuthorizationService
+ * Performs the call to the AuthorizationService.
  */
 public class AuthorizationImpl implements Authorization {
     //Constants
@@ -25,7 +25,7 @@ public class AuthorizationImpl implements Authorization {
     private static final String PATH = JettyStarter.APP_URL + "/shareit/authentication/users";
 
     /**
-     * Calls the Authentication MicroService to authenticate users
+     * Calls the Authentication MicroService to authenticate users.
      *
      * @param token The token to authorize
      * @return code and status of the result

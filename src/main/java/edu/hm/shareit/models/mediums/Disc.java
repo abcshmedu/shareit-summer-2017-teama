@@ -1,7 +1,6 @@
 package edu.hm.shareit.models.mediums;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 /**
  * Represents a disc with a unique barcode.
