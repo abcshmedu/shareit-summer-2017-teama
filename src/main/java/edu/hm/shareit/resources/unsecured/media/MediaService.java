@@ -3,7 +3,6 @@ package edu.hm.shareit.resources.unsecured.media;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
 
-import java.util.Collection;
 
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.

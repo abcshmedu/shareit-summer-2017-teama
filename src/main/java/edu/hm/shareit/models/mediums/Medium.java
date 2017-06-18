@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Title field is inherited by all media.
  */
 @MappedSuperclass
-public class Medium implements Serializable{
+public class Medium implements Serializable {
 
     @Column(name = "Title")
     private String title;
@@ -31,6 +31,7 @@ public class Medium implements Serializable{
 
     /**
      * Getter for the title.
+     *
      * @return The title.
      */
     public String getTitle() {
@@ -39,6 +40,7 @@ public class Medium implements Serializable{
 
     /**
      * Setter for the title.
+     *
      * @param title The title.
      */
     public void setTitle(String title) {

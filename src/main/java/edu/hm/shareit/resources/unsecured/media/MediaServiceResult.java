@@ -11,7 +11,7 @@ import java.util.Collection;
  * Contains all the status codes and messages needed for the SecuredMediaService.
  */
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
-public enum MediaServiceResult implements ServiceResult{
+public enum MediaServiceResult implements ServiceResult {
     SUCCESS(200, "Completed request"),
     PARAMETER_MISSING(404, "At least one parameter is missing."),
     ACCEPTED(202, "Request accepted"),
@@ -30,13 +30,17 @@ public enum MediaServiceResult implements ServiceResult{
     private String status;
     private Collection<Medium> media;
 
+    /**
+     * MediaServiceResult constructor.
+     */
     MediaServiceResult() {
         this(0, null);
     }
 
     /**
      * Custom constructor.
-     * @param code The status code.
+     *
+     * @param code   The status code.
      * @param status The status message.
      */
     MediaServiceResult(int code, String status) {

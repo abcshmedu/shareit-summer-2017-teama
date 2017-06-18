@@ -70,7 +70,7 @@ public class PersistenceImpl implements Persistence {
         }
         return false;
     }
-
+@Override
     public Medium getRecord(Class clazz, Serializable id) {
         Medium result = null;
         Session session = openOrGetCurrentSession();

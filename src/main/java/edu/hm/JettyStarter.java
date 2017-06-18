@@ -1,17 +1,11 @@
 package edu.hm;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Stage;
-import com.google.inject.servlet.GuiceFilter;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.*;
-import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.webapp.*;
-import sun.security.provider.SHA;
 
-import java.util.EnumSet;
 
 /**
  * Start the application without an AppServer like tomcat.
@@ -22,14 +16,14 @@ public final class JettyStarter {
     /**
      * Private default constructor.
      */
-    public JettyStarter() { }
+    private JettyStarter() { }
 
     public static final String APP_URL = "/";
     public static final int PORT = 8082;
     public static final String WEBAPP_DIR = "./src/main/webapp/";
     public static final Object MONITOR = new Object();
 
-    static final Logger logger = LogManager.getLogger();
+    static final Logger LOGGER = LogManager.getLogger();
 
     /**
      * Main method to start jetty.
@@ -40,7 +34,7 @@ public final class JettyStarter {
         Server jetty = new Server(PORT);
         jetty.setHandler(new WebAppContext(WEBAPP_DIR, APP_URL));
         jetty.start();
-        logger.info("Jetty listening on port " + PORT);
+        LOGGER.info("Jetty listening on port " + PORT);
         synchronized (JettyStarter.MONITOR) {
             JettyStarter.MONITOR.wait();
         }
