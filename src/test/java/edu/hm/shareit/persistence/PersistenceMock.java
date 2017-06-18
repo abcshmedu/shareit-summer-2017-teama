@@ -1,5 +1,6 @@
 package edu.hm.shareit.persistence;
 
+import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class PersistenceMock implements Persistence {
 
     @Override
     public boolean updateRecord(Medium medium) {
-        if (medium.getTitle().equals("valid"))
+        if (medium.getTitle().equals("title"))
             return true;
         else
             return false;
@@ -29,11 +30,16 @@ public class PersistenceMock implements Persistence {
 
     @Override
     public boolean findRecord(Class clazz, Serializable id) {
-        return false;
+        if (id.equals("9783940006127"))
+            return false;
+        return true;
     }
 
     @Override
     public Medium getRecord(Class clazz, Serializable id) {
-        return null;
+        if (id.equals("9783127323207"))
+            return new Book("title", "9783127323207", "author");
+        else
+            return null;
     }
 }

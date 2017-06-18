@@ -1,6 +1,5 @@
 package edu.hm.shareit.api.exeptionhandlers;
 
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.jetty.server.Server;
@@ -8,7 +7,6 @@ import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -37,7 +35,7 @@ public class TestExceptionHandlers {
     @Test
     public void testJsonParseException() {
         String invalidBook = "{\n" +
-                        "\"title:\" " + "\"title,\"\n" +
+                "\"title:\" " + "\"title,\"\n" +
                 "\"author\": " + "\"author\",\n" +
                 "\"isbn\": " + "\"978-3-16-148410-0\"\n" +
                 "}";

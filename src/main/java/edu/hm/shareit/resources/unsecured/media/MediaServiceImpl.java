@@ -25,17 +25,14 @@ public class MediaServiceImpl implements MediaService, Serializable {
 
     @Override
     public MediaServiceResult addBook(Book book) {
-        book.setIsbn(validator.validateISBN13(book.getIsbn()));
-
         if (book == null || book.getIsbn() == null || book.getTitle() == null || book.getAuthor() == null) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
 
-        if (book.getAuthor().isEmpty()
-                || book.getIsbn().isEmpty() || book.getTitle().isEmpty()) {
+        if (book.getAuthor().isEmpty() || book.getIsbn().isEmpty() || book.getTitle().isEmpty()) {
             return MediaServiceResult.PARAMETER_MISSING;
         }
-
+        book.setIsbn(validator.validateISBN13(book.getIsbn()));
         if (!validator.isValidISBN13(book.getIsbn())) {
             return MediaServiceResult.INVALID_ISBN;
         }
