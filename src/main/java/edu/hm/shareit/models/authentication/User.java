@@ -1,31 +1,35 @@
 package edu.hm.shareit.models.authentication;
 
 /**
- * Simple User Class
- *
+ * Simple User Class.
+ * <p>
  * A user has a username and password
  */
 public class User {
-    String username;
-    String password;
+    private String username;
+    private String password;
 
-    //Default constructor
-    public User(){
+    /**
+     * default constructor.
+     */
+    public User() {
         this(null, null);
     }
 
     /**
-     * Helper Constructor
+     * Helper Constructor.
+     *
      * @param username The users name
      * @param password The users password
      */
-    public User(String username, String password){
+    public User(String username, String password) {
         setUsername(username);
         setPassword(password);
     }
 
     /**
-     * Getter for the users name
+     * Getter for the users name.
+     *
      * @return The username
      */
     public String getUsername() {
@@ -33,7 +37,8 @@ public class User {
     }
 
     /**
-     * Getter for the users password
+     * Getter for the users password.
+     *
      * @return The password
      */
     public String getPassword() {
@@ -41,7 +46,8 @@ public class User {
     }
 
     /**
-     * Setter for the users name
+     * Setter for the users name.
+     *
      * @param username The new username
      */
     public void setUsername(String username) {
@@ -49,7 +55,8 @@ public class User {
     }
 
     /**
-     * Setter for the users password
+     * Setter for the users password.
+     *
      * @param password The new password
      */
     public void setPassword(String password) {
@@ -58,7 +65,7 @@ public class User {
 
     @Override
     public String toString() {
-        return"User:{username: " + username + ", password: " + password + "}";
+        return "User:{username: " + username + ", password: " + password + "}";
     }
 
     @Override
