@@ -136,10 +136,8 @@ Steakholder des Systems sind in erster Linie die Studenten der Hochschule Münch
 
 \textbf{Motivation.}
 
-Sie sollten die Projektbeteiligten und -betroffenen kennen, sonst
-erleben Sie später im Entwicklungsprozess Überraschungen. Diese
-Stakeholder bestimmen unter anderem Umfang und Detaillierungsgrad der
-von Ihnen zu leistenden Arbeit und Ergebnisse.
+Für die Administratoren ist die Beschreibung des Systems wichtig, da diese das System entwickeln, betreiben sowie supporten müssen.
+Die eigentliche Zielgruppe des Systems ist an die Studenten der Hochschule München gerichtet, welche somit Hauptbestandteil des Systems sind und zwingend als Stakeholder aufgenommen werden müssen.
 
 \textbf{Form.}
 
@@ -148,11 +146,11 @@ bezüglich der Architektur und deren Dokumentation.
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-\begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
 Rolle\strut
-\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
 Abnahmerelevanz\strut
-\end{minipage} & \begin{minipage}[b]{0.46\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.35\columnwidth}\raggedright\strut
 Erwartungshaltung\strut
 \end{minipage}\tabularnewline
 \midrule
@@ -328,8 +326,11 @@ Randbedingungen, was Sie entschieden haben und warum Sie so entschieden
 haben. Verweisen Sie eher auf weitere Ausführungen in Folgeabschnitten.
 
 \section{Bausteinsicht}\label{section-building-block-view}
+Die Architektur des Systems ist in dem sog. "Schichtenmodell" aufgebaut. Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON-Objekte in Objekte umwandeln bzw. im Falle einer Response Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht weist keinerlei Abhängigkeiten zu den anderen Schichten auf. (Ausnahme ist dabei zu den Model-Klassen)
+Model-Klassen sind geteilte Ressourcen, welche von allen Schichten verwendet werden darf. In den Ressourcen sind lediglich die Objekte "Book", "Disc", "Medium", "User" und "Token" abgebildet und enthalten die Informationen zu den jeweiligen Objekten.
 
 \textbf{Inhalt.}
+
 
 Diese Sicht zeigt die statische Zerlegung des Systems in Bausteine
 (Module, Komponenten, Subsysteme, Klassen, Interfaces, Pakete,
