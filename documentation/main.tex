@@ -138,7 +138,7 @@ Szenarien, geordnet nach Prioritäten.
 
 Stakeholder des Systems sind in erster Linie die Studenten der Hochschule München sowie die Administratoren des Systems. Studenten können dabei als Ausleiher und/oder als Anbieter fungieren, daher wird dessen Funktion in zwei Bereiche aufgeteilt. Folgendes Use Case Diagramm verdeutlicht die Zusammenhänge:
 
-\includegraphics{images/UseCaseDiagram.png}
+\includegraphics{images/UseCaseDiagram.png}[H]
 \begin{itemize}
 \item
   die Architektur kennen sollten oder
@@ -321,8 +321,11 @@ Randbedingungen, was Sie entschieden haben und warum Sie so entschieden
 haben. Verweisen Sie eher auf weitere Ausführungen in Folgeabschnitten.
 
 \section{Bausteinsicht}\label{section-building-block-view}
-Die Architektur des Systems ist in dem sog. "Schichtenmodell" aufgebaut. Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON-Objekte in Objekte umwandeln bzw. im Falle einer Response Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht weist keinerlei Abhängigkeiten zu den anderen Schichten auf. (Ausnahme ist dabei zu den Model-Klassen)
-Model-Klassen sind geteilte Ressourcen, welche von allen Schichten verwendet werden darf. In den Ressourcen sind lediglich die Objekte "Book", "Disc", "Medium", "User" und "Token" abgebildet und enthalten die Informationen zu den jeweiligen Objekten.
+Die Architektur der Software ist wie folgt in Schichtenmodell aufgebaut:
+\includegraphics{images/SoftwareLayers.png}
+
+ Folgende  Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON in Objekte umwandeln bzw. im Falle einer Antwort Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht weist keinerlei Abhängigkeiten zu den anderen Schichten auf. (Ausnahme ist dabei zu den Model-Klassen)
+Modell-Klassen sind geteilte Ressourcen, welche von allen Schichten verwendet werden dürfen. In den Modells sind lediglich die Objekte "Book", "Disc", "Medium", "User" und "Token" abgebildet und enthalten die Informationen zu den jeweiligen Objekten. Die Modell-Klassen
 
 \textbf{Inhalt.}
 
