@@ -73,14 +73,13 @@
 \maketitle
 \newpage
 \section{Einführung und Ziele}\label{section-introduction-and-goals}
-
 Beschreibt die wesentliche Anforderungen und treibenden Kräfte, die
 Softwarearchitekten und Entwicklungsteams berücksichtigen müssen. Dazu
 gehören die
 
 \begin{itemize}
 \item
-  zugrunde liegenden Geschäftsziele, wesentliche Aufgabenstellung und
+  zugrunde liegenden Ziele, wesentliche Aufgabenstellung und
   essenzielle fachliche Anforderungen an das System
 \item
   Qualitätsziele für die Architektur
@@ -89,38 +88,30 @@ gehören die
 \end{itemize}
 
 \subsection{Aufgabenstellung}\label{_aufgabenstellung}
-
 \textbf{Inhalt.}
 
-Kurzbeschreibung der fachlichen Aufgabenstellung, treibenden Kräfte,
-Extrakt (oder Abstract) der Anforderungen. Verweis auf (hoffentlich
-vorliegende) Anforderungsdokumente (mit Versionsbezeichnungen und
-Ablageorten).
+Studierende der Hochschule München benötigen innerhalb der Bachelor-/Master-Laufbahn diverse Fachbücher/CDs um einen intensiven und schnellen Lernerfolg zu erreichen. Diese Literatur ist oftmals kostspielig und wird darüber hinaus meist nur für einen kurzen Zeitraum (für gewöhnlich ein Semester) benötigt. Für diese Problemstellung soll das "ShareIt"-System eine elegante Möglichkeit bieten, um
 
-\textbf{Motivation.}
+\begin{itemize}
+	\item Studierende nicht mehr benötigte Fachbücher/CDs für den Verleih anzubieten.
+	\item benötigte Fachbücher einfach und komfortable ausleihen zu können.
+\end{itemize}
 
-Aus Sicht der späteren Nutzer ist die Unterstützung einer fachlichen
-Aufgabe oder Verbesserung der Qualität der eigentliche Beweggrund, ein
-neues System zu schaffen oder ein bestehendes zu modifizieren.
+Das ShareIt-System soll dabei als zentrale Verleihbibliothek für gebrauchte Fachliteratur/CDs dienen. Studierende, welche Exemplare ausleihen/anbieten wollen, müssen sich gegenüber dem System mittels einem Token authentisieren, um Falscheingaben und Missbrauch zu vermeiden. Die Implementierung wird ohne Front-End zur Verfügung gestellt und nur über eine REST-API implementiert. Als Datenübertragungsformat dient JSON.
 
-\textbf{Form.}
-
-Kurze textuelle Beschreibung, eventuell in tabellarischer Use-Case Form.
-Sofern vorhanden sollte die Aufgabenstellung Verweise auf die
-entsprechenden Anforderungsdokumente enthalten.
-
-Halten Sie diese Auszüge so knapp wie möglich und wägen Sie Lesbarkeit
-und Redundanzfreiheit gegeneinander ab.
+Die genaue Anforderungsbeschreibung ist unter Moodle der Veranstaltung "Software-Architektur" verfügbar.
 
 \subsection{Qualitätsziele}\label{_qualit_tsziele}
 
 \textbf{Inhalt.}
 
-Die Top-3 bis Top-5 der Qualitätsziele für die Architektur, deren
-Erfüllung oder Einhaltung den maßgeblichen Stakeholdern besonders
-wichtig sind. Gemeint sind hier wirklich Qualitätsziele, die nicht
-unbedingt mit den Zielen des Projekts übereinstimmen. Beachten Sie den
-Unterschied.
+Folgende Qualitätsziele sind zwingend erforderlich: 
+
+\begin{itemize}
+	\item Hochverfügbarkeit des Systems
+	\item Konsistente Datenhaltung
+	\item Intuitive und einfache REST-Schnittstelle
+\end{itemize}
 
 \textbf{Motivation.}
 
@@ -140,9 +131,9 @@ Szenarien, geordnet nach Prioritäten.
 
 \textbf{Inhalt.}
 
-Expliziter Überblick über die Stakeholder des Systems, d.h. über alle
-Personen, Rollen oder Organisationen, die
+Steakholder des Systems sind in erster Linie die Studenten der Hochschule München sowie die Administratoren des Systems. Studenten können dabei als Ausleiher und/oder als Anbieter fungieren, daher wird dessen Funktion in zwei Bereiche aufgeteilt. Folgendes Use Case Diagramm verdeutlicht die Zusammenhänge:
 
+\includegraphics{images/UseCaseDiagram.png}
 \begin{itemize}
 \item
   die Architektur kennen sollten oder

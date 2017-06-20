@@ -19,12 +19,21 @@ import javax.ws.rs.core.Response;
  */
 @Path("users")
 public class AuthenticationRestApi {
-
+    /**
+     * Logger object
+     */
     static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Object for authentication
+     */
     @Inject
     private AuthenticationService authenticationService;
-    //Used for authorization
+
+
+    /**
+     * Represents the token-content
+     */
     @HeaderParam(HttpHeaders.AUTHORIZATION)
     private String tokenStr = null;
 

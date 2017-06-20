@@ -10,7 +10,14 @@ import java.util.Map;
  * Authentication Service Implementation for Authentication and Authorization of users.
  */
 public class AuthenticationServiceImpl implements AuthenticationService {
+    /**
+     * Salt string
+     */
     private static final String SALT = "0xw3";
+
+    /**
+     * User to Token mapping (not integrated into the database)
+     */
     private final Map<User, Token> userToToken = new HashMap<>();
 
 

@@ -1,6 +1,9 @@
 package edu.hm.shareit.models.mediums;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Represents a book with a unique isbn.
@@ -49,21 +52,21 @@ public class Book extends Medium {
     }
 
     /**
-     * Getter for the author.
-     *
-     * @return The author of the book.
-     */
-    public String getAuthor() {
-        return author;
-    }
-
-    /**
      * Setter for isbn number.
      *
      * @param isbn The isbn of the book.
      */
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    /**
+     * Getter for the author.
+     *
+     * @return The author of the book.
+     */
+    public String getAuthor() {
+        return author;
     }
 
     /**

@@ -25,10 +25,15 @@ import java.util.Collection;
 @Path("books")
 public class AuthenticatedBookRestApi {
 
+    /**
+     * Object for authentication
+     */
     @Inject
     private SecuredMediaService securedMediaService;
 
-    //Used for authorization
+    /**
+     * Object for authentication
+     */
     @HeaderParam(HttpHeaders.AUTHORIZATION)
     private String tokenStr = null;
 

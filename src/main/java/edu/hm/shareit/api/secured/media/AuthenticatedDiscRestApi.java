@@ -25,6 +25,9 @@ import java.util.Collection;
 @Path("discs")
 public class AuthenticatedDiscRestApi {
 
+    /**
+     * Object for authentication
+     */
     @Inject
     private SecuredMediaService securedMediaService;
 
