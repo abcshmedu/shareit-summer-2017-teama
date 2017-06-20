@@ -1,5 +1,6 @@
 \documentclass[]{article}
 \usepackage{lmodern}
+\usepackage{color}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -97,7 +98,7 @@ Studierende der Hochschule München benötigen innerhalb der Bachelor-/Master-La
 	\item benötigte Fachbücher einfach und komfortable ausleihen zu können.
 \end{itemize}
 
-Das ShareIt-System soll dabei als zentrale Leihbibliothek für gebrauchte Fachliteratur/CDs dienen. Studierende, welche Exemplare ausleihen/anbieten wollen, müssen sich gegenüber dem System mittels einem Token authentisieren, um Falscheingaben und Missbrauch zu vermeiden. Die Implementierung wird ohne Front-End zur Verfügung gestellt und nur über eine REST-API implementiert. Als Datenübertragungsformat dient JSON.
+Das ShareIt-System soll dabei als zentrale Verleihbibliothek für gebrauchte Fachliteratur/CDs dienen. Studierende, welche Exemplare ausleihen/anbieten wollen, müssen sich gegenüber dem System mittels einem Token authentisieren, um Falscheingaben und Missbrauch zu vermeiden. Die Implementierung wird ohne Front-End zur Verfügung gestellt und nur über eine REST-API implementiert. Als Datenübertragungsformat dient JSON.
 
 Die genaue Anforderungsbeschreibung ist unter Moodle der Veranstaltung "Software-Architektur" verfügbar.
 
@@ -113,16 +114,20 @@ Folgende Qualitätsziele sind zwingend erforderlich:
 	\item Intuitive und einfache REST-Schnittstelle
 \end{itemize}
 
+\colorbox{red} {// evtl. noch Ablauf/Aktivitätsdiagramm hinzufügen}
+
 \textbf{Motivation.}
 
-Weil Qualitätsziele grundlegende Architekturentscheidungen oft
-maßgeblich beeinflussen, sollten Sie die für Ihre Stakeholder relevanten
-Qualitätsziele kennen, möglichst konkret und operationalisierbar.
+Mit den Qualitätszielen sollen verschiedene Ziele erreicht werden. Zum einen soll Studenten dauerhaft und zu jeder Tages- und Nachtzeit die Möglichkeit gegeben werden, auf den Service zuzugreifen. Für Abschlussarbeiten ist diese Verfügbarkeit besonders wichtig. (Stichwort Hochverfügbarkeit).
 
-Wenn Sie als Architekt nicht wissen, woran Ihre Arbeit gemessen wird,
-\ldots{}.
+Da Studenten ein Interesse daran haben, ihre Bücher ggf. wieder zurückzufordern, soll auch die Datenhaltung unbedingt konsistent sein. Somit ist garantiert, dass die Eigentümer wissen, wo ihre Bücher zu jedem Zeitpunkt sind. (Stichwort Konsistente Datenhaltung)
+
+Schließlich soll die Schnittstelle möglichst einfach bedienbar sein, sodass ein mögliches Frontend ohne größere Komplikationen darauf aufbauen kann.
+
 
 \textbf{Form.}
+
+\colorbox{red} {// evtl. noch tabellarische Form hinzufügen}
 
 Tabellarische Darstellung der Qualitätsziele mit möglichst konkreten
 Szenarien, geordnet nach Prioritäten.
@@ -131,8 +136,21 @@ Szenarien, geordnet nach Prioritäten.
 
 \textbf{Inhalt.}
 
-Steakholder des Systems sind in erster Linie die Studenten der Hochschule München sowie die Administratoren des Systems. Studenten können dabei als Ausleiher und/oder als Anbieter fungieren, daher wird dessen Funktion in zwei Bereiche aufgeteilt. Folgendes Use Case Diagramm verdeutlicht die Zusammenhänge:
+Stakeholder des Systems sind in erster Linie die Studenten der Hochschule München sowie die Administratoren des Systems. Studenten können dabei als Ausleiher und/oder als Anbieter fungieren, daher wird dessen Funktion in zwei Bereiche aufgeteilt. Folgendes Use Case Diagramm verdeutlicht die Zusammenhänge:
+
 \includegraphics{images/UseCaseDiagram.png}
+\begin{itemize}
+\item
+  die Architektur kennen sollten oder
+\item
+  von der Architektur überzeugt werden müssen,
+\item
+  mit Architektur oder Code arbeiten (z.B. Schnittstellen nutzen),
+\item
+  Dokumentation der Architektur für ihre eigene Arbeit benötigen,
+\item
+  Entscheidungen über das System und dessen Entwicklung treffen.
+\end{itemize}
 
 \textbf{Motivation.}
 
@@ -144,41 +162,15 @@ Die eigentliche Zielgruppe des Systems ist an die Studenten der Hochschule Münc
 Tabelle mit Rollen- oder Personennamen, sowie deren Erwartungshaltung
 bezüglich der Architektur und deren Dokumentation.
 
-\begin{longtable}[]{@{}lll@{}}
-\toprule
-\begin{minipage}[b]{0.20\columnwidth}\raggedright\strut
-Rolle\strut
-\end{minipage} & \begin{minipage}[b]{0.15\columnwidth}\raggedright\strut
-Abnahmerelevanz\strut
-\end{minipage} & \begin{minipage}[b]{0.35\columnwidth}\raggedright\strut
-Erwartungshaltung\strut
-\end{minipage}\tabularnewline
-\midrule
-\endhead
-\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Anbieter}\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ja}\strut
-\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-\emph{Muss Medien anbieten und verwalten können}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ausleiher}\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ja}\strut
-\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-\emph{Muss nach Medien suchen und ausleihen können}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-	\emph{Administratoren}\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-	\emph{Nein}\strut
-\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-	\emph{Müssen das System entwickeln sowie betreiben.}\strut
-\end{minipage}\tabularnewline
-\bottomrule
-\end{longtable}
+
 \section{Randbedingungen}\label{section-architecture-constraints}
+
+Wichtige Randbedingung ist z.B., dass eine sichere Authentifizierung am System erfolgen muss. Des Weiteren muss eine klar erkennbare Schichtenarchitektur befolgt werden, sodass keine unerlaubten Abhängigkeiten innerhalb der REST-Architektur bestehen.
+
+Grundsätzlich sollen die Bestandteile des Systems als gesamtes als OpenSource-Projekt zur Vefügung stehen. Die Implementierung soll in der Programmiersprache Java erfolgen. Eingebettet in einen Jetty-Server soll das Jersey RESTful-Webservices Framework anhand der JAX-RS Bibliothek zur Implementierung verwendet werden. 
+Für die Persistenzierung ist Hibernate vorgesehen.
+
+Organisatorisch: Das Entwicklerteam soll aus mindestens zwei und höchstens vier Entwickler(inne)n zusammengesetzt sein.
 
 \textbf{Inhalt.}
 
@@ -204,6 +196,7 @@ Namenskonvention)
 
 \section{Kontextabgrenzung}\label{section-system-scope-and-context}
 
+\colorbox{red} {// REST-Schnittstellenbeschreibung hinzufügen, z.B. swagger}
 \textbf{Inhalt.}
 
 Die Kontextabgrenzung grenzt das System von allen Kommunikationspartnern
@@ -290,7 +283,9 @@ Schnittstellen\textgreater{}}
 Schnittstellen\textgreater{}}
 
 \section{Lösungsstrategie}\label{section-solution-strategy}
+Es wird bewusst auf eine Lösung mittels eines REST-Services gesetzt, da somit bereits das Grundgerüst der Infrastruktur für einen Webservice vorhanden ist.
 
+Die Schichtenarchitektur hilft dabei, eine möglichst klare Struktur zu schaffen und z.B. einzelne Schichten getrennt voneinander betrachten/austauschen zu können. Somit wird nicht nur dem Nutzer, sondern auch den Administratoren das Leben erleichtert.
 \textbf{Inhalt.}
 
 Kurzer Überblick über die grundlegenden Entscheidungen und
