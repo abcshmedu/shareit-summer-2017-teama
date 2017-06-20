@@ -98,7 +98,7 @@ Studierende der Hochschule München benötigen innerhalb der Bachelor-/Master-La
 	\item benötigte Fachbücher einfach und komfortable ausleihen zu können.
 \end{itemize}
 
-Das ShareIt-System soll dabei als zentrale Leihbibliothek für gebrauchte Fachliteratur/CDs dienen. Studierende, welche Exemplare ausleihen/anbieten wollen, müssen sich gegenüber dem System mittels einem Token authentisieren, um Falscheingaben und Missbrauch zu vermeiden. Die Implementierung wird ohne Front-End zur Verfügung gestellt und nur über eine REST-API implementiert. Als Datenübertragungsformat dient JSON.
+Das ShareIt-System soll dabei als zentrale Verleihbibliothek für gebrauchte Fachliteratur/CDs dienen. Studierende, welche Exemplare ausleihen/anbieten wollen, müssen sich gegenüber dem System mittels einem Token authentisieren, um Falscheingaben und Missbrauch zu vermeiden. Die Implementierung wird ohne Front-End zur Verfügung gestellt und nur über eine REST-API implementiert. Als Datenübertragungsformat dient JSON.
 
 Die genaue Anforderungsbeschreibung ist unter Moodle der Veranstaltung "Software-Architektur" verfügbar.
 
@@ -137,7 +137,20 @@ Szenarien, geordnet nach Prioritäten.
 \textbf{Inhalt.}
 
 Stakeholder des Systems sind in erster Linie die Studenten der Hochschule München sowie die Administratoren des Systems. Studenten können dabei als Ausleiher und/oder als Anbieter fungieren, daher wird dessen Funktion in zwei Bereiche aufgeteilt. Folgendes Use Case Diagramm verdeutlicht die Zusammenhänge:
+
 \includegraphics{images/UseCaseDiagram.png}
+\begin{itemize}
+\item
+  die Architektur kennen sollten oder
+\item
+  von der Architektur überzeugt werden müssen,
+\item
+  mit Architektur oder Code arbeiten (z.B. Schnittstellen nutzen),
+\item
+  Dokumentation der Architektur für ihre eigene Arbeit benötigen,
+\item
+  Entscheidungen über das System und dessen Entwicklung treffen.
+\end{itemize}
 
 \textbf{Motivation.}
 
@@ -156,35 +169,29 @@ bezüglich der Architektur und deren Dokumentation.
 \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
 Rolle\strut
 \end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
-Abnahmerelevanz\strut
+Kontakt\strut
 \end{minipage} & \begin{minipage}[b]{0.46\columnwidth}\raggedright\strut
 Erwartungshaltung\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
 \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Anbieter}\strut
+\emph{\textless{}Rolle-1\textgreater{}}\strut
 \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ja}\strut
+\emph{\textless{}Kontakt-1\textgreater{}}\strut
 \end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-\emph{Muss Medien anbieten und verwalten können}\strut
+\emph{\textless{}Erwartung-1\textgreater{}}\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ausleiher}\strut
+\emph{\textless{}Rolle-2\textgreater{}}\strut
 \end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-\emph{Ja}\strut
+\emph{\textless{}Kontakt-2\textgreater{}}\strut
 \end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-\emph{Muss nach Medien suchen und ausleihen können}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-	\emph{Administratoren}\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
-	\emph{Nein}\strut
-\end{minipage} & \begin{minipage}[t]{0.46\columnwidth}\raggedright\strut
-	\emph{Müssen das System entwickeln sowie betreiben.}\strut
+\emph{\textless{}Erwartung-2\textgreater{}}\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
+
 \section{Randbedingungen}\label{section-architecture-constraints}
 
 Wichtige Randbedingung ist z.B., dass eine sichere Authentifizierung am System erfolgen muss. Des Weiteren muss eine klar erkennbare Schichtenarchitektur befolgt werden, sodass keine unerlaubten Abhängigkeiten innerhalb der REST-Architektur bestehen.
