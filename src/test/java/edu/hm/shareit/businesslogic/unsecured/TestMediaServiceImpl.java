@@ -1,13 +1,13 @@
-package edu.hm.shareit.resources.unsecured;
+package edu.hm.shareit.businesslogic.unsecured;
 
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.hm.shareit.DependencyInjectionMockBindings;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceImpl;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Before;
 import org.junit.Test;
 

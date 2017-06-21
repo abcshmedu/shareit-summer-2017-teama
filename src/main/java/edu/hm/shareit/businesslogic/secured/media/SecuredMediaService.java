@@ -1,9 +1,9 @@
-package edu.hm.shareit.resources.secured.media;
+package edu.hm.shareit.businesslogic.secured.media;
 
+import edu.hm.shareit.businesslogic.ServiceResult;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.ServiceResult;
 
 /**
  * Implements the interface SecuredMediaService and provides functionality and logic for managing the media in the database.

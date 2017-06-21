@@ -1,9 +1,9 @@
-package edu.hm.shareit.api.secured.authentication;
+package edu.hm.shareit.restapi.secured.authentication;
 
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationService;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.authentication.User;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

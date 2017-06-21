@@ -4,14 +4,14 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
+import edu.hm.shareit.businesslogic.secured.Authorization;
+import edu.hm.shareit.businesslogic.secured.AuthorizationImpl;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationService;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceImpl;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaService;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceImpl;
 import edu.hm.shareit.persistence.Persistence;
 import edu.hm.shareit.persistence.PersistenceImpl;
-import edu.hm.shareit.resources.secured.Authorization;
-import edu.hm.shareit.resources.secured.AuthorizationImpl;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceImpl;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
 
 /**
  * the context listener.

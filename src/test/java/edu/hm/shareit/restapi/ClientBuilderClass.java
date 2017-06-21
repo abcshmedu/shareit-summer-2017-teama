@@ -1,4 +1,4 @@
-package edu.hm.shareit.api;
+package edu.hm.shareit.restapi;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;

@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources.secured;
+package edu.hm.shareit.businesslogic.secured;
 
 public class TestAuthorization {
 

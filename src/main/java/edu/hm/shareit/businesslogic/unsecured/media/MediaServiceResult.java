@@ -1,9 +1,9 @@
-package edu.hm.shareit.resources.unsecured.media;
+package edu.hm.shareit.businesslogic.unsecured.media;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import edu.hm.shareit.businesslogic.ServiceResult;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.ServiceResult;
 
 import java.util.Collection;
 

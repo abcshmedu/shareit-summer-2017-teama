@@ -1,10 +1,10 @@
 package edu.hm.toDelete.media;
 
+import edu.hm.shareit.businesslogic.unsecured.media.MediaService;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceImpl;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceImpl;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Ignore;
 import org.junit.Test;
 

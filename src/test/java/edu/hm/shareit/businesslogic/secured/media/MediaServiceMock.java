@@ -1,11 +1,11 @@
-package edu.hm.shareit.resources.secured.media;
+package edu.hm.shareit.businesslogic.secured.media;
 
+import edu.hm.shareit.businesslogic.unsecured.media.MediaService;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

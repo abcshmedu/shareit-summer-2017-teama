@@ -1,10 +1,10 @@
-package edu.hm.shareit.api.secured.authentication;
+package edu.hm.shareit.restapi.secured.authentication;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.hm.shareit.DependencyInjectionMockBindings;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.models.authentication.User;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.junit.Before;
 import org.junit.Test;
 

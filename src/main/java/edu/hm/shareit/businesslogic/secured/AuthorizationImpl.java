@@ -1,8 +1,8 @@
-package edu.hm.shareit.resources.secured;
+package edu.hm.shareit.businesslogic.secured;
 
 import edu.hm.JettyStarter;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;

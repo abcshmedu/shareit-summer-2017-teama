@@ -1,11 +1,11 @@
-package edu.hm.shareit.api.secured.media;
+package edu.hm.shareit.restapi.secured.media;
 
+import edu.hm.shareit.businesslogic.ServiceResult;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
+import edu.hm.shareit.businesslogic.secured.media.SecuredMediaService;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Disc;
-import edu.hm.shareit.resources.ServiceResult;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
-import edu.hm.shareit.resources.secured.media.SecuredMediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

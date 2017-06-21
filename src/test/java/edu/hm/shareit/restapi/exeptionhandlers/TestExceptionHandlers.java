@@ -1,4 +1,4 @@
-package edu.hm.shareit.api.exeptionhandlers;
+package edu.hm.shareit.restapi.exeptionhandlers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

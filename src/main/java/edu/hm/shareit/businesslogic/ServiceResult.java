@@ -1,4 +1,4 @@
-package edu.hm.shareit.resources;
+package edu.hm.shareit.businesslogic;
 
 /**
  * The ServiceResult.

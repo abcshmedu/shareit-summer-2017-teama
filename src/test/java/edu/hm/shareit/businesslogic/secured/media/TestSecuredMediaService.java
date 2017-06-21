@@ -1,15 +1,15 @@
-package edu.hm.shareit.resources.secured.media;
+package edu.hm.shareit.businesslogic.secured.media;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import edu.hm.shareit.DependencyInjectionMockBindings;
+import edu.hm.shareit.businesslogic.ServiceResult;
+import edu.hm.shareit.businesslogic.secured.MockAuthorization;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.Vars;
 import edu.hm.shareit.models.authentication.Token;
 import edu.hm.shareit.models.mediums.Book;
-import edu.hm.shareit.resources.ServiceResult;
-import edu.hm.shareit.resources.secured.MockAuthorization;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 import org.junit.Before;
 import org.junit.Test;
 

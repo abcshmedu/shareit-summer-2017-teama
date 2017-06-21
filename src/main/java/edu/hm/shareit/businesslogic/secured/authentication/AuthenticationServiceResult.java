@@ -1,7 +1,7 @@
-package edu.hm.shareit.resources.secured.authentication;
+package edu.hm.shareit.businesslogic.secured.authentication;
 
+import edu.hm.shareit.businesslogic.ServiceResult;
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.resources.ServiceResult;
 
 /**
  * Contains all the status codes and messages needed for the CopyService.
@@ -13,10 +13,10 @@ public enum AuthenticationServiceResult implements ServiceResult {
     TOKEN_NOT_VALID(400, "Token not valid"),
     LOGIN_REJECTED(401, "Login Rejected");
 
+    private static final int ERROR_404 = 404;
     private int code;
     private String status;
     private Token token;
-    private static final int ERROR_404 = 404;
 
 
     /**
@@ -48,6 +48,15 @@ public enum AuthenticationServiceResult implements ServiceResult {
     }
 
     /**
+     * Setter for the status code.
+     *
+     * @param code the status code.
+     */
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    /**
      * Getter for the status message.
      *
      * @return the status message.
@@ -58,15 +67,6 @@ public enum AuthenticationServiceResult implements ServiceResult {
         } else {
             return status;
         }
-    }
-
-    /**
-     * Setter for the status code.
-     *
-     * @param code the status code.
-     */
-    public void setCode(int code) {
-        this.code = code;
     }
 
     /**

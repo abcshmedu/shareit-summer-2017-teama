@@ -1,9 +1,9 @@
-package edu.hm.shareit.api.unsecured.media;
+package edu.hm.shareit.restapi.unsecured.media;
 
+import edu.hm.shareit.businesslogic.unsecured.media.MediaService;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaServiceResult;
 import edu.hm.shareit.models.mediums.Book;
 import edu.hm.shareit.models.mediums.Medium;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
-import edu.hm.shareit.resources.unsecured.media.MediaServiceResult;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

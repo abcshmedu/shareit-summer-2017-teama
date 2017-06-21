@@ -1,16 +1,16 @@
 package edu.hm.shareit;
 
 import com.google.inject.AbstractModule;
+import edu.hm.shareit.businesslogic.secured.Authorization;
+import edu.hm.shareit.businesslogic.secured.MockAuthorization;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationService;
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceMock;
+import edu.hm.shareit.businesslogic.secured.media.MediaServiceMock;
+import edu.hm.shareit.businesslogic.secured.media.SecuredMediaService;
+import edu.hm.shareit.businesslogic.secured.media.SecuredMediaServiceMock;
+import edu.hm.shareit.businesslogic.unsecured.media.MediaService;
 import edu.hm.shareit.persistence.Persistence;
 import edu.hm.shareit.persistence.PersistenceMock;
-import edu.hm.shareit.resources.secured.Authorization;
-import edu.hm.shareit.resources.secured.MockAuthorization;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationService;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceMock;
-import edu.hm.shareit.resources.secured.media.MediaServiceMock;
-import edu.hm.shareit.resources.secured.media.SecuredMediaService;
-import edu.hm.shareit.resources.secured.media.SecuredMediaServiceMock;
-import edu.hm.shareit.resources.unsecured.media.MediaService;
 
 public class DependencyInjectionMockBindings extends AbstractModule {
 

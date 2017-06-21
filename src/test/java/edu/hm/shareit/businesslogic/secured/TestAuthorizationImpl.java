@@ -1,7 +1,7 @@
-package edu.hm.shareit.resources.secured;
+package edu.hm.shareit.businesslogic.secured;
 
+import edu.hm.shareit.businesslogic.secured.authentication.AuthenticationServiceResult;
 import edu.hm.shareit.models.authentication.Token;
-import edu.hm.shareit.resources.secured.authentication.AuthenticationServiceResult;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

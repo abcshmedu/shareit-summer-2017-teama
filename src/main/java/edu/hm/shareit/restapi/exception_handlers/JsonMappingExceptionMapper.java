@@ -1,4 +1,4 @@
-package edu.hm.shareit.api.exception_handlers;
+package edu.hm.shareit.restapi.exception_handlers;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 
