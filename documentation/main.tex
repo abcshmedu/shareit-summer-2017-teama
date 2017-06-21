@@ -328,9 +328,284 @@ haben. Verweisen Sie eher auf weitere Ausführungen in Folgeabschnitten.
 Die Architektur der Software ist wie folgt in Schichtenmodell aufgebaut:
 \includegraphics{images/SoftwareLayers.png}
 
- Folgende  Dabei dient die "Ressourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON in Objekte umwandeln bzw. im Falle einer Antwort Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht weist keinerlei Abhängigkeiten zu den anderen Schichten auf. (Ausnahme ist dabei zu den Model-Klassen)
-Modell-Klassen sind geteilte Ressourcen, welche von allen Schichten verwendet werden dürfen. In den Modells sind lediglich die Objekte "Book", "Disc", "Medium", "User" und "Token" abgebildet und enthalten die Informationen zu den jeweiligen Objekten. Die Modell-Klassen
+Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON in Objekte umwandeln bzw. im Falle einer Antwort Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht beinhaltet dabei keinerlei Überprüfung der ankommenden Daten. Die Prüfung auf fehlerhafte bzw. unvollständige Daten wird in der Geschäftslogikschicht durchgeführt, welche von der REST-API-Schicht an die Geschäftslogikschicht gesendet wird. Diese prüft die eingehenden Daten und definiert, ob Daten gespeichert werden und welche Antwort (Response) an den Client zurückgesendet wird. Dabei kommuniziert die Geschäftslogikschicht nicht direkt mit der Datenbank, sondern leitet diese Anfragen an die Datenzugrifsschicht weiter. Diese enthält Informationen zur Datenbankanbidung und stellt enstsprechende Methoden für die Geschäftslogikschicht für Abfragen (inserts, update, exists, etc.) Verfügung.
 
+Neben den Schichten werden sog. Fachklassen (Models) bereitgestellt, welche schichtenübergreifend Objekte für die Modellierung von Books, Discs, Mediums, Tokens und Users zur Verfügung stellt. Diese beinhalten keinerlei Logik und werden nur als Objekte verwendet, welche zu realen, abstrahierten Informationen zugeordnet werden.
+
+Hinweis: Die Darstellungsschicht (UI) ist nicht Bestandteil des ShareIt-Systems und muss vom Nutzer der REST-API selbst implementiert werden. (sofern benötigt)
+
+\includegraphics{images/05_building_blocks-DE.png}
+
+\subsection{Whitebox Gesamtsystem}\label{_whitebox_gesamtsystem}
+
+An dieser Stelle beschreiben Sie die Zerlegung des Gesamtsystems anhand
+des nachfolgenden Whitebox-Templates. Dieses enthält:
+
+\begin{itemize}
+\item
+  Ein Übersichtsdiagramm
+\item
+  die Begründung dieser Zerlegung
+\item
+  Blackbox-Beschreibungen der hier enthaltenen Bausteine. Dafür haben
+  Sie verschiedene Optionen:
+
+  \begin{itemize}
+  \item
+    in \emph{einer} Tabelle, gibt einen kurzen und pragmatischen
+    Überblick über die enthaltenen Bausteine sowie deren Schnittstellen.
+  \item
+    als Liste von Blackbox-Beschreibungen der Bausteine, gemäß dem
+    Blackbox-Template (siehe unten). Diese Liste können Sie, je nach
+    Werkzeug, etwa in Form von Unterkapiteln (Text), Unter-Seiten (Wiki)
+    oder geschachtelten Elementen (Modellierungswerkzeug) darstellen.
+  \end{itemize}
+\item
+  (optional:) wichtige Schnittstellen, die nicht bereits im
+  Blackbox-Templates eines der Bausteine erläutert werden, aber für das
+  Verständnis der Whitebox von zentraler Bedeutung sind. Aufgrund der
+  vielfältigen Möglichkeiten oder Ausprägungen von Schnittstellen geben
+  wir hierzu kein weiteres Template vor. Im schlimmsten Fall müssen Sie
+  Syntax, Semantik, Protokolle, Fehlerverhalten, Restriktionen,
+  Versionen, Qualitätseigenschaften, notwendige Kompatibilitäten und
+  vieles mehr spezifizieren oder beschreiben. Im besten Fall kommen Sie
+  mit Beispielen oder einfachen Signaturen zurecht.
+\end{itemize}
+
+\emph{\textbf{\textless{}Übersichtsdiagramm\textgreater{}}}
+
+\begin{description}
+\item[Begründung]
+\emph{\textless{}Erläuternder Text\textgreater{}}
+\item[Enthaltene Bausteine]
+\emph{\textless{}Beschreibung der enhaltenen Bausteine
+(Blackboxen)\textgreater{}}
+\item[Wichtige Schnittstellen]
+\emph{\textless{}Beschreibung wichtiger Schnittstellen\textgreater{}}
+\end{description}
+
+Hier folgen jetzt Erläuterungen zu Blackboxen der Ebene 1.
+
+Falls Sie die tabellarische Beschreibung wählen, so werden Blackboxen
+darin nur mit Name und Verantwortung nach folgendem Muster beschrieben:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.31\columnwidth}\raggedright\strut
+\textbf{Name}\strut
+\end{minipage} & \begin{minipage}[b]{0.63\columnwidth}\raggedright\strut
+\textbf{Verantwortung}\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\emph{\textless{}Blackbox 1\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+~\emph{\textless{}Text\textgreater{}}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.31\columnwidth}\raggedright\strut
+\emph{\textless{}Blackbox 2\textgreater{}}\strut
+\end{minipage} & \begin{minipage}[t]{0.63\columnwidth}\raggedright\strut
+~\emph{\textless{}Text\textgreater{}}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Falls Sie die ausführliche Liste von Blackbox-Beschreibungen wählen,
+beschreiben Sie jede wichtige Blackbox in einem eigenen
+Blackbox-Template. Dessen Überschrift ist jeweils der Namen dieser
+Blackbox.
+
+\subsubsection{\textless{}Name Blackbox
+1\textgreater{}}\label{__name_blackbox_1}
+
+An dieser Stelle beschreiben Sie die \textless{}Blackbox 1\textgreater{}
+anhand des folgenden Blackbox-Templates:
+
+\begin{itemize}
+\item
+  Zweck/Verantwortung
+\item
+  Schnittstelle(n), sofern sie nicht als eigenständige Beschreibungen
+  herausgezogen sind. Hierzu gehören eventuell auch Qualitäts- und
+  Leistungsmerkmale dieser Schnittstelle.
+\item
+  (Optional) Qualitäts-/Leistungsmerkmale der Blackbox, beispielsweise
+  Verfügbarkeit, Laufzeitverhalten\ldots{}
+\item
+  (Optional) Ablageort/Datei(en)
+\item
+  (Optional) Erfüllte Anforderungen, falls Sie Traceability zu
+  Anforderungen benötigen.
+\item
+  (Optional) Offene Punkte/Probleme/Risiken
+\end{itemize}
+
+\emph{\textless{}Zweck/Verantwortung\textgreater{}}
+
+\emph{\textless{}Schnittstelle(n)\textgreater{}}
+
+\emph{\textless{}(Optional) Qualitäts-/Leistungsmerkmale\textgreater{}}
+
+\emph{\textless{}(Optional) Ablageort/Datei(en)\textgreater{}}
+
+\emph{\textless{}(Optional) Erfüllte Anforderungen\textgreater{}}
+
+\emph{\textless{}(optional) Offene
+Punkte/Probleme/Risiken\textgreater{}}
+
+\subsubsection{\textless{}Name Blackbox
+2\textgreater{}}\label{__name_blackbox_2}
+
+\emph{\textless{}Blackbox-Template\textgreater{}}
+
+\subsubsection{\textless{}Name Blackbox
+n\textgreater{}}\label{__name_blackbox_n}
+
+\emph{\textless{}Blackbox-Template\textgreater{}}
+
+\subsubsection{\textless{}Name Schnittstelle
+1\textgreater{}}\label{__name_schnittstelle_1}
+
+\ldots{}
+
+\subsubsection{\textless{}Name Schnittstelle
+m\textgreater{}}\label{__name_schnittstelle_m}
+
+\subsection{Ebene 2}\label{_ebene_2}
+
+An dieser Stelle können Sie den inneren Aufbau (einiger) Bausteine aus
+Ebene 1 als Whitebox beschreiben.
+
+Welche Bausteine Ihres Systems Sie hier beschreiben, müssen Sie selbst
+entscheiden. Bitte stellen Sie dabei Relevanz vor Vollständigkeit.
+Skizzieren Sie wichtige, überraschende, riskante, komplexe oder
+besonders volatile Bausteine. Normale, einfache oder standardisierte
+Teile sollten Sie weglassen.
+
+\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
+1\textgreater{}}}{Whitebox \textless{}Baustein 1\textgreater{}}}\label{_whitebox_emphasis_baustein_1_emphasis}
+
+\ldots{}zeigt das Innenleben von \emph{Baustein 1}.
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
+2\textgreater{}}}{Whitebox \textless{}Baustein 2\textgreater{}}}\label{_whitebox_emphasis_baustein_2_emphasis}
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\ldots{}
+
+\subsubsection{\texorpdfstring{Whitebox \emph{\textless{}Baustein
+m\textgreater{}}}{Whitebox \textless{}Baustein m\textgreater{}}}\label{_whitebox_emphasis_baustein_m_emphasis}
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\subsection{Ebene 3}\label{_ebene_3}
+
+An dieser Stelle können Sie den inneren Aufbau (einiger) Bausteine aus
+Ebene 2 als Whitebox beschreiben.
+
+Bei tieferen Gliederungen der Architektur kopieren Sie diesen Teil von
+arc42 für die weiteren Ebenen.
+
+\subsubsection{Whitebox \textless{}\_Baustein
+x.1\_\textgreater{}}\label{_whitebox_baustein_x_1}
+
+\ldots{}zeigt das Innenleben von \emph{Baustein x.1}.
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\subsubsection{Whitebox \textless{}\_Baustein
+x.2\_\textgreater{}}\label{_whitebox_baustein_x_2}
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\subsubsection{Whitebox \textless{}\_Baustein
+y.1\_\textgreater{}}\label{_whitebox_baustein_y_1}
+
+\emph{\textless{}Whitebox-Template\textgreater{}}
+
+\section{Laufzeitsicht}\label{section-runtime-view}
+
+\textbf{Inhalt.}
+
+Diese Sicht erklärt konkrete Abläufe und Beziehungen zwischen Bausteinen
+in Form von Szenarien aus folgenden Bereichen:
+
+\begin{itemize}
+\item
+  Wichtige Abläufe oder \emph{Features}: Wie führen die Bausteine der
+  Architektur die wichtigsten Abläufe durch?
+\item
+  Interaktionen an kritischen externen Schnittstellen: Wie arbeiten
+  Bausteine mit Nutzern und Nachbarsystemen zusammen?
+\item
+  Betrieb und Administration: Inbetriebnahme, Start, Stop.
+\item
+  Fehler- und Ausnahmeszenarien
+\end{itemize}
+
+Anmerkung: Kriterium für die Auswahl der möglichen Szenarien (d.h.
+Abläufe) des Systems ist deren Architekturrelevanz. Es geht nicht darum,
+möglichst viele Abläufe darzustellen, sondern eine angemessene Auswahl
+zu dokumentieren.
+
+\textbf{Motivation.}
+
+Sie sollten verstehen wie (Instanzen von) Bausteine(n) Ihres Systems
+ihre jeweiligen Aufgaben erfüllen und zur Laufzeit miteinander
+kommunizieren.
+
+Nutzen Sie solche Szenarien in der Dokumentation hauptsächlich zur
+besseren Kommunikation mit Stakeholdern, die statische Modelle (z.B.
+Bausteinsicht, Verteilungssicht) weniger verständlich finden.
+
+\textbf{Form.}
+
+Für die Beschreibung von Szenarien gibt es zahlreiche
+Ausdrucksmöglichkeiten. Nutzen Sie beispielsweise:
+
+\begin{itemize}
+\item
+  Nummerierte Schrittfolgen oder Aufzählungen in Umgangssprache
+\item
+  Aktivitäts- oder Flussdiagramme
+\item
+  Sequenzdiagramme
+\item
+  BPMN oder EPKs (Ereignis-Prozessketten)
+\item
+  Zustandsautomaten
+\item
+  \ldots{}
+\end{itemize}
+
+\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
+Laufzeitszenario
+1\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario 1\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_1_emphasis}
+
+\begin{itemize}
+\item
+  \textless{}hier Laufzeitdiagramm oder Ablaufbeschreibung
+  einfügen\textgreater{}
+\item
+  \textless{}hier Besonderheiten bei dem Zusammenspiel der Bausteine in
+  diesem Szenario erläutern\textgreater{}
+\end{itemize}
+
+\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
+Laufzeitszenario
+2\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario 2\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_2_emphasis}
+
+\ldots{}
+
+\subsection{\texorpdfstring{\emph{\textless{}Bezeichnung
+Laufzeitszenario
+n\textgreater{}}}{\textless{}Bezeichnung Laufzeitszenario n\textgreater{}}}\label{__emphasis_bezeichnung_laufzeitszenario_n_emphasis}
+
+\ldots{}
 
 \section{Verteilungssicht}\label{section-deployment-view}
 
