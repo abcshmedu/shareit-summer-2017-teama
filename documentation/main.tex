@@ -324,45 +324,13 @@ haben. Verweisen Sie eher auf weitere Ausführungen in Folgeabschnitten.
 Die Architektur der Software ist wie folgt in Schichtenmodell aufgebaut:
 \includegraphics{images/SoftwareLayers.png}
 
- Folgende  Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON in Objekte umwandeln bzw. im Falle einer Antwort Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht weist keinerlei Abhängigkeiten zu den anderen Schichten auf. (Ausnahme ist dabei zu den Model-Klassen)
-Modell-Klassen sind geteilte Ressourcen, welche von allen Schichten verwendet werden dürfen. In den Modells sind lediglich die Objekte "Book", "Disc", "Medium", "User" und "Token" abgebildet und enthalten die Informationen zu den jeweiligen Objekten. Die Modell-Klassen
+Dabei dient die "Resourcen"-Schicht als oberste Layer, welche alle Schnittstellen der REST-API implementieren und ggfs. JSON in Objekte umwandeln bzw. im Falle einer Antwort Objekte zurück in JSON umwandelt. Die Ressourcen-Schicht beinhaltet dabei keinerlei Überprüfung der ankommenden Daten. Die Prüfung auf fehlerhafte bzw. unvollständige Daten wird in der Geschäftslogikschicht durchgeführt, welche von der REST-API-Schicht an die Geschäftslogikschicht gesendet wird. Diese prüft die eingehenden Daten und definiert, ob Daten gespeichert werden und welche Antwort (Response) an den Client zurückgesendet wird. Dabei kommuniziert die Geschäftslogikschicht nicht direkt mit der Datenbank, sondern leitet diese Anfragen an die Datenzugrifsschicht weiter. Diese enthält Informationen zur Datenbankanbidung und stellt enstsprechende Methoden für die Geschäftslogikschicht für Abfragen (inserts, update, exists, etc.) Verfügung.
 
-\textbf{Inhalt.}
+Neben den Schichten werden sog. Fachklassen (Models) bereitgestellt, welche schichtenübergreifend Objekte für die Modellierung von Books, Discs, Mediums, Tokens und Users zur Verfügung stellt. Diese beinhalten keinerlei Logik und werden nur als Objekte verwendet, welche zu realen, abstrahierten Informationen zugeordnet werden.
 
-
-Diese Sicht zeigt die statische Zerlegung des Systems in Bausteine
-(Module, Komponenten, Subsysteme, Klassen, Interfaces, Pakete,
-Bibliotheken, Frameworks, Schichten, Partitionen, Tiers, Funktionen,
-Makros, Operationen, Datenstrukturen\ldots{}) sowie deren Beziehungen.
-
-Diese Sicht sollte in jeder Architekturdokumentation vorhanden sein . In
-der Analogie zum Hausbau bildet die Bausteinsicht den
-\emph{Grundrissplan}.
-
-\textbf{Motivation.}
-
-Behalten Sie den Überblick über den Quellcode, indem Sie die statische
-Struktur des Systems durch Abstraktion verständlich machen.
-
-Damit ermöglichen Sie Kommunikation auf abstrakterer Ebene, ohne zu
-viele Implementierungsdetails offenlegen zu müssen.
-
-\textbf{Form.}
-
-Die Bausteinsicht ist eine hierarchische Sammlung von Blackboxen und
-Whiteboxen (siehe Abbildung unten) und deren Beschreibungen.
+Hinweis: Die Darstellungsschicht (UI) ist nicht Bestandteil des ShareIt-Systems und muss vom Nutzer der REST-API selbst implementiert werden. (sofern benötigt)
 
 \includegraphics{images/05_building_blocks-DE.png}
-
-\textbf{Ebene 1} ist die Whitebox-Beschreibung des Gesamtsystems,
-zusammen mit Blackbox-Beschreibungen der darin enthaltenen Bausteine.
-
-\textbf{Ebene 2} zoomt in einige Bausteine der Ebene 1 hinein. Sie
-enthält somit die Whitebox-Beschreibungen ausgewählter Bausteine der
-Ebene 1, jeweils zusammen mit Blackbox-Beschreibungen darin enthaltener
-Bausteine.
-
-\textbf{Ebene 3} zoomt in einige Bausteine der Ebene 2 hinein, usw.
 
 \subsection{Whitebox Gesamtsystem}\label{_whitebox_gesamtsystem}
 
